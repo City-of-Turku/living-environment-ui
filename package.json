@@ -2,6 +2,7 @@
   "name": "living-environment-ui",
   "version": "0.1.0",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -9,6 +10,7 @@
     "eslint-plugin-react": "^6.10.3",
     "leaflet": "^1.0.3",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.30.8",
     "react-dom": "^15.5.4",
     "react-leaflet": "^1.1.6",
     "react-redux": "^5.0.4",
@@ -17,12 +19,12 @@
     "redux-logger": "^3.0.1"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "custom-react-scripts": "0.0.23"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "node ./scripts/patch_webpack.js && react-scripts start",
+    "build": "node ./scripts/patch_webpack.js && react-scripts build",
+    "test": "node ./scripts/patch_webpack.js && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx",
     "lint-fix": "lint --fix"
