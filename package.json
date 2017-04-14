@@ -5,7 +5,11 @@
     "leaflet": "^1.0.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-leaflet": "^1.1.6"
+    "react-leaflet": "^1.1.6",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
+    "redux-logger": "^3.0.1"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
