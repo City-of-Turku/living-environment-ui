@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
+import TaskLandingPage from './components/TaskLandingPage';
 import store from './store';
 
 import './styling/styles.global.less'
@@ -21,6 +22,7 @@ class App extends Component {
           </div>
           <div className={styles.contentWrapper}>
             <Header current={80000} total={100000}/>
+            <TaskLandingPage />
           </div>
         </div>
       </Provider>
