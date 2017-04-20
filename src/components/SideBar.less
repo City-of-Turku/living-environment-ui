@@ -1,0 +1,111 @@
+@import '../styling/styling';
+
+@background-normal: @darkGray;
+@background-selected: @black;
+@iconWrapperWidth: 40px;
+@logoWrapperHeight: 160px;
+@submenuToMenuFontSizeRatio: 10/12;
+@circleSize: 0.5em;
+
+.root {
+  background: @background-normal;
+  min-height: 100vh;
+
+  ul {
+    list-style-type: none;
+  }
+}
+
+.iconWrapper {
+  display: inline-block;
+  text-align: center;
+  width: @iconWrapperWidth;
+}
+
+.selectedItem {
+  background: @background-selected;
+
+  .menuItem {
+    border-right: 4px solid @cyan;
+  }
+}
+
+.menu {
+  padding: 0;
+}
+
+.menuItem {
+  padding: 0.5em 0;
+
+  a {
+    color: @cyan;
+
+    &:hover {
+      color: darken(@cyan, 20);
+      text-decoration: none;
+    }
+  }
+}
+
+.menuIcon {
+  display: inline-block;
+  transform: scale(1.4);
+  text-align: center;
+}
+
+.submenu {
+  padding: 0 0 0.5em @iconWrapperWidth;
+}
+
+.menuSubitem {
+  font-size: @submenuToMenuFontSizeRatio * 1em;
+  padding: 0.75em 0;
+
+  a {
+    color: @gray;
+
+    &:hover {
+      color: darken(@gray, 20);
+      text-decoration: none;
+    }
+  }
+}
+
+.menuSubitemSelected {
+  position: relative;
+
+  a {
+    color: @cyan;
+
+    &:hover {
+      color: @cyan;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: @circleSize;
+    height: @circleSize;
+    background: @cyan;
+    border-radius: 50%;
+    left: -1.5em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.logoWrapper {
+  overflow: hidden;
+  height: @logoWrapperHeight;
+}
+
+.logo {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  color: @cyan;
+  font-size: 130px;
+}
