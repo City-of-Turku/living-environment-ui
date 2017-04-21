@@ -1,30 +1,20 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import {browserHistory, Router} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
 
-import TaskLandingPage from './components/TaskLandingPage';
+import createRoutes from './routes';
 import store from './store';
 
-import './styling/styles.global.less'
+const routes = createRoutes(store);
+const history = syncHistoryWithStore(browserHistory, store);
 
-
-import Header from './components/Header';
-import SideBar from './components/SideBar';
-import './styling/styles.global.less'
-import styles from './App.less';
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className={styles.root}>
-          <div className={styles.sideBarWrapper}>
-            <SideBar />
-          </div>
-          <div className={styles.contentWrapper}>
-            <Header current={80000} total={100000}/>
-            <TaskLandingPage />
-          </div>
-        </div>
+        <Router history={history} children={routes}/>
       </Provider>
     );
   }
