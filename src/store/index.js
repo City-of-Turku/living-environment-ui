@@ -1,11 +1,13 @@
 import { applyMiddleware, compose, createStore,  } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from 'redux-logger';
+import promiseMiddleware from 'redux-promise-middleware';
 
 import reducers from '../reducers';
 
 const middleware = [
   logger,
+  promiseMiddleware(),
 ];
 
 
