@@ -22,28 +22,28 @@ const client = {
     return instance.get(resolvedUrl, { params })
     .then(
       response => response.data,
-      error => error);
+      error => Promise.reject(error));
   },
   post(url, pathParams, data) {
     const resolvedUrl = this.resolveUrl(url, pathParams);
     return instance.post(resolvedUrl, data)
     .then(
       response => response.data,
-      error => error);
+      error => Promise.reject(error));
   },
   put(url, pathParams, params) {
     const resolvedUrl = this.resolveUrl(url, pathParams);
     return instance.put(resolvedUrl, { params })
     .then(
       response => response.data,
-      error => error);
+      error => Promise.reject(error));
   },
   delete(url, pathParams, params) {
     const resolvedUrl = this.resolveUrl(url, pathParams);
     return instance.delete(resolvedUrl, { params })
     .then(
       response => response.data,
-      error => error);
+      error => Promise.reject(error));
   },
 };
 
