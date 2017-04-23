@@ -1,4 +1,4 @@
-import TaskLandingPage from './components/TaskLandingPage';
+import TaskLandingPage from './containers/TaskLandingPage';
 
 import { fetchAssignment } from "./actions/assignment";
 import assignmentReducer from './reducers/assignment';
