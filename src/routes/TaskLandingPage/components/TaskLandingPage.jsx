@@ -1,8 +1,7 @@
 import React from 'react';
 
 import BudgetingTask from './BudgetingTask';
-import ContentWrapper from './ContentWrapper';
-import MapTask from './MapTask';
+import ContentWrapper from '../../../containers/ContentWrapper';
 import OpenTextTask from './OpenTextTask';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
@@ -11,10 +10,11 @@ import styles from './TaskLandingPage.less';
 
 const TaskLandingPage = ({sections}) => (
   <section>
+    <ContentWrapper id='_' />
     {
       sections.map(section => (
         <div className={styles.root}>
-          <ContentWrapper>
+          <ContentWrapper id={`${section.id}-section`}>
             <div className={styles.heroImageWrapper}>
               <img
                 className={styles.heroImage}
