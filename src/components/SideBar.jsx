@@ -13,27 +13,27 @@ const menuItems = [
     subitems: [
       {
         label: 'Landing Page',
-        url: '#',
+        id: '2-section',
       },
       {
         label: 'Player Information',
-        url: '#',
+        id: '2-3-open-text-map',
       },
       {
         label: 'Basic Question Task Name',
-        url: '#',
+        id: '2-4-open-text-map',
       },
       {
         label: 'Budgeting Task',
-        url: '#',
+        id: '2-3-budgeting_task',
       },
       {
         label: 'Budgeting Map Task',
-        url: '#',
+        id: '1-section',
       },
       {
         label: 'Friend of the Park',
-        url: '#',
+        id: '1-1-open-text-map',
       },
     ]
   },
@@ -58,6 +58,7 @@ class SideBar extends Component {
   }
 
   render() {
+    const { currentSection } = this.props;
     return (
       <div className={styles.root}>
         <div className={styles.logoWrapper}>
@@ -80,7 +81,12 @@ class SideBar extends Component {
                       {
                         item.subitems.map(subitem => (
                           <li role="none"
-                              className={classNames(styles.menuSubitem, styles.menuSubitemSelected)}>
+                              className={classNames(
+                                styles.menuSubitem,
+                                currentSection === subitem.id
+                                  ? styles.menuSubitemSelected
+                                  : ''
+                              )}>
                             <a href={subitem.url} role="menuitem">{subitem.label}</a>
                           </li>
                         ))
