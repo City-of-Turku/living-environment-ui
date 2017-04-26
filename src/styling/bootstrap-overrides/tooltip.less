@@ -1,0 +1,17 @@
+@import '../styling';
+
+@directions: top, left, bottom, right;
+
+.custom-tooltip(@name, @color) {
+  .for(@directions);
+  .-each(@direction) {
+    .tooltip.@{direction}.@{name} .tooltip-arrow {
+      border-@{direction}-color: @color
+    }
+    .tooltip.@{direction}.@{name} .tooltip-inner {
+      background:  @color;
+    }
+  }
+}
+
+.custom-tooltip(success, @green);

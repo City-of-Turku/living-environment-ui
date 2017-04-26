@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
-const reducers = combineReducers({
-});
+import waypointsReducer from './waypoints';
 
-export default reducers;
+export default function createReducer(asyncReducers) {
+  return combineReducers({
+    routing: routerReducer,
+    formReducer,
+    waypoints: waypointsReducer,
+    ...asyncReducers
+  });
+}

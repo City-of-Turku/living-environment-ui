@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "rules": {
     "indent": ["error", 2],  // Require 2-space indent
     "quotes": 0,  // No specified quote style; the programmer should take care of using only one style
@@ -7,5 +7,9 @@
     "curly": ["error", "all"], // Always require curlys.
     "comma-dangle": ["error", "only-multiline"],  // Require trailing commas in multi-line literals (such as this)
     "complexity": ["error", {"max": 20}]
+  },
+  "env": {
+    "browser": true,
+    "mocha": true
   }
 }
