@@ -13,9 +13,8 @@ const TaskContent = ({ title, description, body }) => (
     </div>
     <div
       className={styles.body}
-      dangerouslySetInnerHTML={{ __html: body }}
-    >
-    </div>
+      dangerouslySetInnerHTML={{ __html: body }} // eslint-disable-line react/no-danger
+    />
   </div>);
 
 TaskContent.propTypes = {

@@ -24,16 +24,14 @@ import { Map as LeafletMap, WMSTileLayer } from 'react-leaflet';
  *
  */
 
-const Map = ({height, layers, position, url, zoom}) => {
-  return (
-    <LeafletMap center={position} zoom={zoom} style={{height: height}}>
-      <WMSTileLayer
-        layers={layers}
-        url={url}
-      />
-    </LeafletMap>
+const Map = ({ height, layers, position, url, zoom }) => (
+  <LeafletMap center={position} zoom={zoom} style={{ height }}>
+    <WMSTileLayer
+      layers={layers}
+      url={url}
+    />
+  </LeafletMap>
   );
-};
 
 Map.propTypes = {
   height: PropTypes.number,

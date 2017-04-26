@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/aria-role */
+
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link, routerShape } from 'react-router';
 
@@ -46,7 +49,7 @@ const menuItems = [
 
 class SideBar extends Component {
 
-  resolveToLocation(to, router) {
+  resolveToLocation(to, router) { // eslint-disable-line class-methods-use-this
     return typeof to === 'function' ?
       to(router.location) : to;
   }
@@ -62,7 +65,7 @@ class SideBar extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.logoWrapper}>
-          <i className={classNames('glyphfont', 'turku-logo', styles.logo)}/>
+          <i className={classNames('glyphfont', 'turku-logo', styles.logo)} />
         </div>
         <ul role="menu" className={styles.menu}>
           {
@@ -70,9 +73,9 @@ class SideBar extends Component {
               <li role="none" className={this.calcMenuWrapperStyle(item.url)}>
                 <div className={styles.menuItem}>
                   <Link to={item.url} role="menuitem">
-                <span className={styles.iconWrapper}>
-                  <i className={classNames('glyphfont', 'icon-triangle', styles.menuIcon)}/>
-                </span>
+                    <span className={styles.iconWrapper}>
+                      <i className={classNames('glyphfont', 'icon-triangle', styles.menuIcon)} />
+                    </span>
                     {item.label}</Link>
                 </div>
                 {
@@ -80,13 +83,15 @@ class SideBar extends Component {
                     <ul className={styles.submenu}>
                       {
                         item.subitems.map(subitem => (
-                          <li role="none"
-                              className={classNames(
+                          <li
+                            role="none"
+                            className={classNames(
                                 styles.menuSubitem,
                                 currentSection === subitem.id
                                   ? styles.menuSubitemSelected
                                   : ''
-                              )}>
+                              )}
+                          >
                             <a href={subitem.url} role="menuitem">{subitem.label}</a>
                           </li>
                         ))
@@ -106,5 +111,12 @@ SideBar.contextTypes = {
   router: routerShape
 };
 
+SideBar.propTypes = {
+  currentSection: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number,
+  ]).isRequired,
+};
+
 
 export default SideBar;
+/* eslint-enable jsx-a11y/aria-role */

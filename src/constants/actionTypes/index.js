@@ -1,5 +1,5 @@
 import * as waypointsActionType from './waypoints';
 
 export {
-  waypointsActionType,
+  waypointsActionType, // eslint-disable-line import/prefer-default-export
 };

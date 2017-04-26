@@ -1,6 +1,5 @@
 import React from 'react';
 
-const MapTask = () => (<div>
-</div>);
+const MapTask = () => (<div />);
 
 export default MapTask;

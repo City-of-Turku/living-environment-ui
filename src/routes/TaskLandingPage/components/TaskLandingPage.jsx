@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BudgetingTask from './BudgetingTask';
 import ContentWrapper from '../../../containers/ContentWrapper';
@@ -8,9 +9,9 @@ import TaskContent from './TaskContent';
 
 import styles from './TaskLandingPage.less';
 
-const TaskLandingPage = ({sections}) => (
+const TaskLandingPage = ({ sections }) => (
   <section>
-    <ContentWrapper id='_' />
+    <ContentWrapper id="_" />
     {
       sections.map(section => (
         <div className={styles.root}>
@@ -24,7 +25,7 @@ const TaskLandingPage = ({sections}) => (
             </div>
             <TaskInfoBar
               categoryName={'Example Category'}
-              tasks={{completed: 10, total: 20}}
+              tasks={{ completed: 10, total: 20 }}
               totalBudget={100000}
             />
             <TaskContent
@@ -33,14 +34,14 @@ const TaskLandingPage = ({sections}) => (
             />
           </ContentWrapper>
           {
-            section.open_text_tasks && section.open_text_tasks.map( openTextTask => (
+            section.open_text_tasks && section.open_text_tasks.map(openTextTask => (
               <ContentWrapper id={`${section.id}-${openTextTask.id}-open-text-map`}>
                 <OpenTextTask {...openTextTask} />
               </ContentWrapper>
             ))
           }
           {
-            section.budgeting_tasks && section.budgeting_tasks.map( budgetingTask => (
+            section.budgeting_tasks && section.budgeting_tasks.map(budgetingTask => (
               <ContentWrapper id={`${section.id}-${budgetingTask.id}-budgeting_task`}>
                 <BudgetingTask {...budgetingTask} />
               </ContentWrapper>
@@ -50,5 +51,9 @@ const TaskLandingPage = ({sections}) => (
     }
   </section>
 );
+
+TaskLandingPage.propTypes = {
+  sections: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default TaskLandingPage;

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import styles from './TaskInfoBar.less';
 
-const TaskInfoBar = ({ categoryName, tasks, totalBudget }) => (
+const TaskInfoBar = ({ tasks, totalBudget }) => (
   <div className={styles.root}>
     <Row>
       <Col xs={12} sm={6} className={classNames(styles.col, styles.firstCol)}>
@@ -20,7 +20,6 @@ const TaskInfoBar = ({ categoryName, tasks, totalBudget }) => (
   </div>);
 
 TaskInfoBar.propTypes = {
-  categoryName: PropTypes.string.isRequired,
   tasks: PropTypes.shape({
     completed: PropTypes.number,
     total: PropTypes.number
