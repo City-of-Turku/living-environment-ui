@@ -1,0 +1,13 @@
+@import "../variables";
+
+.tablet(@rules) {
+  @media only screen and (min-width: @screen-sm-min) {
+    @rules();
+  }
+}
+
+.desktop(@rules) {
+  @media only screen and (max-width: @screen-md-min) {
+    @rules();
+  }
+}
