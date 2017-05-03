@@ -22,7 +22,8 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-form": "^6.6.3",
     "redux-logger": "^3.0.1",
-    "redux-promise-middleware": "^4.2.0"
+    "redux-promise-middleware": "^4.2.0",
+    "url-pattern": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -36,9 +37,9 @@
     "stylelint": "^7.10.1"
   },
   "scripts": {
-    "start": "node ./scripts/patch_webpack.js && react-scripts start", 
+    "start": "node ./scripts/patch_webpack.js && react-scripts start",
     "build": "node ./scripts/patch_webpack.js && react-scripts build",
-     "test": "node ./scripts/patch_webpack.js && react-scripts test --env=jsdom",
+    "test": "node ./scripts/patch_webpack.js && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx && stylelint \"src/**/*.less\"",
     "lint-fix": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx --fix && stylelint \"src/**/*.less\" --fix"
