@@ -26,14 +26,15 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "6.10.0"
+    "eslint-plugin-react": "6.10.0",
+    "stylelint": "^7.10.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx",
-    "lint-fix": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx --fix"
+    "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx && stylelint \"src/**/*.less\"",
+    "lint-fix": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx --fix && stylelint \"src/**/*.less\" --fix"
   }
 }
