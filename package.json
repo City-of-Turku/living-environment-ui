@@ -30,9 +30,9 @@
     "stylelint": "^7.10.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "node ./scripts/patch_webpack.js && react-scripts start", 
+    "build": "node ./scripts/patch_webpack.js && react-scripts build",
+     "test": "node ./scripts/patch_webpack.js && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx && stylelint \"src/**/*.less\"",
     "lint-fix": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx --fix && stylelint \"src/**/*.less\" --fix"
