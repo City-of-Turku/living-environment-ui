@@ -97,15 +97,25 @@
 
 .logoWrapper {
   overflow: hidden;
-  height: @logoWrapperHeight;
+  height: 0;
+  padding-top: 10px;
+
+  .tablet({
+    height: @logoWrapperHeight;
+    padding-top: 0;
+  })
 }
 
 .logo {
+  display: none;
   position: relative;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  display: inline-block;
   color: @cyan;
   font-size: 130px;
+
+  .tablet({
+    display: inline-block;
+  })
 }
