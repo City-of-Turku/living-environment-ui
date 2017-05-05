@@ -1,0 +1,20 @@
+@import './styling/variables';
+
+@sideBarWidth: 300px;
+
+.root {
+  background: @lightGray;
+}
+
+.sideBarWrapper {
+  display: inline-block;
+  width: @sideBarWidth;
+  vertical-align: top;
+}
+
+.contentWrapper {
+  display: inline-block;
+  width: calc(~'100% - '@sideBarWidth);
+  padding: 0 @grid-gutter-width / 2;
+  vertical-align: top;
+}

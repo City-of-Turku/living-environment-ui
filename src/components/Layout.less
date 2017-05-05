@@ -1,0 +1,23 @@
+@import '../styling/styling';
+
+@sideBarWidth: 300px;
+
+.root {
+  background: @lightGray;
+}
+
+.sideBarWrapper {
+  position: fixed;
+  display: inline-block;
+  width: @sideBarWidth;
+  vertical-align: top;
+}
+
+.contentWrapper {
+  margin-left: @sideBarWidth;
+  display: inline-block;
+  width: calc(~'100% - '@sideBarWidth);
+  padding: 0 @grid-gutter-width / 2;
+  vertical-align: top;
+}
+

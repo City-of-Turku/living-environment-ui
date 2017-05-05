@@ -6,7 +6,6 @@ import { Map as LeafletMap, WMSTileLayer } from 'react-leaflet';
 /**
  * Leaflet map
  *
- * @param height - map container height
  * @param layers - list of layers
  * @param position - initial position [lat, long]
  * @param url - provider url
@@ -17,26 +16,22 @@ import { Map as LeafletMap, WMSTileLayer } from 'react-leaflet';
  * <Map
  *   position={[60.4629060928519,22.259694757206415]}
  *   zoom={12}
- *   height={400}
  *   layers={['Opaskartta']}
  *   url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
  * />
  *
  */
 
-const Map = ({height, layers, position, url, zoom}) => {
-  return (
-    <LeafletMap center={position} zoom={zoom} style={{height: height}}>
-      <WMSTileLayer
-        layers={layers}
-        url={url}
-      />
-    </LeafletMap>
+const Map = ({ layers, position, url, zoom }) => (
+  <LeafletMap center={position} zoom={zoom}>
+    <WMSTileLayer
+      layers={layers}
+      url={url}
+    />
+  </LeafletMap>
   );
-};
 
 Map.propTypes = {
-  height: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.string).isRequired,
   position: PropTypes.arrayOf(PropTypes.number).isRequired,
   url: PropTypes.string.isRequired,
@@ -44,7 +39,6 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  height: 100,
   zoom: 17
 };
 
