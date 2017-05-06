@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Waypoint from 'react-waypoint';
+import { Element as ScrollElement } from 'react-scroll';
 
 import styles from './ContentWrapper.less';
 
@@ -54,16 +55,18 @@ class ContentWrapper extends Component {
     }
     wrappersList.push(id);
     return (
-      <Waypoint
-        onEnter={({ previousPosition }) => this.handleEnterHelper(previousPosition)}
-        onLeave={({ currentPosition }) => this.handleLeaveHelper(currentPosition)}
-        topOffset={30}
-        bottomOffset={30}
-      >
-        <div className={styles.root}>
-          {children}
-        </div>
-      </Waypoint>);
+      <ScrollElement name={id}>
+        <Waypoint
+          onEnter={({ previousPosition }) => this.handleEnterHelper(previousPosition)}
+          onLeave={({ currentPosition }) => this.handleLeaveHelper(currentPosition)}
+          topOffset={30}
+          bottomOffset={30}
+        >
+          <div className={styles.root}>
+            {children}
+          </div>
+        </Waypoint>
+      </ScrollElement>);
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link, routerShape } from 'react-router';
+import { Link as ScrollLink } from 'react-scroll';
 
 import styles from './SideBar.less';
 import resolveToLocation from './helpers/routerHelper';
@@ -75,7 +76,9 @@ class SideBar extends Component {
                             styles.menuSubitem,
                             this.calcSubmenuStyle(subitem.id))}
                         >
-                          <a href={subitem.url} role="menuitem">{subitem.label}</a>
+                          <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
+                            {subitem.label}
+                          </ScrollLink>
                         </li>))
                     }
                   </ul>)}
