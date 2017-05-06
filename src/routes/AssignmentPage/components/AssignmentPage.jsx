@@ -10,12 +10,13 @@ import TaskContent from './TaskContent';
 import styles from './AssignmentPage.less';
 
 
-const openTextTasks = (tasks) => {
+const openTextTasks = (assignmentId, section) => {
+  const tasks = section.tasks;
   if (tasks.length === 0) {
     return null;
   }
   return tasks.map(task => (
-    <ContentWrapper id={`${task.id}-open-text-map`}>
+    <ContentWrapper id={`${assignmentId}-${task.id}-task`}>
       <OpenTextTask {...task} />
     </ContentWrapper>)
   );
@@ -46,9 +47,8 @@ const AssignmentPage = ({ assignment }) => (
       </ContentWrapper>
       }
       {
-        assignment && assignment.sections && assignment.sections.map(section => (
-          openTextTasks(section.open_text_tasks)
-        ))
+        assignment && assignment.sections && assignment.sections.map(
+          section => openTextTasks(assignment.id, section))
       }
     </div>
   </section>
