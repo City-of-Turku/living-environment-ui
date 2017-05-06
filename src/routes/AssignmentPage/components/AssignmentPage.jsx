@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ContentWrapper from '../../../containers/ContentWrapper';
@@ -9,50 +9,55 @@ import TaskContent from './TaskContent';
 
 import styles from './AssignmentPage.less';
 
+class AssignmentPage extends Component {
 
-const openTextTasks = (assignmentId, section) => {
-  const tasks = section.tasks;
-  if (tasks.length === 0) {
-    return null;
+  openTextTasks(assignmentId, section) {
+    const tasks = section.tasks;
+    if (tasks.length === 0) {
+      return null;
+    }
+    return tasks.map(task => (
+      <ContentWrapper id={`${assignmentId}-${task.id}-task`}>
+        <OpenTextTask {...task} />
+      </ContentWrapper>)
+    );
   }
-  return tasks.map(task => (
-    <ContentWrapper id={`${assignmentId}-${task.id}-task`}>
-      <OpenTextTask {...task} />
-    </ContentWrapper>)
-  );
-};
 
-const AssignmentPage = ({ assignment }) => (
-  <section>
-    <ContentWrapper id="_" />
-    <div className={styles.root}>
-      <Header moneyUsed={3} totalBudget={5} />
-      { assignment && <ContentWrapper id={`${assignment.id}-assignment`}>
-        <div className={styles.heroImageWrapper}>
-          <img
-            className={styles.heroImage}
-            src="http://placehold.it/750x250"
-            alt=""
+  render() {
+    const { assignment } = this.props;
+    if (!assignment) {
+      return null;
+    }
+    return (<section>
+      <ContentWrapper id="_" />
+      <div className={styles.root}>
+        <Header moneyUsed={3} totalBudget={5} />
+        <ContentWrapper id={`${assignment.id}-assignment`}>
+          <div className={styles.heroImageWrapper}>
+            <img
+              className={styles.heroImage}
+              src="http://placehold.it/750x250"
+              alt=""
+            />
+          </div>
+          <TaskInfoBar
+            categoryName={'Example Category'}
+            tasks={{ completed: 10, total: 20 }}
+            totalBudget={100000}
           />
-        </div>
-        <TaskInfoBar
-          categoryName={'Example Category'}
-          tasks={{ completed: 10, total: 20 }}
-          totalBudget={100000}
-        />
-        <TaskContent
-          body={assignment.description}
-          title={assignment.name}
-        />
-      </ContentWrapper>
-      }
-      {
-        assignment && assignment.sections && assignment.sections.map(
-          section => openTextTasks(assignment.id, section))
-      }
-    </div>
-  </section>
-);
+          <TaskContent
+            body={assignment.description}
+            title={assignment.name}
+          />
+        </ContentWrapper>
+        {
+          assignment.sections && assignment.sections.map(
+            section => this.openTextTasks(assignment.id, section))
+        }
+      </div>
+    </section>);
+  }
+}
 
 AssignmentPage.propTypes = {
   assignment: PropTypes.shape({
