@@ -26,12 +26,12 @@ class AssignmentPage extends Component {
   }
 
   render() {
-    const { assignment } = this.props;
+    const { assignment, handleSubmit, onSubmit } = this.props;
     if (!assignment) {
       return null;
     }
     return (<section>
-      <form name="assignmentPage">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.root}>
           <Header moneyUsed={3} totalBudget={5} />
@@ -73,6 +73,8 @@ AssignmentPage.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 AssignmentPage.defaultProps = {
