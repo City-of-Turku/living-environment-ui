@@ -1,20 +1,61 @@
 @import '../styling/styling';
 
-@progressBarWidth: 80%;
+@toggleButtonColor: @gray;
+
+@logoWrapperHeight: @headerHeight;
+
 
 .root {
-  background: @white;
-  padding: @spacingL;
+  transition: height @transitionDuration @transitionEasing;
+  background: @darkGray;
   color: @gray;
+  height: @headerHeight;
+  overflow: visible;
+
+  .tablet({
+    height: 0;
+  });
 }
 
-.label {
-  line-height: @progressBarHeight;
+.contentWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: @headerHeight;
+
+  .tablet({
+    top: -@headerHeight;
+  })
+}
+
+.toggleButtonWrapper {
+  line-height: @logoWrapperHeight;
   float: left;
-
+  margin: 0 @spacingM 0 @spacingL;
 }
 
-.progressBarWrapper {
+.button {
+  border: 0;
+  background: transparent;
+  color: @toggleButtonColor;
+
+  &:hover {
+    color: darken(@toggleButtonColor, 20);
+  }
+}
+
+
+.logoWrapper {
   overflow: hidden;
-  padding: 0 (100% -  @progressBarWidth) / 2;
+  height: @logoWrapperHeight;
+}
+
+.logo {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  color: @cyan;
+  font-size: 80px;
 }

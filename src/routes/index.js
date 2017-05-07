@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Layout from '../containers/Layout';
 import AssignmentPage from './AssignmentPage';
 
 import store from '../store';

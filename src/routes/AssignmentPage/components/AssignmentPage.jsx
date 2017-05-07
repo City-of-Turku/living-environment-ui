@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ContentWrapper from '../../../containers/ContentWrapper';
+import Header from './Header';
 import OpenTextTask from './OpenTextTask';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
@@ -24,6 +25,7 @@ const AssignmentPage = ({ assignment }) => (
   <section>
     <ContentWrapper id="_" />
     <div className={styles.root}>
+      <Header moneyUsed={3} totalBudget={5} />
       { assignment && <ContentWrapper id={`${assignment.id}-assignment`}>
         <div className={styles.heroImageWrapper}>
           <img
