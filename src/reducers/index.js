@@ -7,7 +7,7 @@ import waypointsReducer from './waypoints';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    formReducer,
+    form: formReducer,
     routing: routerReducer,
     sideMenu: sideMenuReducer,
     waypoints: waypointsReducer,
