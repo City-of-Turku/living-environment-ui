@@ -5,6 +5,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 import Header from './Header';
 import PlayerInformation from './PlayerInformation';
 import OpenTextTask from './OpenTextTask';
+import SubmitAssignment from './SubmitAssignment';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
 
@@ -59,6 +60,7 @@ class AssignmentPage extends Component {
             assignment.sections && assignment.sections.map(
               section => this.openTextTasks(assignment.id, section))
           }
+          <SubmitAssignment />
         </div>
       </form>
     </section>);
