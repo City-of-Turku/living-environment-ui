@@ -10,9 +10,9 @@ const mapStateToProps = state => ({
   assignment: state.assignmentReducer.assignment,
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({
-    onSubmit: submitForm,
+    onSubmit: values => submitForm(ownProps.params.assignmentSlug, values),
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({

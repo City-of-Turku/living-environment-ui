@@ -1,9 +1,9 @@
 import assignmentService from '../../../services/assignmentService';
 import { formActionType } from '../constants/actionTypes';
 
-export const submitForm = values => ({
+export const submitForm = (assignmentSlug, values) => ({
   type: formActionType.SUBMIT_FORM,
-  payload: assignmentService.postAssignment(values),
+  payload: assignmentService.postAssignment(assignmentSlug, values),
 });
 
 export default submitForm;
