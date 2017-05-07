@@ -32,6 +32,7 @@ const createMenuItems = (assignment, router) => new Promise((resolve, reject) =>
   const routes = router.routes;
   match({ routes, location }, (error, redirect, renderProps) => {
     if (error) {
+      // eslint-disable-line no-console
       console.error(`Can't generate the menu content for the given path ${location.pathname}`);
       return reject(error);
     }
