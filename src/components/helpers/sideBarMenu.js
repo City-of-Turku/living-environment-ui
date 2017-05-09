@@ -10,7 +10,7 @@ const generateAssignmentPageMenuItems = (assignment, result) => {
     url: `/assignment/${assignment.slug}`,
     icon: 'fa-home',
     subitems: [{
-      label: 'Landing Page',
+      label: assignment.header,
       id: `${assignmentId}-assignment`,
     }, {
       label: 'Minun tietoni',

@@ -59,7 +59,7 @@ class SideBar extends Component {
             menuItems.map(item => (
               <li role="presentation" className={this.calcMenuWrapperStyle(item.url)} key={item.id}>
                 <div className={styles.menuItem}>
-                  <Link to={item.url} role="menuitem">
+                  <Link to={item.url} role="menuitem" className={styles.menuItemLink}>
                     <span className={styles.iconWrapper}>
                       <i className={classNames('glyphfont', 'icon-triangle', styles.menuIcon)} />
                     </span>
