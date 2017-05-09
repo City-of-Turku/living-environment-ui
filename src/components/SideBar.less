@@ -20,6 +20,9 @@
   display: inline-block;
   text-align: center;
   width: @iconWrapperWidth;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .selectedItem {
@@ -31,7 +34,7 @@
 }
 
 .menu {
-  padding: 0;
+  padding: 0 @spacingM 0 0;
 }
 
 .menuItem {
@@ -45,6 +48,12 @@
       text-decoration: none;
     }
   }
+}
+
+.menuItemLink {
+  display: inline-block;
+  padding-left: @iconWrapperWidth;
+  position: relative;
 }
 
 .menuIcon {
