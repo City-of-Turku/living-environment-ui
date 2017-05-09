@@ -1,5 +1,7 @@
 import * as assignmentActionType from './assignment';
+import * as formActionType from './form';
 
 export {
-  assignmentActionType, // eslint-disable-line import/prefer-default-export
+  assignmentActionType,
+  formActionType,
 };

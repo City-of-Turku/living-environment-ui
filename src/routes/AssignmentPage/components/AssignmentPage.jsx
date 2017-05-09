@@ -5,6 +5,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 import Header from './Header';
 import PlayerInformation from './PlayerInformation';
 import OpenTextTask from './OpenTextTask';
+import SubmitAssignment from './SubmitAssignment';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
 
@@ -25,12 +26,12 @@ class AssignmentPage extends Component {
   }
 
   render() {
-    const { assignment } = this.props;
+    const { assignment, handleSubmit, onSubmit } = this.props;
     if (!assignment) {
       return null;
     }
     return (<section>
-      <form name="assignmentPage">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.root}>
           <Header moneyUsed={3} totalBudget={5} />
@@ -59,6 +60,7 @@ class AssignmentPage extends Component {
             assignment.sections && assignment.sections.map(
               section => this.openTextTasks(assignment.id, section))
           }
+          <SubmitAssignment />
         </div>
       </form>
     </section>);
@@ -71,6 +73,8 @@ AssignmentPage.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 AssignmentPage.defaultProps = {
