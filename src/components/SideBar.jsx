@@ -6,7 +6,7 @@ import { Link as ScrollLink } from 'react-scroll';
 
 import styles from './SideBar.less';
 import resolveToLocation from './helpers/routerHelper';
-import createMenuItems from './helpers/sideBarContext';
+import createMenuItems from './helpers/sideBarMenu';
 
 class SideBar extends Component {
 

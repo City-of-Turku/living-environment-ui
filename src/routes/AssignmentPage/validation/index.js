@@ -1,10 +1,10 @@
 const validate = (values) => {
   const errors = {};
   if (!values.school) {
-    errors.school = 'Required';
+    errors.school = 'Vaadittu';
   }
   if (!values.schoolClass) {
-    errors.schoolClass = 'Required';
+    errors.schoolClass = 'Vaadittu';
   }
   return errors;
 };
