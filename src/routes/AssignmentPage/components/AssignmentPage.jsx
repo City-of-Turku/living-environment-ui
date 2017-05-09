@@ -14,7 +14,8 @@ import styles from './AssignmentPage.less';
 class AssignmentPage extends Component {
 
   openTextTasks(assignmentId, section) {
-    const tasks = section.tasks;
+    const tasks = section.tasks
+    .filter(task => task.task_type === 'open_text_task');
     if (tasks.length === 0) {
       return null;
     }
