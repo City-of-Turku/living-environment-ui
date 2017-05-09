@@ -52,7 +52,7 @@ class AssignmentPage extends Component {
           />
           <TaskContent
             body={assignment.description}
-            title={assignment.name}
+            title={assignment.header}
           />
         </ContentWrapper>
         <ContentWrapper id={`${assignment.id}-assignment-my-information`}>
