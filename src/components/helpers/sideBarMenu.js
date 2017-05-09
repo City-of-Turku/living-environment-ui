@@ -13,16 +13,17 @@ const generateAssignmentPageMenuItems = (assignment, result) => {
       label: 'Landing Page',
       id: `${assignmentId}-assignment`,
     }, {
-      label: 'Player Information',
-      id: `${assignmentId}-assignment-player-information`,
+      label: 'Minun tietoni',
+      id: `${assignmentId}-assignment-my-information`,
     },
     ],
   };
   const sections = assignment.sections;
   sections.forEach((section) => {
     section.tasks.forEach(task => assignmentMenuItem.subitems.push({
-      label: task.name,
-      id: `${assignmentId}-${task.id}-task`,
+      // huh: this is not good
+      label: task.data.name || task.data.question,
+      id: `${assignmentId}-${task.id}-open-text-task`,
     }));
     result.push(assignmentMenuItem);
   });
