@@ -2,53 +2,36 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link, routerShape } from 'react-router';
+import { Link as ScrollLink } from 'react-scroll';
 
 import styles from './SideBar.less';
 import resolveToLocation from './helpers/routerHelper';
-
-const menuItems = [
-  {
-    id: 1,
-    label: 'My Assignment Name',
-    url: '/assignment/new-assignment-1',
-    icon: 'fa-home',
-    chevron: 'fa-chevron-up',
-    subitems: [
-      {
-        label: 'Landing Page',
-        id: '1-assignment',
-      },
-      {
-        label: 'Player Information',
-        id: '1-open-text-map',
-      },
-      {
-        label: 'Basic Question Task Name',
-        id: '2-open-text-map',
-      },
-      {
-        label: 'Budgeting Task',
-        id: '2-3-budgeting_task',
-      },
-      {
-        label: 'Budgeting Map Task',
-        id: '1-section',
-      },
-      {
-        label: 'Friend of the Park',
-        id: '1-1-open-text-map',
-      },
-    ]
-  },
-  {
-    id: 2,
-    label: 'Another Link',
-    chevron: 'fa-chevron-down',
-    url: '#',
-  },
-];
+import createMenuItems from './helpers/sideBarContext';
 
 class SideBar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.requestedMenuGeneration = false;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // TODO: we didn't ensure that menu items change as the url is changed. It will be easier to
+    // implement it when more routes are added to app
+    const { assignment } = this.props;
+    if (assignment && prevState === null && !this.requestedMenuGeneration) {
+      const { router } = this.context;
+      // `requestedMenuGeneration` ensures that the `createMenuItems` method is called just once.
+      // The issue is that the `menuItems` state is set async as `createMenuItems` uses
+      // the async method `route` so we can't rely only on condition A: `prevState === null`
+      // (if `createMenuItems` was a sync method then it would be possible to use only  condition A)
+      this.requestedMenuGeneration = true;
+      createMenuItems(assignment, router)
+      .then((menuItems) => {
+        this.setState({ menuItems });
+      });
+    }
+  }
 
   calcMenuWrapperStyle(to) {
     const { router } = this.context;
@@ -62,6 +45,10 @@ class SideBar extends Component {
   }
 
   render() {
+    if (this.state === null) {
+      return null;
+    }
+    const { menuItems } = this.state;
     return (
       <div className={styles.root}>
         <div className={styles.logoWrapper}>
@@ -89,7 +76,9 @@ class SideBar extends Component {
                             styles.menuSubitem,
                             this.calcSubmenuStyle(subitem.id))}
                         >
-                          <a href={subitem.url} role="menuitem">{subitem.label}</a>
+                          <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
+                            {subitem.label}
+                          </ScrollLink>
                         </li>))
                     }
                   </ul>)}
@@ -104,9 +93,18 @@ SideBar.contextTypes = {
 };
 
 SideBar.propTypes = {
+  assignment: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }),
   currentSection: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number,
   ]).isRequired,
+};
+
+SideBar.defaultProps = {
+  assignment: null,
 };
 
 

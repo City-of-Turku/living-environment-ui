@@ -1,6 +1,6 @@
 import { assignmentActionType } from '../constants/actionTypes';
 
-const initialState = { sections: [] };
+const initialState = { assignment: null };
 
 const assignmentReducer = (state = initialState, action) => {
   switch (action.type) {
