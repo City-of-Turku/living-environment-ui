@@ -20,7 +20,7 @@ class AssignmentPage extends Component {
       return null;
     }
     return tasks.map(task => (
-      <ContentWrapper id={`${assignmentId}-${task.id}-task`}>
+      <ContentWrapper id={`${assignmentId}-${task.id}-open-text-task`}>
         <OpenTextTask {...task} />
       </ContentWrapper>)
     );
