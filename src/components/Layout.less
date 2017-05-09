@@ -1,7 +1,5 @@
 @import '../styling/styling';
 
-@sideBarWidth: 300px;
-
 .root {
   background: @lightGray;
 }
@@ -31,12 +29,10 @@
 
 .contentWrapper {
   transition: width @transitionDuration @transitionEasing,
-    margin-top @transitionDuration @transitionEasing,
     margin-left @transitionDuration @transitionEasing;
   position: relative;
   z-index: 0;
 
-  margin-top: @headerHeight;
   margin-left: 0;
   display: inline-block;
   width: 100%;
@@ -45,7 +41,6 @@
 
   .tablet({ width: calc(~'100% - '@sideBarWidth);
     margin-left: @sideBarWidth;
-    margin-top: 0;
   });
 }
 

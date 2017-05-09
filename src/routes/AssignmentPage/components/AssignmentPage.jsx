@@ -31,38 +31,38 @@ class AssignmentPage extends Component {
     if (!assignment) {
       return null;
     }
-    return (<section>
+    return (<section className={styles.root}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
-        <div className={styles.root}>
+        <div className={styles.headerWrapper}>
           <Header moneyUsed={3} totalBudget={5} />
-          <ContentWrapper id={`${assignment.id}-assignment`}>
-            <div className={styles.heroImageWrapper}>
-              <img
-                className={styles.heroImage}
-                src="http://placehold.it/750x250"
-                alt=""
-              />
-            </div>
-            <TaskInfoBar
-              categoryName={'Example Category'}
-              tasks={{ completed: 10, total: 20 }}
-              totalBudget={100000}
-            />
-            <TaskContent
-              body={assignment.description}
-              title={assignment.name}
-            />
-          </ContentWrapper>
-          <ContentWrapper id={`${assignment.id}-assignment-my-information`}>
-            <MyInformation schools={assignment.schools} />
-          </ContentWrapper>
-          {
-            assignment.sections && assignment.sections.map(
-              section => this.openTextTasks(assignment.id, section))
-          }
-          <SubmitAssignment />
         </div>
+        <ContentWrapper id={`${assignment.id}-assignment`}>
+          <div className={styles.heroImageWrapper}>
+            <img
+              className={styles.heroImage}
+              src="http://placehold.it/750x250"
+              alt=""
+            />
+          </div>
+          <TaskInfoBar
+            categoryName={'Example Category'}
+            tasks={{ completed: 10, total: 20 }}
+            totalBudget={100000}
+          />
+          <TaskContent
+            body={assignment.description}
+            title={assignment.name}
+          />
+        </ContentWrapper>
+        <ContentWrapper id={`${assignment.id}-assignment-my-information`}>
+          <MyInformation schools={assignment.schools} />
+        </ContentWrapper>
+        {
+          assignment.sections && assignment.sections.map(
+            section => this.openTextTasks(assignment.id, section))
+        }
+        <SubmitAssignment />
       </form>
     </section>);
   }
