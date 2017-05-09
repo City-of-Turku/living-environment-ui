@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ContentWrapper from '../../../containers/ContentWrapper';
 import Header from './Header';
-import PlayerInformation from './PlayerInformation';
+import MyInformation from './MyInformation';
 import OpenTextTask from './OpenTextTask';
 import SubmitAssignment from './SubmitAssignment';
 import TaskInfoBar from './TaskInfoBar';
@@ -54,7 +54,7 @@ class AssignmentPage extends Component {
             />
           </ContentWrapper>
           <ContentWrapper id={`${assignment.id}-assignment-my-information`}>
-            <PlayerInformation schools={assignment.schools} />
+            <MyInformation schools={assignment.schools} />
           </ContentWrapper>
           {
             assignment.sections && assignment.sections.map(

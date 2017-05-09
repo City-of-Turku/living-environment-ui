@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { renderField } from '../../../components/helpers/formHelpers';
 
-class PlayerInformation extends Component {
+class MyInformation extends Component {
 
   constructor(props) {
     super(props);
@@ -26,10 +26,11 @@ class PlayerInformation extends Component {
     const { schools } = this.props;
     const { schoolClasses } = this.state;
     return (<div>
+      <h2>Minun tietoni</h2>
       <Field
         name="school"
-        label={'School'}
-        placeholder="Select school"
+        label={'Koulu'}
+        placeholder="Valitse koulu"
         component={renderField} type="select"
         options={schools}
         optionsKey="id"
@@ -39,8 +40,8 @@ class PlayerInformation extends Component {
 
       <Field
         name="schoolClass"
-        label={'Class'}
-        placeholder="Select class"
+        label={'Luokka'}
+        placeholder="Valitse luokka"
         component={renderField} type="select"
         options={schoolClasses}
         optionsKey="id"
@@ -50,7 +51,7 @@ class PlayerInformation extends Component {
   }
 }
 
-PlayerInformation.propTypes = {
+MyInformation.propTypes = {
   schools: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -61,4 +62,4 @@ PlayerInformation.propTypes = {
   })).isRequired,
 };
 
-export default PlayerInformation;
+export default MyInformation;
