@@ -7,4 +7,4 @@ const mapStateToProps = state => ({
   assignment: state.assignmentReducer.assignment,
 });
 
-export default connect(mapStateToProps)(reduxForm({ form: 'landingPage' })(AssignmentPage));
+export default connect(mapStateToProps)(reduxForm({ form: 'assignmentPage' })(AssignmentPage));

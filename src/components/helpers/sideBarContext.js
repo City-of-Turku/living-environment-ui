@@ -20,9 +20,7 @@ const generateAssignmentPageMenuItems = (assignment, result) => {
   };
   const sections = assignment.sections;
   sections.forEach((section) => {
-    // TODO: consider to use the `sort` method from `lodash`
-    const tasks = section.tasks.sort((a, b) => a.order_number - b.order_number);
-    tasks.forEach(task => assignmentMenuItem.subitems.push({
+    section.tasks.forEach(task => assignmentMenuItem.subitems.push({
       label: task.name,
       id: `${assignmentId}-${task.id}-task`,
     }));
