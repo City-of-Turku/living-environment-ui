@@ -74,8 +74,8 @@ AssignmentPage.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
-  onSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 AssignmentPage.defaultProps = {
