@@ -12,7 +12,7 @@ import styles from './BudgetingTextTask.less';
 const BudgetingTextTask = ({ className, task }) => (<div className={classnames(styles.root, className)}>
   <h4>{task.name}</h4>
   {
-    task.targets.map(target => (<div>
+    task.targets.map(target => (<div key={target.id}>
       <Row>
         <Col sm={7} xs={12} smPush={5} className={styles.col}>
           {target.name}

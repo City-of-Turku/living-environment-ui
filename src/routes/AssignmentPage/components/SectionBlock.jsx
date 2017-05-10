@@ -12,10 +12,10 @@ import styles from './SectionBlock.less';
 
 const createTaskList = tasks => tasks.reduce((acc, task) => {
   if (task.task_type === TaskType.OpenTextTask) {
-    acc.push(<OpenTextTask {...{ ...task, className: styles.separator }} />);
+    acc.push(<OpenTextTask {...{ ...task, className: styles.separator, key: task.id }} />);
   } else if (task.task_type === TaskType.BudgetingTask
       && task.data.budgeting_type === TaskType.BudgetingTextTask) {
-    acc.push(<BudgetingTextTask {...{ ...task, className: styles.separator }} />);
+    acc.push(<BudgetingTextTask {...{ ...task, className: styles.separator, key: task.id }} />);
   } else {
     console.warn(`Unknown task type ${task.task_type} can't be processed`); // eslint-disable-line no-console
   }
