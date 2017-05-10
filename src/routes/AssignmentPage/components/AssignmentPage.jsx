@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ContentWrapper from '../../../containers/ContentWrapper';
 import Header from './Header';
 import MyInformation from './MyInformation';
-import OpenTextTask from './OpenTextTask';
+import SectionBlock from './SectionBlock';
 import SubmitAssignment from './SubmitAssignment';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
@@ -12,19 +12,6 @@ import TaskContent from './TaskContent';
 import styles from './AssignmentPage.less';
 
 class AssignmentPage extends Component {
-
-  openTextTasks(assignmentId, section) {
-    const tasks = section.tasks
-    .filter(task => task.task_type === 'open_text_task');
-    if (tasks.length === 0) {
-      return null;
-    }
-    return tasks.map(task => (
-      <ContentWrapper id={`${assignmentId}-${task.id}-open-text-task`}>
-        <OpenTextTask {...task} />
-      </ContentWrapper>)
-    );
-  }
 
   render() {
     const { assignment, handleSubmit, onSubmit } = this.props;
@@ -60,7 +47,7 @@ class AssignmentPage extends Component {
         </ContentWrapper>
         {
           assignment.sections && assignment.sections.map(
-            section => this.openTextTasks(assignment.id, section))
+            section => <SectionBlock section={section} />)
         }
         <SubmitAssignment />
       </form>
