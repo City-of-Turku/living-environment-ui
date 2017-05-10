@@ -1,6 +1,7 @@
 import client from './client';
 
-const openTextTaskIdReqExp = /open_text_task_(\d*)/;
+const openTextTaskIdReqExp = /open_text_task_(\d+)/;
+const budgetingTextTaskIdsReqExp = /budgeting_text_task_(\d+)_(\d+)/;
 
 const convertAssignmentFormDataToAPIPayload = (values) => {
   const data = {
@@ -14,7 +15,15 @@ const convertAssignmentFormDataToAPIPayload = (values) => {
       }
       return accum;
     }, []),
-    budgeting_targets: [],
+    budgeting_targets: Object.entries(values).reduce((accum, [key, amount]) => {
+      const match = key.match(budgetingTextTaskIdsReqExp);
+      if (match) {
+        const task = parseInt(match[1], 10);
+        const target = parseInt(match[2], 10);
+        accum.push({ task, target, amount: parseFloat(amount) });
+      }
+      return accum;
+    }, []),
   };
   return data;
 };

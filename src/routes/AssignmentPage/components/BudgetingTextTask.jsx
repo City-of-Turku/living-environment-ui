@@ -20,7 +20,7 @@ const BudgetingTextTask = ({ className, task }) => (<div className={classnames(s
         <Col sm={3} xs={12} smPull={5} className={styles.col}>
           <Field
             className={classnames('form-group', styles.field)}
-            name={`budgeting_text_task_${target.id}`}
+            name={`budgeting_text_task_${task.id}_${target.id}`}
             placeholder="" min="0"
             component={renderField} type="number"
             suppressErrors
@@ -32,7 +32,7 @@ const BudgetingTextTask = ({ className, task }) => (<div className={classnames(s
       <Row>
         <Col sm={10} xs={12} smPush={2}>
           <Field
-            name={`budgeting_text_task_${target.id}`}
+            name={`budgeting_text_task_${task.id}_${target.id}`}
             placeholder="" min="0"
             component={renderField} type="error"
             validate={[Validation.number, value =>
