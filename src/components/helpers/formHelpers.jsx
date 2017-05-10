@@ -4,9 +4,11 @@ import classnames from 'classnames';
 
 export const renderField = (field) => { // eslint-disable-line import/prefer-default-export
   const placeholder = field.placeholder || field.label;
-  // all input types except textarea and select
-  const otherTypes = field.type !== 'textarea' && field.type !== 'select';
+  // all input types except textarea, select and error
+  const otherTypes = field.type !== 'textarea' && field.type !== 'select' && field.type !== 'error';
   const { touched, error } = field.meta;
+  const suppressErrors = field.suppressErrors;
+  const wrapperClass = field.className || 'form-group';
   const attributes = {
     ...field.input,
     placeholder,
@@ -17,7 +19,7 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
   return (
     <div>
       { field.label && <label htmlFor={name} className="control-label">{field.label}</label> }
-      <div className={classnames('form-group', hasError && 'has-error')}>
+      <div className={classnames(wrapperClass, hasError && 'has-error')}>
         { field.type === 'textarea' && <textarea {...attributes} /> }
         { field.type === 'select' &&
           <select {...attributes}>
@@ -33,9 +35,9 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
           </select>
         }
         { otherTypes && <input {...attributes} /> }
-        <div className="help-block">
+        { !suppressErrors && <div className="help-block">
           {hasError && (<span>{error}</span>)}
-        </div>
+        </div>}
       </div>
     </div>
   );
