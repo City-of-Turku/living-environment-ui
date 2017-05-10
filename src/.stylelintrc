@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "block-no-empty": true,
+    "color-hex-case": "upper",
+    "color-hex-length": "long",
+    "color-named": "never",
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": [ "always", {
+      "ignore": ["stylelint-commands", "after-comment"]
+    } ],
+    "declaration-bang-space-after": "never",
+    "declaration-colon-space-after": "always",
+    "declaration-bang-space-before": "always",
+    "font-family-name-quotes": "always-where-recommended",
+    "indentation": [ 2, {
+      "ignore": [ "inside-parens", "value" ]
+    }],
+    "max-empty-lines": 2,
+    "max-nesting-depth": 5,
+    "no-missing-end-of-source-newline": true,
+    "number-leading-zero": "always",
+    "number-max-precision": 3,
+    "number-no-trailing-zeros": true,
+    "property-case": "lower",
+    "property-no-vendor-prefix": true,
+    "rule-empty-line-before": [ "always-multi-line", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
+    }],
+    "string-no-newline": true,
+    "string-quotes": "single",
+    "unit-case": "lower",
+    "unit-no-unknown": true,
+    "unit-whitelist": ["%", "deg", "em", "ms", "pt", "px", "rem", "s", "vh", "vw"],
+    "value-keyword-case": "lower",
+    "value-no-vendor-prefix": true,
+  }
+}

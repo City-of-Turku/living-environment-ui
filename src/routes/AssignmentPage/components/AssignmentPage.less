@@ -1,0 +1,25 @@
+@import '../../../styling/styling';
+
+.root {
+  padding-top: @assignmentHeaderHeight;
+}
+
+.headerWrapper {
+  transition: top @transitionDuration @transitionEasing,
+    left @transitionDuration @transitionEasing;
+  position: fixed;
+  top: @headerHeight;
+  left: 0;
+  right: 0;
+  height: @assignmentHeaderHeight;
+  z-index: 1;
+
+  .tablet({
+    top: 0;
+    left: @sideBarWidth;
+  });
+}
+
+.heroImage {
+  width: 100%;
+}

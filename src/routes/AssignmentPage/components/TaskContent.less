@@ -1,0 +1,53 @@
+@import '../../../styling/styling';
+
+@bodyColor: @gray;
+
+.head {
+  max-width: 700px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+
+  padding: 30px 0;
+
+  p {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+
+    color: @bodyColor;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 50px;
+    height: 1px;
+    background: @gray;
+    transform: translateX(-50%);
+  }
+}
+
+.body {
+  max-width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+
+  padding-top: 30px;
+
+  p {
+    color: @bodyColor;
+  }
+
+  ul {
+    padding-left: 1em;
+  }
+
+  li {
+    color: @bodyColor;
+  }
+}

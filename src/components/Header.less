@@ -1,0 +1,66 @@
+@import '../styling/styling';
+
+@toggleButtonColor: @gray;
+
+@logoWrapperHeight: @headerHeight;
+
+
+.root {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: height @transitionDuration @transitionEasing;
+  background: @darkGray;
+  color: @gray;
+  height: @headerHeight;
+  overflow: visible;
+
+  .tablet({
+    height: 0;
+  });
+}
+
+.contentWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: @headerHeight;
+
+  .tablet({
+    top: -@headerHeight;
+  })
+}
+
+.toggleButtonWrapper {
+  line-height: @logoWrapperHeight;
+  float: left;
+  margin: 0 @spacingM 0 @spacingL;
+}
+
+.button {
+  border: 0;
+  background: transparent;
+  color: @toggleButtonColor;
+
+  &:hover {
+    color: darken(@toggleButtonColor, 20);
+  }
+}
+
+
+.logoWrapper {
+  overflow: hidden;
+  height: @logoWrapperHeight;
+}
+
+.logo {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  color: @cyan;
+  font-size: 80px;
+}
