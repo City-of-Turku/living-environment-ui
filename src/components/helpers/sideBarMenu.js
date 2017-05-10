@@ -2,7 +2,7 @@ import { match } from 'react-router';
 
 const isPathInRoutes = (routes, path) => routes.some(route => route.path === path);
 
-const generateAssignmentPageMenuItems = (assignment, result) => {
+const generateAssignmentPageMenuItems = (assignment, menuItems) => {
   const assignmentId = assignment.id;
   const assignmentMenuItem = {
     id: assignmentId,
@@ -20,12 +20,11 @@ const generateAssignmentPageMenuItems = (assignment, result) => {
   };
   const sections = assignment.sections;
   sections.forEach((section) => {
-    section.tasks.forEach(task => assignmentMenuItem.subitems.push({
-      // huh: this is not good
-      label: task.data.name || task.data.question,
-      id: `${assignmentId}-${task.id}-open-text-task`,
-    }));
-    result.push(assignmentMenuItem);
+    assignmentMenuItem.subitems.push({
+      label: section.title,
+      id: `${section.id}-section`,
+    });
+    menuItems.push(assignmentMenuItem);
   });
 };
 
@@ -33,8 +32,9 @@ const createMenuItems = (assignment, router) => new Promise((resolve, reject) =>
   const routes = router.routes;
   match({ routes, location }, (error, redirect, renderProps) => {
     if (error) {
-      // eslint-disable-line no-console
+      /* eslint-disable no-console */
       console.error(`Can't generate the menu content for the given path ${location.pathname}`);
+      /* eslint-enable no-console */
       return reject(error);
     }
     const menuItems = [];
