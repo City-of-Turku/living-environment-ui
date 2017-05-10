@@ -8,6 +8,7 @@ import SectionBlock from './SectionBlock';
 import SubmitAssignment from './SubmitAssignment';
 import TaskInfoBar from './TaskInfoBar';
 import TaskContent from './TaskContent';
+import TopImage from './TopImage';
 
 import styles from './AssignmentPage.less';
 
@@ -25,13 +26,7 @@ class AssignmentPage extends Component {
           <Header moneyUsed={3} totalBudget={5} />
         </div>
         <ContentWrapper id={`${assignment.id}-assignment`}>
-          <div className={styles.heroImageWrapper}>
-            <img
-              className={styles.heroImage}
-              src="http://placehold.it/750x250"
-              alt=""
-            />
-          </div>
+          <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
             categoryName={'Example Category'}
             tasks={{ completed: 10, total: 20 }}
