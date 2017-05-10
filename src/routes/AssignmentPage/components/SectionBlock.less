@@ -1,0 +1,17 @@
+@import '../../../styling/styling';
+
+.separator {
+  position: relative;
+  margin-bottom: @spacingL;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 50px;
+    height: 1px;
+    background: @gray;
+    transform: translateX(-50%);
+  }
+}
