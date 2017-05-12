@@ -42,7 +42,7 @@ class AssignmentPage extends Component {
         </ContentWrapper>
         {
           assignment.sections && assignment.sections.map(
-            section => <SectionBlock section={section} key={section.id} />)
+            section => <SectionBlock assignment={assignment} section={section} key={section.id} />)
         }
         <SubmitAssignment />
       </form>
