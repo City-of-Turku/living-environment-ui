@@ -1,20 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import BudgetingTextTask from './BudgetingTextTask';
 import ContentWrapper from '../../../containers/ContentWrapper';
 import OpenTextTask from './OpenTextTask';
 import parseQueryString from '../../../components/helpers/urlHelpers';
 import Video from '../../../components/Video';
+import * as TaskType from '../constants/taskTypes/index';
 
 import styles from './SectionBlock.less';
 
-const openTextTasks = (tasks) => {
-  const openTextTaskList = tasks.filter(task => task.task_type === 'open_text_task');
-  if (openTextTaskList.length === 0) {
-    return null;
+const createTaskList = tasks => tasks.reduce((acc, task) => {
+  if (task.task_type === TaskType.OpenTextTask) {
+    acc.push(<OpenTextTask {...{ ...task, className: styles.separator, key: task.id }} />);
+  } else if (task.task_type === TaskType.BudgetingTask
+      && task.data.budgeting_type === TaskType.BudgetingTextTask) {
+    acc.push(<BudgetingTextTask {...{ task: task.data, className: styles.separator, key: task.id }} />);
+  } else {
+    console.warn(`Unknown task type ${task.task_type} can't be processed`); // eslint-disable-line no-console
   }
-  return openTextTaskList.map(task => (<OpenTextTask {...task} />));
-};
+  return acc;
+}, []);
 
 const video = (task) => {
   const videoUrl = task.video;
@@ -27,10 +33,9 @@ const SectionBlock = ({ section }) => (
     { video(section) }
     <h3>{section.title}</h3>
     <div
-      className={section.tasks.length ? styles.separator : ''}
       dangerouslySetInnerHTML={{ __html: section.description }} // eslint-disable-line react/no-danger
     />
-    { openTextTasks(section.tasks)}
+    { createTaskList(section.tasks)}
   </ContentWrapper>
 );
 

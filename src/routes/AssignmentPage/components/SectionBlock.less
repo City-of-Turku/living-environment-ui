@@ -2,12 +2,14 @@
 
 .separator {
   position: relative;
-  margin-bottom: @spacingL;
+  margin-top: @spacingL;
+  padding-top: @spacingL;
 
-  &:after {
+
+  &:before {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 50%;
     width: 50px;
     height: 1px;
