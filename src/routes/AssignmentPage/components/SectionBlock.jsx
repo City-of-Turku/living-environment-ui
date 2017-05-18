@@ -24,6 +24,9 @@ const createTaskList = tasks => tasks.reduce((acc, task) => {
 
 const video = (task) => {
   const videoUrl = task.video;
+  if (!videoUrl) {
+    return null;
+  }
   const queryString = parseQueryString(videoUrl);
   return (<Video videoId={queryString.v} />);
 };
