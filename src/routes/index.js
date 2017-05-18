@@ -4,7 +4,7 @@ import AssignmentPage from './AssignmentPage';
 import store from '../store';
 
 const createRoutes = () => ({
-  path: 'assignment/:assignmentSlug',
+  path: '/:assignmentSlug',
   component: Layout,
   indexRoute: AssignmentPage(store),
   childRoutes: [
