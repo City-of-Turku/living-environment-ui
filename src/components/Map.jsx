@@ -1,45 +1,77 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Map as LeafletMap, Marker, Polygon, Popup, WMSTileLayer } from 'react-leaflet';
+import L from 'leaflet';
+import inside from 'point-in-polygon';
 
-import { Map as LeafletMap, WMSTileLayer } from 'react-leaflet';
+import MapMask from './MapMask';
 
-/**
- * Leaflet map
- *
- * @param layers - list of layers
- * @param position - initial position [lat, long]
- * @param url - provider url
- * @param zoom - initial zoom [2..21]
- * @returns map element
- *
- * Example:
- * <Map
- *   position={[60.4629060928519,22.259694757206415]}
- *   zoom={12}
- *   layers={['Opaskartta']}
- *   url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
- * />
- *
- */
+import styles from './Map.less';
 
-const Map = ({ layers, position, url, zoom }) => (
-  <LeafletMap center={position} zoom={zoom}>
-    <WMSTileLayer
-      layers={layers}
-      url={url}
-    />
-  </LeafletMap>
-  );
+class Map extends Component {
+  handleClick(e) {
+    const point = e.latlng;
+    const { mask } = this.props;
+    if (inside([point.lat, point.lng], mask)) {
+      this.setState({ latlng: e.latlng });
+    }
+  }
+
+  render() {
+    const { className, layers, mask, maxLat, maxLong, minLat, minLong, minZoom, url } = this.props;
+    const polygon = L.polygon(mask);
+    const areaBounds = polygon.getBounds();
+    const marker = this.state && this.state.latlng
+      ? (<Marker position={this.state.latlng}>
+        <Popup>
+          <div>
+            <div>Placeholder</div>
+          </div>
+        </Popup>
+      </Marker>)
+      : null;
+    return (<LeafletMap
+      className={className}
+      bounds={areaBounds}
+      maxBounds={[[minLat, minLong], [maxLat, maxLong]]}
+      minZoom={minZoom}
+      onClick={e => this.handleClick(e)}
+    >
+      <WMSTileLayer
+        layers={layers}
+        url={url}
+      />
+      <MapMask
+        className={styles.mask}
+        color="black"
+        fillOpacity={0.4}
+        minLat={minLat}
+        minLong={minLong}
+        maxLat={maxLat}
+        maxLong={maxLong}
+        positions={mask}
+        weight={0}
+      />
+      <Polygon color="white" positions={mask} fillOpacity={0} weight={1} />
+      {marker}
+    </LeafletMap>);
+  }
+}
 
 Map.propTypes = {
+  className: PropTypes.string,
   layers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  position: PropTypes.arrayOf(PropTypes.number).isRequired,
+  mask: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  maxLat: PropTypes.number.isRequired,
+  maxLong: PropTypes.number.isRequired,
+  minLat: PropTypes.number.isRequired,
+  minLong: PropTypes.number.isRequired,
+  minZoom: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
-  zoom: PropTypes.number,
 };
 
 Map.defaultProps = {
-  zoom: 17
+  className: '',
 };
 
 export default Map;

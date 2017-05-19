@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
     "npm": "^4.5.0",
+    "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
