@@ -8,7 +8,7 @@ import { injectAsyncReducer } from '../../store';
 const AssignmentPageRoute = store => ({
   getComponent(nextState, cb) {
     const assignmentSlug = nextState.params.assignmentSlug;
-    injectAsyncReducer({ assignmentReducer, budgetingMap: budgetingMapReducer });
+    injectAsyncReducer({ assignment: assignmentReducer, budgetingMap: budgetingMapReducer });
     store.dispatch(fetchAssignment(assignmentSlug));
     cb(null, AssignmentPage);
   }
