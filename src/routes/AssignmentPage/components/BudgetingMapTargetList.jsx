@@ -4,7 +4,7 @@ import { Button, ButtonGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import styles from './BudgetingMapTargetList.less';
 
-const findTargetById = (id, task) => task.targets.filter(target => target.id === id)[0];
+const findTargetById = (id, task) => task.data.targets.filter(target => target.id === id)[0];
 
 class BudgetingMapTargetList extends Component {
 
@@ -32,7 +32,7 @@ class BudgetingMapTargetList extends Component {
   componentWillUnmount() {
     const { onDialogClosed, task } = this.props;
     if (onDialogClosed && this.handleDialogClose) {
-      onDialogClosed(task);
+      onDialogClosed(task.data);
     }
     // we don't need to set the value of this.handleDialogClose to true as the component lifecycle is done here
   }
@@ -72,7 +72,7 @@ class BudgetingMapTargetList extends Component {
       <div className={styles.firstPage}>
         <ListGroup className={styles.list}>
           {
-            task.targets.map(
+            task.data.targets.map(
               target => (<ListGroupItem
                 active={selectedTarget === target}
                 className={styles.listItem}

@@ -50,8 +50,8 @@ BudgetingTextTask.propTypes = {
     name: PropTypes.string.isRequired,
     targets: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      max_amount: PropTypes.number.isRequired,
-      min_amount: PropTypes.number.isRequired,
+      max_amount: PropTypes.string.isRequired, // server returns string here
+      min_amount: PropTypes.string.isRequired, // -- / --
       name: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
