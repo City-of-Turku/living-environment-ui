@@ -8,7 +8,7 @@ export const range = (value, min, max) => { // eslint-disable-line import/prefer
       return console.warn(`min value ${min} can't be greater then max value ${max}`); // eslint-disable-line
     }
     if (value < min || value > max) {
-      return `Arvon on oltava väliltä ${min} ja ${max}`; // The value should't be less than ${min}
+      return `Arvon on oltava väliltä ${min} ja ${max}`; // The value should be between ${min} and ${max}`
     }
   } else if (minDefined && value < min) {
     return `Arvo ei saa olla pienempi kuin ${min}`; // The value should't be less than ${min}
