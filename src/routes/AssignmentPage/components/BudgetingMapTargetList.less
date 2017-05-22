@@ -1,0 +1,21 @@
+@import '../../../styling/styling';
+
+.list {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.footer {
+  margin: 0 -(@spacingS);
+  padding: @spacingS @spacingS 0;
+  border-top: 1px solid @lightGray;
+
+  :global .btn-group {
+    white-space: nowrap;
+
+    :global .btn {
+      float: none;
+      display: inline-block;
+    }
+  }
+}

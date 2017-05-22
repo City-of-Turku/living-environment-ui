@@ -30,7 +30,7 @@ const createTaskList = (assignment, tasks) => tasks.reduce((acc, task) => {
       && task.data.budgeting_type === TaskType.BudgetingMapTask) {
     const maskPolygon = getMaskPolygon(assignment);
     acc.push(<BudgetingMapTask
-      {...{ task: task.data, maskPolygon, className: styles.separator, key: task.id }}
+      {...{ task, maskPolygon, className: styles.separator, key: task.id }}
     />);
   } else if (task.task_type === TaskType.BudgetingTask
     && task.data.budgeting_type === TaskType.BudgetingTextTask) {

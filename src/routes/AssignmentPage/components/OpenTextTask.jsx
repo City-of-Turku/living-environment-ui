@@ -32,7 +32,6 @@ const OpenTextTask = ({ className, data, id }) => (
 OpenTextTask.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
   }).isRequired,
   id: PropTypes.number.isRequired,

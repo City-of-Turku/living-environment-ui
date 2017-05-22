@@ -1,0 +1,46 @@
+@import '../../../styling/styling';
+
+@markerWidth: 32px;
+@markerHeight: 48px;
+@markerIconSize: 24px;
+
+.mask {
+  cursor: -webkit-grab; // stylelint-disable-line value-no-vendor-prefix
+  cursor: -moz-grab; // stylelint-disable-line value-no-vendor-prefix
+}
+
+.popup {
+  :global .leaflet-popup-content {
+    margin: @spacingL @spacingS @spacingS;
+  }
+}
+
+.markerIconWrapper {
+  width: @markerWidth;
+  height: @markerHeight;
+  font-size: @markerHeight;
+  line-height: @markerHeight;
+  color: @white;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.markerIcon {
+  width: @markerIconSize;
+  height: @markerIconSize;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  // we used @markerWidth instead of @markerHeight in order to calculate top
+  // as we are interested in the top part of the position pin
+  // ...@@@@@@...
+  // ..@......@..
+  // .@. icon  @.
+  // .@........@.
+  // ..@......@..
+  //    @    @
+  //     @  @
+  //      @@
+  top: (@markerWidth - @markerIconSize)/2;
+  left: (@markerWidth - @markerIconSize)/2;
+  position: absolute;
+}
