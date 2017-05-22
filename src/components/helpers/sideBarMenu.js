@@ -7,7 +7,7 @@ const generateAssignmentPageMenuItems = (assignment, menuItems) => {
   const assignmentMenuItem = {
     id: assignmentId,
     label: assignment.name,
-    url: `/assignment/${assignment.slug}`,
+    url: `/${assignment.slug}`,
     icon: 'fa-home',
     subitems: [{
       label: assignment.header,
@@ -38,7 +38,7 @@ const createMenuItems = (assignment, router) => new Promise((resolve, reject) =>
       return reject(error);
     }
     const menuItems = [];
-    if (isPathInRoutes(renderProps.routes, 'assignment/:assignmentSlug')) {
+    if (isPathInRoutes(renderProps.routes, '/:assignmentSlug')) {
       generateAssignmentPageMenuItems(assignment, menuItems);
     }
     return resolve(menuItems);
