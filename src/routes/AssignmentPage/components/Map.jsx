@@ -7,23 +7,38 @@ import classnames from 'classnames';
 
 import MapMask from './MapMask';
 import BudgetingMapTargetList from '../components/BudgetingMapTargetList';
+import config from '../../../config';
 
 import styles from './Map.less';
+import pin from './MapPin.svg';
+import pinWHole from './MapPinHole.svg';
+
+const iconSize = [38, 48];
 
 class Map extends Component {
 
   static getMarkerIcon(target) {
-    const iconSize = [32, 48];
+    let html;
+    const { backendImages: { baseUrl } } = config;
+    if (target.valid && target.selectedTarget.icon) {
+      if (target.selectedTarget.icon.endsWith('.svg')) {
+        html = [`<div class="${classnames(styles.markerIconWrapper, styles.customSvgIcon)}"`,
+          ` style="background-image: url(${baseUrl + target.selectedTarget.icon})"></div>`].join('');
+      } else {
+        html = [`<div class="${classnames(styles.markerIconWrapper)}" style="background-image: url(${pinWHole})">`,
+          `<div class=${styles.markerIcon} style="background-image:`,
+          ` url(${baseUrl + target.selectedTarget.icon})"></div>`,
+          `</div>`].join('');
+      }
+    } else {
+      html = [`<div class="${classnames(styles.markerIconWrapper)}" style="background-image: url(${pin})">`,
+        `</div>`].join('');
+    }
     const iconDefinition = {
       className: styles.dotIcon,
       iconAnchor: [iconSize[0] / 2, iconSize[1]],
       iconSize,
-      html: target.valid
-        ? `<div class="${classnames('icon-map-pin', 'glyphfont', styles.markerIconWrapper)}">
-        <div class=${styles.markerIcon} style="background-image: url(${target.selectedTarget.icon})"></div>
-        </div>`
-        : `<div class="${classnames('icon-map-pin-hole', 'glyphfont', styles.markerIconWrapper)}">
-        </div>`
+      html,
     };
     return divIcon(iconDefinition);
   }

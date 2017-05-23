@@ -1,8 +1,8 @@
 @import '../../../styling/styling';
 
-@markerWidth: 32px;
+@markerWidth: 38px;
 @markerHeight: 48px;
-@markerIconSize: 24px;
+@markerIconSize: 25px;
 
 .mask {
   cursor: -webkit-grab; // stylelint-disable-line value-no-vendor-prefix
@@ -21,26 +21,33 @@
   font-size: @markerHeight;
   line-height: @markerHeight;
   color: @white;
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+
+  &:before {
+    content: '_';
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    top: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: transparent;
+    z-index: -1;
+  }
 }
 
 .markerIcon {
   width: @markerIconSize;
   height: @markerIconSize;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
-  // we used @markerWidth instead of @markerHeight in order to calculate top
-  // as we are interested in the top part of the position pin
-  // ...@@@@@@...
-  // ..@......@..
-  // .@. icon  @.
-  // .@........@.
-  // ..@......@..
-  //    @    @
-  //     @  @
-  //      @@
-  top: (@markerWidth - @markerIconSize)/2;
+  top: 6px;
   left: (@markerWidth - @markerIconSize)/2;
   position: absolute;
+  z-index: -1;
+}
+
+.customSvgIcon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
 }
