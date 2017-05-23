@@ -5,7 +5,7 @@ const isPathInRoutes = (routes, path) => routes.some(route => route.path === pat
 const generateAssignmentPageMenuItems = (assignment, menuItems) => {
   const assignmentId = assignment.id;
   const assignmentMenuItem = {
-    id: assignmentId,
+    id: `assignment-${assignmentId}`,
     label: assignment.name,
     url: `/${assignment.slug}`,
     icon: 'fa-home',
@@ -24,8 +24,8 @@ const generateAssignmentPageMenuItems = (assignment, menuItems) => {
       label: section.title,
       id: `${section.id}-section`,
     });
-    menuItems.push(assignmentMenuItem);
   });
+  menuItems.push(assignmentMenuItem);
 };
 
 const createMenuItems = (assignment, router) => new Promise((resolve, reject) => {
