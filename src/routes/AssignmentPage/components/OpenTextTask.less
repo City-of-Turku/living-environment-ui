@@ -1,14 +1,22 @@
 @import '../../../styling/styling';
 
+@fontSize: 24px;
+
 .iconWrapper {
   .tablet({
     text-align: right;
   });
 }
 
+.question {
+  font-size: @fontSize;
+  line-height: (36 / 24);
+  margin-bottom: 1em;
+}
+
 .editIcon {
   display: inline-block;
-  transform: scale(1.4);
+  font-size: @fontSize;
   color: @cyan;
 }
 

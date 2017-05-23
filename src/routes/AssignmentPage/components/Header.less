@@ -2,21 +2,26 @@
 
 @progressBarWidth: 80%;
 @toggleButtonColor: @gray;
+@progressBarControlMaxWidth: 600px;
 
 .root {
   background: @white;
-  padding: @spacingL;
-  color: @gray;
+  padding: @spacingL 50px;
   box-shadow: 0 5px 45px -20px @black;
 }
 
 .label {
   line-height: @progressBarHeight;
   float: left;
+  font-size: 14px;
 
 }
 
 .progressBarWrapper {
   overflow: hidden;
   padding: 0 (100% -  @progressBarWidth) / 2;
+}
+
+.progressBarControl {
+  max-width: @progressBarControlMaxWidth;
 }

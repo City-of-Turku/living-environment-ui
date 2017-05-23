@@ -26,7 +26,7 @@ class MyInformation extends Component {
     const { schools } = this.props;
     const { schoolClasses } = this.state;
     return (<div>
-      <h2>Minun tietoni</h2>
+      <h2 className="no-separator">Minun tietoni</h2>
       <Field
         name="school"
         label={'Koulu'}

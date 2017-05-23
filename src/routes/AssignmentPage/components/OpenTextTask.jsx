@@ -13,7 +13,7 @@ const OpenTextTask = ({ className, data, id }) => (
       <Col xs={12} sm={2} className={styles.iconWrapper}>
         <i className={classNames('glyphfont', 'icon-edit', styles.editIcon)} />
       </Col>
-      <Col xs={12} sm={8}>
+      <Col xs={12} sm={8} className={styles.question}>
         {data.question}
       </Col>
     </Row>
