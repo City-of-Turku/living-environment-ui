@@ -1,7 +1,11 @@
 @import '../../../styling/styling';
 
 .root {
-  padding-top: @assignmentHeaderHeight;
+  padding-top: @assignmentHeaderHeight + @headerHeight;
+
+  .tablet({
+    padding-top: @assignmentHeaderHeight;
+  })
 }
 
 .headerWrapper {

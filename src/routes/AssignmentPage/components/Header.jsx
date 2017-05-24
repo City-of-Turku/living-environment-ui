@@ -18,7 +18,11 @@ const Header = ({ moneyUsed, totalBudget }) => (
           </Tooltip>
         }
       >
-        <ProgressBar now={calcPercent(moneyUsed, totalBudget)} bsStyle="success" />
+        <ProgressBar
+          now={calcPercent(moneyUsed, totalBudget)}
+          bsStyle="success"
+          className={styles.progressBarControl}
+        />
       </OverlayTrigger>
     </div>
   </Row>);

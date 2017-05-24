@@ -17,3 +17,6 @@ yarn-error.log*
 
 # ignore Idea/WebStorm files
 .idea/
+
+# ignore Sketch and other design files
+docs/

@@ -55,7 +55,7 @@ const video = (task) => {
 const SectionBlock = ({ assignment, section }) => (
   <ContentWrapper id={`${section.id}-section`}>
     { video(section) }
-    <h3>{section.title}</h3>
+    <h2>{section.title}</h2>
     <div
       dangerouslySetInnerHTML={{ __html: section.description }} // eslint-disable-line react/no-danger
     />
