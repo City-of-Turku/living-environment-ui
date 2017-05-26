@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AssignmentPage from '../components/AssignmentPage';
 import { submitForm } from '../actions/form';
 import validate from '../validation';
+import calcAssignmentBudget from '../../../components/helpers/budgetingHelper';
 
 const setFromValues = (values, budgetingMap) => {
   const formData = { ...values, budgeting_targets: [] };
@@ -22,9 +23,11 @@ const setFromValues = (values, budgetingMap) => {
   });
 };
 
+
 const mapStateToProps = state => ({
   assignment: state.assignment.assignment,
   budgetingMap: state.budgetingMap, // used by mergeProps
+  budget: calcAssignmentBudget(state),
 });
 
 

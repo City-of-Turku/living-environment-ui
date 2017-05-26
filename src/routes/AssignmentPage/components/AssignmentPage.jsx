@@ -15,7 +15,7 @@ import styles from './AssignmentPage.less';
 class AssignmentPage extends Component {
 
   render() {
-    const { assignment, handleSubmit, onSubmit } = this.props;
+    const { assignment, budget, handleSubmit, onSubmit } = this.props;
     if (!assignment) {
       return null;
     }
@@ -23,7 +23,7 @@ class AssignmentPage extends Component {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.headerWrapper}>
-          <Header moneyUsed={3} totalBudget={5} />
+          <Header moneyUsed={budget.spent} totalBudget={budget.total} />
         </div>
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
@@ -56,6 +56,10 @@ AssignmentPage.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  budget: PropTypes.shape({
+    spent: PropTypes.number,
+    total: PropTypes.number,
+  }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
