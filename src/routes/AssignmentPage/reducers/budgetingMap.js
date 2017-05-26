@@ -1,5 +1,5 @@
 import { assignmentActionType, budgetingMapActionType } from '../constants/actionTypes';
-import * as TaskType from '../constants/taskTypes/index';
+import * as TaskType from '../../../constants/taskTypes/index';
 
 const initialState = { tasks: {} };
 

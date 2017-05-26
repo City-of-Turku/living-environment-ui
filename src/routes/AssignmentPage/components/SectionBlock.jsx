@@ -7,7 +7,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 import OpenTextTask from './OpenTextTask';
 import parseQueryString from '../../../components/helpers/urlHelpers';
 import Video from '../../../components/Video';
-import * as TaskType from '../constants/taskTypes/index';
+import * as TaskType from '../../../constants/taskTypes/index';
 
 import styles from './SectionBlock.less';
 
