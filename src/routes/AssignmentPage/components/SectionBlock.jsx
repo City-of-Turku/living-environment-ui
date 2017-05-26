@@ -35,7 +35,7 @@ const createTaskList = (assignment, tasks) => tasks.reduce((acc, task) => {
   } else if (task.task_type === TaskType.BudgetingTask
     && task.data.budgeting_type === TaskType.BudgetingTextTask) {
     acc.push(<BudgetingTextTask
-      {...{ task: task.data, className: styles.separator, key: task.id }}
+      {...{ task, className: styles.separator, key: task.id }}
     />);
   } else {
     console.warn(`Unknown task type ${task.task_type} can't be processed`); // eslint-disable-line no-console
