@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import styles from './OpenTextTask.less';
 import { renderField } from '../../../components/helpers/formHelpers';
 
-const OpenTextTask = ({ id, data }) => (
-  <div>
+const OpenTextTask = ({ className, data, id }) => (
+  <div className={className}>
     <Row>
       <Col xs={12} sm={2} className={styles.iconWrapper}>
         <i className={classNames('glyphfont', 'icon-edit', styles.editIcon)} />
       </Col>
-      <Col xs={12} sm={8}>
+      <Col xs={12} sm={8} className={styles.question}>
         {data.question}
       </Col>
     </Row>
@@ -30,12 +30,15 @@ const OpenTextTask = ({ id, data }) => (
 );
 
 OpenTextTask.propTypes = {
-  id: PropTypes.number.isRequired,
+  className: PropTypes.string,
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
   }).isRequired,
+  id: PropTypes.number.isRequired,
 };
 
+OpenTextTask.defaultProps = {
+  className: '',
+};
 
 export default OpenTextTask;

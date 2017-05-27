@@ -2,5 +2,8 @@
   "api": {
     "baseUrl": "http://localhost:8000/api",
     "timeout": 30000
+  },
+  "backendImages": {
+    "baseUrl": "http://localhost:8000"
   }
 }

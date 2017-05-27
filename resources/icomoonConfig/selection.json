@@ -20,7 +20,7 @@
         {}
       ],
       "properties": {
-        "order": 1104,
+        "order": 1121,
         "id": 9,
         "name": "icon-chevron-down",
         "prevSize": 32,
@@ -49,7 +49,7 @@
         {}
       ],
       "properties": {
-        "order": 1105,
+        "order": 1132,
         "id": 8,
         "name": "icon-chevron-up",
         "prevSize": 32,
@@ -81,7 +81,7 @@
         {}
       ],
       "properties": {
-        "order": 1106,
+        "order": 1122,
         "id": 7,
         "name": "icon-check",
         "prevSize": 32,
@@ -110,7 +110,7 @@
         {}
       ],
       "properties": {
-        "order": 1107,
+        "order": 1123,
         "id": 6,
         "name": "icon-circle",
         "prevSize": 32,
@@ -139,7 +139,7 @@
         {}
       ],
       "properties": {
-        "order": 1108,
+        "order": 1124,
         "id": 5,
         "name": "icon-diamond",
         "prevSize": 32,
@@ -168,7 +168,7 @@
         {}
       ],
       "properties": {
-        "order": 1109,
+        "order": 1125,
         "id": 4,
         "name": "icon-edit",
         "prevSize": 32,
@@ -200,7 +200,7 @@
         {}
       ],
       "properties": {
-        "order": 1110,
+        "order": 1126,
         "id": 3,
         "name": "icon-location",
         "prevSize": 32,
@@ -229,7 +229,7 @@
         {}
       ],
       "properties": {
-        "order": 1111,
+        "order": 1127,
         "id": 2,
         "name": "icon-rect",
         "prevSize": 32,
@@ -258,7 +258,7 @@
         {}
       ],
       "properties": {
-        "order": 1112,
+        "order": 1128,
         "id": 1,
         "name": "icon-triangle",
         "prevSize": 32,
@@ -287,7 +287,7 @@
         {}
       ],
       "properties": {
-        "order": 1113,
+        "order": 1129,
         "id": 0,
         "name": "turku-logo",
         "prevSize": 32,
@@ -296,6 +296,66 @@
       "setIdx": 0,
       "setId": 0,
       "iconIdx": 9
+    },
+    {
+      "icon": {
+        "paths": [
+          "M348.16 1024c0 0 348.16-484.255 348.16-676.29s-155.877-347.71-348.16-347.71c-192.283 0-348.16 155.675-348.16 347.71s348.16 676.29 348.16 676.29z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 696,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "icon-map-pin"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 1130,
+        "id": 10,
+        "name": "icon-map-pin",
+        "prevSize": 32,
+        "code": 59658
+      },
+      "setIdx": 0,
+      "setId": 0,
+      "iconIdx": 10
+    },
+    {
+      "icon": {
+        "paths": [
+          "M348.16 1024c0 0-348.16-484.255-348.16-676.29s155.877-347.71 348.16-347.71c192.283 0 348.16 155.675 348.16 347.71s-348.16 676.29-348.16 676.29zM352.256 516.096c104.059 0 188.416-84.357 188.416-188.416s-84.357-188.416-188.416-188.416c-104.059 0-188.416 84.357-188.416 188.416s84.357 188.416 188.416 188.416z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 696,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "icon-map-pin-hole"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 1131,
+        "id": 11,
+        "name": "icon-map-pin-hole",
+        "prevSize": 32,
+        "code": 59659
+      },
+      "setIdx": 0,
+      "setId": 0,
+      "iconIdx": 11
     }
   ],
   "height": 1024,

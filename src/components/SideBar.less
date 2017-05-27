@@ -1,11 +1,12 @@
 @import '../styling/styling';
 
 @background-normal: @darkGray;
-@background-selected: @black;
+@background-selected: #0F0D0D;
 @iconWrapperWidth: 40px;
 @logoWrapperHeight: 160px;
-@submenuToMenuFontSizeRatio: 10/12;
 @circleSize: 0.5em;
+@fontSize: 14px;
+@lineHeight: 1.4;
 
 .root {
   background: @background-normal;
@@ -34,11 +35,11 @@
 }
 
 .menu {
-  padding: 0 @spacingM 0 0;
+  padding: 0 0 0 0;
 }
 
 .menuItem {
-  padding: 0.5em 0;
+  padding: 0 @spacingM 0 0;
 
   a {
     color: @cyan;
@@ -54,6 +55,8 @@
   display: inline-block;
   padding-left: @iconWrapperWidth;
   position: relative;
+  font-size: @fontSize;
+  line-height: @lineHeight;
 }
 
 .menuIcon {
@@ -67,8 +70,10 @@
 }
 
 .menuSubitem {
-  font-size: @submenuToMenuFontSizeRatio * 1em;
-  padding: 0.75em 0;
+  font-size: @fontSize;
+  line-height: @lineHeight;
+  margin-top: 15px;
+  padding: 0 30px 0 0;
 
   a {
     color: @gray;

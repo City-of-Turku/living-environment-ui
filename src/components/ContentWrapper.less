@@ -1,12 +1,35 @@
 @import '../styling/styling';
 
-@borderRadius: 8px;
-@mainPadding: @spacingM;
-@margin: @spacingL @spacingS;
+@borderRadius: 10px;
+@mainPadding: @spacingL;
+@margin: @spacingXL @spacingL;
+@borderColor: #979797;
 
 .root {
   background: @white;
+  border: 1px solid (@borderColor * 0.25 + @backgroundColor * (1 - 0.25));
   border-radius: @borderRadius;
   padding: @mainPadding;
   margin: @margin;
+  max-width: 1020px;
+  box-shadow: 0 9px 22px 0 RGBA(0, 0, 0, 0.1);
+
+  :global h1, :global h2 {
+    &:not(:global .no-separator) {
+      position: relative;
+      padding-bottom: 1em;
+      margin-bottom: 0.5em;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 50px;
+        height: 1px;
+        background: @lineColor;
+        transform: translateX(-50%);
+      }
+    }
+  }
 }
