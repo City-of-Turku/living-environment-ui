@@ -1,0 +1,18 @@
+@import '../../../styling/styling';
+
+.answers {
+  border: 1px solid @gray;
+}
+
+.answer {
+  border-bottom: 1px solid @gray;
+  padding: @spacingS;
+
+  &:nth-child(2n) {
+    background: @backgroundColor;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
