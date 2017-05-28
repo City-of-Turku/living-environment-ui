@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CountOfAnswersPerSchool from './CountOfAnswersPerSchool';
 import OpenTextReport from './OpenTextReport';
 
 import styles from './ReportPage.less';
@@ -21,6 +22,7 @@ const getOpenTextAnswers = report => (report.sections || []).map(
 
 const ReportPage = ({ report }) => (<div className={styles.root}>
   <OpenTextReport data={getOpenTextAnswers(report)} />
+  <CountOfAnswersPerSchool report={report} />
 </div>);
 
 ReportPage.propTypes = {
@@ -34,7 +36,13 @@ ReportPage.propTypes = {
           answer: PropTypes.string,
         })),
       }))
-    }))
+    })),
+    submissions: PropTypes.shape({
+      per_school: PropTypes.shape({
+        school__name: PropTypes.string,
+        count: PropTypes.number,
+      })
+    }),
   }).isRequired,
 };
 
