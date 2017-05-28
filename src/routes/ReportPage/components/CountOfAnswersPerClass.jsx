@@ -4,20 +4,20 @@ import { Table } from 'react-bootstrap';
 
 import ContentWrapper from '../../../containers/ContentWrapper';
 
-const CountOfAnswersPerSchool = ({ report }) => (<div>
+const CountOfAnswersPerClass = ({ report }) => (<div>
   <ContentWrapper>
-    <h1>Vastauksien lukumäärä per koulu</h1>
+    <h1>Count of Answers per Class</h1>
     <Table striped bordered condensed hover>
       <thead>
         <tr>
-          <th>Koulu</th>
-          <th>Lukumäärä</th>
+          <th>School</th>
+          <th>Count</th>
         </tr>
       </thead>
       <tbody>
         { // eslint-disable-next-line react/no-array-index-key
-          ((report.submissions || []).per_school || []).map((schoolCount, index) => (<tr key={index}>
-            <td>{schoolCount.school__name}</td>
+          ((report.submissions || []).per_class || []).map((schoolCount, index) => (<tr key={index}>
+            <td>{schoolCount.school_class__name}</td>
             <td>{schoolCount.count}</td>
           </tr>))
         }
@@ -26,15 +26,15 @@ const CountOfAnswersPerSchool = ({ report }) => (<div>
   </ContentWrapper>
 </div>);
 
-CountOfAnswersPerSchool.propTypes = {
+CountOfAnswersPerClass.propTypes = {
   report: PropTypes.shape({
     submissions: PropTypes.shape({
-      per_school: PropTypes.shape({
-        school__name: PropTypes.string,
+      per_class: PropTypes.shape({
+        school_class__name: PropTypes.string,
         count: PropTypes.number,
       })
     }),
   }).isRequired,
 };
 
-export default CountOfAnswersPerSchool;
+export default CountOfAnswersPerClass;

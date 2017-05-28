@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CountOfAnswersPerClass from './CountOfAnswersPerClass';
 import CountOfAnswersPerSchool from './CountOfAnswersPerSchool';
 import OpenTextReport from './OpenTextReport';
-
-import styles from './ReportPage.less';
 
 const getOpenTextAnswersForSection = (section) => {
   const { open_text_tasks, title } = section;
@@ -20,8 +19,9 @@ const getOpenTextAnswersForSection = (section) => {
 const getOpenTextAnswers = report => (report.sections || []).map(
   section => getOpenTextAnswersForSection(section));
 
-const ReportPage = ({ report }) => (<div className={styles.root}>
+const ReportPage = ({ report }) => (<div>
   <OpenTextReport data={getOpenTextAnswers(report)} />
+  <CountOfAnswersPerClass report={report} />
   <CountOfAnswersPerSchool report={report} />
 </div>);
 
