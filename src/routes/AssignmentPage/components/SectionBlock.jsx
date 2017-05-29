@@ -21,7 +21,7 @@ const getMaskPolygon = (assignment) => {
   }
 };
 
-const createTaskList = (assignment, tasks) => tasks.reduce((acc, task) => {
+const createTaskList = (assignment, sectionId, tasks) => tasks.reduce((acc, task) => {
   if (task.task_type === TaskType.OpenTextTask) {
     acc.push(<OpenTextTask
       {...{ ...task, className: styles.separator, key: task.id }}
@@ -30,7 +30,7 @@ const createTaskList = (assignment, tasks) => tasks.reduce((acc, task) => {
       && task.data.budgeting_type === TaskType.BudgetingMapTask) {
     const maskPolygon = getMaskPolygon(assignment);
     acc.push(<BudgetingMapTask
-      {...{ task, maskPolygon, className: styles.separator, key: task.id }}
+      {...{ task, maskPolygon, sectionId, className: styles.separator, key: task.id }}
     />);
   } else if (task.task_type === TaskType.BudgetingTask
     && task.data.budgeting_type === TaskType.BudgetingTextTask) {
@@ -59,7 +59,7 @@ const SectionBlock = ({ assignment, section }) => (
     <div
       dangerouslySetInnerHTML={{ __html: section.description }} // eslint-disable-line react/no-danger
     />
-    { createTaskList(assignment, section.tasks)}
+    { createTaskList(assignment, section.id, section.tasks)}
   </ContentWrapper>
 );
 

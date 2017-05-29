@@ -10,9 +10,10 @@ export const budgetingMapClicked = (lat, lng, taskId) => ({
   },
 });
 
-export const addTarget = (taskId, target) => ({
+export const addTarget = (sectionId, taskId, target) => ({
   type: budgetingMapActionType.ADD_TARGET,
   payload: {
+    sectionId,
     taskId,
     target,
   },

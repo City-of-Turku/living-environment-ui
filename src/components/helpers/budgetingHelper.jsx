@@ -3,41 +3,63 @@ import * as TaskType from '../../constants/taskTypes';
 
 const formValue = formValueSelector('assignmentPage');
 
+
+const calcTextTaskSpentBudget = (task, state) => {
+  const taskData = (task.data || {});
+  const textTaskSpentBudget = (taskData.targets || []).reduce(
+      (accTarget, target) => {
+        const targetAmount = formValue(state, `budgeting_text_task_${task.id}_${target.id}`);
+        if (!isNaN(targetAmount)) {
+          return accTarget + (parseFloat(target.unit_price) * parseFloat(targetAmount));
+        }
+        return accTarget;
+      }, 0);
+  return textTaskSpentBudget;
+};
+
+const calcSectionSpentBudget = (section, state) => (section.tasks || []).reduce(
+    (accSection, task) => {
+      if (task.task_type === TaskType.BudgetingTask) {
+        const taskData = (task.data || {});
+        if (taskData.budgeting_type === TaskType.BudgetingTextTask) {
+          return accSection + calcTextTaskSpentBudget(task, state);
+        }
+      }
+      return accSection;
+    }, 0);
+
+const calcMapSpentBudget = task => (task.targetUserData || []).reduce((acc, target) => {
+  if (target.selectedTarget) {
+    return acc + parseFloat(target.selectedTarget.unit_price);
+  }
+  return acc;
+}, 0);
+
 const calcAssignmentBudget = (state) => {
   const { assignment: { assignment }, budgetingMap } = state;
   if (!assignment || !budgetingMap) {
     return { spentBudget: 0, total: 0 };
   }
-  const sectionsSpentBudget = {};
-  const total = parseFloat(assignment.budget);
-  const budgetingMapsSpentBudget = Object.keys(budgetingMap.tasks).reduce(
-    (acc, taskId) => (budgetingMap.tasks[taskId].targetUserData || []).reduce(
-      (accPerTask, target) => accPerTask + (target.selectedTarget ? parseFloat(target.selectedTarget.unit_price) : 0),
-      acc),
-    0);
-  const budgetingTextSpentBudget = (assignment.sections || []).reduce(
-    (acc, section) => (section.tasks || []).reduce(
-      (accSection, task) => {
-        if (task.task_type === TaskType.BudgetingTask) {
-          const taskData = (task.data || {});
-          if (taskData.budgeting_type === TaskType.BudgetingTextTask) {
-            const sectionSpentBudget = accSection + (taskData.targets || []).reduce(
-                (accTarget, target) => {
-                  const targetAmount = formValue(state, `budgeting_text_task_${task.id}_${target.id}`);
-                  if (!isNaN(targetAmount)) {
-                    return accTarget + (parseFloat(target.unit_price) * parseFloat(targetAmount));
-                  }
-                  return accTarget;
-                },
-                accSection);
-            sectionsSpentBudget[section.id] = sectionSpentBudget;
-            return sectionSpentBudget;
-          }
-        }
-        return accSection;
-      }, acc),
-    0);
-  return { spent: budgetingMapsSpentBudget + budgetingTextSpentBudget, total, sectionsSpentBudget };
+
+  const spentBudget = (assignment.sections || []).reduce(
+    (acc, section) => {
+      const sectionSpentBudget = calcSectionSpentBudget(section, state);
+      acc.spent += sectionSpentBudget;
+      acc.total += parseFloat(assignment.budget);
+      acc.sectionsSpentBudget[section.id] = sectionSpentBudget;
+      return acc;
+    }, { spent: 0, total: 0, sectionsSpentBudget: {} });
+
+  return Object.keys(budgetingMap.tasks).reduce(
+    (accSpentBudget, taskId) => {
+      const task = budgetingMap.tasks[taskId];
+      const mapSpentBudget = calcMapSpentBudget(task);
+      /* eslint-disable */
+      accSpentBudget.spent += mapSpentBudget;
+      accSpentBudget.sectionsSpentBudget[task.sectionId] += mapSpentBudget;
+      /* eslint-enable */
+      return accSpentBudget;
+    }, spentBudget);
 };
 
 export default calcAssignmentBudget;

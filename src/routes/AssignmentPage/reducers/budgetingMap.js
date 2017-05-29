@@ -45,6 +45,7 @@ const budgetingMapReducer = (state = initialState, action) => {
   case budgetingMapActionType.ADD_TARGET: {
     const taskId = action.payload.taskId;
     const target = action.payload.target;
+    const sectionId = action.payload.sectionId;
     const currentTask = state.tasks[taskId];
     const targetIndex = currentTask.targetUserData.length - 1;
     return {
@@ -52,7 +53,8 @@ const budgetingMapReducer = (state = initialState, action) => {
         ...state.tasks,
         [taskId]: {
           ...currentTask,
-          // [x, x, ..., xi, xj, ...] -> [x, x, ..., xi, new, xj, ...]
+          // [x, x, ..., xi] -> [x, x, ..., xi, new]
+          sectionId,
           targetUserData: [...currentTask.targetUserData.slice(0, targetIndex),
             { ...currentTask.targetUserData[targetIndex], selectedTarget: target, valid: true }],
         },

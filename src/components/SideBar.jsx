@@ -3,35 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link, routerShape } from 'react-router';
 import { Link as ScrollLink } from 'react-scroll';
+import { Badge } from 'react-bootstrap';
 
 import styles from './SideBar.less';
 import resolveToLocation from './helpers/routerHelper';
 import createMenuItems from './helpers/sideBarMenu';
 
 class SideBar extends Component {
-
-  constructor(props) {
-    super(props);
-    this.requestedMenuGeneration = false;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // TODO: we didn't ensure that menu items change as the url is changed. It will be easier to
-    // implement it when more routes are added to app
-    const { assignment } = this.props;
-    if (assignment && prevState === null && !this.requestedMenuGeneration) {
-      const { router } = this.context;
-      // `requestedMenuGeneration` ensures that the `createMenuItems` method is called just once.
-      // The issue is that the `menuItems` state is set async as `createMenuItems` uses
-      // the async method `route` so we can't rely only on condition A: `prevState === null`
-      // (if `createMenuItems` was a sync method then it would be possible to use only  condition A)
-      this.requestedMenuGeneration = true;
-      createMenuItems(assignment, router)
-      .then((menuItems) => {
-        this.setState({ menuItems });
-      });
-    }
-  }
 
   calcMenuWrapperStyle(to) {
     const { router } = this.context;
@@ -45,10 +23,11 @@ class SideBar extends Component {
   }
 
   render() {
-    if (this.state === null) {
+    const { assignment, budget } = this.props;
+    if (!assignment) {
       return null;
     }
-    const { menuItems } = this.state;
+    const menuItems = createMenuItems(assignment, budget);
     return (
       <div className={styles.root}>
         <div className={styles.logoWrapper}>
@@ -78,6 +57,7 @@ class SideBar extends Component {
                         >
                           <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
                             {subitem.label}
+                            {subitem.badge > 0 && <Badge className={styles.badge}>{subitem.badge} EUR</Badge>}
                           </ScrollLink>
                         </li>))
                     }
@@ -98,6 +78,9 @@ SideBar.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  budget: PropTypes.shape({
+    sectionsSpentBudget: PropTypes.objectOf(PropTypes.number),
+  }).isRequired,
   currentSection: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number,
   ]).isRequired,
