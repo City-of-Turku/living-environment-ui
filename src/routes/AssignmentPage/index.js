@@ -6,6 +6,7 @@ import budgetingMapReducer from './reducers/budgetingMap';
 import { injectAsyncReducer } from '../../store';
 
 const AssignmentPageRoute = store => ({
+  path: '/:assignmentSlug',
   getComponent(nextState, cb) {
     const assignmentSlug = nextState.params.assignmentSlug;
     injectAsyncReducer({ assignment: assignmentReducer, budgetingMap: budgetingMapReducer });
