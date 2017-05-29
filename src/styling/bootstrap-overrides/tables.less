@@ -1,0 +1,22 @@
+@import '../variables';
+
+.table-bordered {
+  border-color: @gray;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-color: @gray;
+}
+
+.table-striped {
+  > tbody {
+    > tr:nth-of-type(odd) {
+      background-color: @backgroundColor;
+    }
+  }
+}
