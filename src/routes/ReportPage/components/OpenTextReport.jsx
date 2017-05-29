@@ -16,12 +16,12 @@ const OpenTextReport = ({ data }) => (<div className={styles.root}>
             <h3>{questionAndAnswers.question}</h3>
             <div className={styles.answers}>
               {
-            questionAndAnswers.answers.map(
-              (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
-                key={`${index}-${answerIndex}`}
-                className={styles.answer}
-              >{answer}</div>))
-          }
+                questionAndAnswers.answers.map(
+                  (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
+                    key={`${index}-${answerIndex}`}
+                    className={styles.answer}
+                  >{answer}</div>))
+              }
             </div>
           </div>))
       }
@@ -38,9 +38,6 @@ OpenTextReport.propTypes = {
     })),
     title: PropTypes.string,
   })).isRequired,
-};
-
-OpenTextReport.defaultProps = {
 };
 
 export default OpenTextReport;
