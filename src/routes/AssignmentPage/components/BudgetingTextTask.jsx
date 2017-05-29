@@ -10,9 +10,9 @@ import * as Validation from '../../../validation';
 import styles from './BudgetingTextTask.less';
 
 const BudgetingTextTask = ({ className, task }) => (<div className={classnames(styles.root, className)}>
-  <h4>{task.name}</h4>
+  <h4>{task.data.name}</h4>
   {
-    task.targets.map(target => (<div key={target.id}>
+    task.data.targets.map(target => (<div key={target.id}>
       <Row>
         <Col sm={7} xs={12} smPush={5} className={styles.col}>
           {target.name}
@@ -47,13 +47,16 @@ const BudgetingTextTask = ({ className, task }) => (<div className={classnames(s
 BudgetingTextTask.propTypes = {
   className: PropTypes.string,
   task: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    targets: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      max_amount: PropTypes.string.isRequired, // server returns string here
-      min_amount: PropTypes.string.isRequired, // -- / --
+    data: PropTypes.shape({
       name: PropTypes.string.isRequired,
-    })).isRequired,
+      targets: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        max_amount: PropTypes.string.isRequired, // server returns string here
+        min_amount: PropTypes.string.isRequired, // -- / --
+        name: PropTypes.string.isRequired,
+      })).isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 
