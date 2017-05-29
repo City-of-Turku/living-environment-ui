@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import MapMask from './MapMask';
 import BudgetingMapTargetList from '../components/BudgetingMapTargetList';
-import config from '../../../config';
+import config from '../config';
 
 import styles from './Map.less';
 import pin from './MapPin.svg';
@@ -60,8 +60,8 @@ class Map extends Component {
 
   handleClick(e) {
     const point = e.latlng;
-    const { handleMapClick, mask, task } = this.props;
-    if (inside([point.lat, point.lng], mask) && handleMapClick) {
+    const { handleMapClick, mask, readOnly, task } = this.props;
+    if (inside([point.lat, point.lng], mask) && handleMapClick && !readOnly) {
       handleMapClick(e.latlng.lat, e.latlng.lng, task);
     }
   }
@@ -69,7 +69,7 @@ class Map extends Component {
   render() {
     const {
       className, handleAddTarget, handleBudgetingMapTargetListDialogClosed, handleDeleteTarget,
-      handleUpdateTarget, layers, mask, maxLat, maxLong, minLat, minLong, minZoom,
+      handleUpdateTarget, layers, mask, maxLat, maxLong, minLat, minLong, minZoom, readOnly,
       targetUserData, task, url
     } = this.props;
     const polygon = L.polygon(mask);
@@ -77,16 +77,18 @@ class Map extends Component {
 
     const markers = targetUserData.map(target => (
       <Marker position={[target.lat, target.lng]} icon={Map.getMarkerIcon(target)} key={target.id}>
-        <Popup ref={ref => this.initPopup(ref, target)} className={styles.popup}>
-          <BudgetingMapTargetList
-            task={task}
-            selectedTarget={target.selectedTarget}
-            onDelete={selectedTarget => this.closePopup() && handleDeleteTarget(target.id, selectedTarget)}
-            onSave={selectedTarget => this.closePopup() && handleAddTarget(selectedTarget)}
-            onUpdate={selectedTarget => this.closePopup() && handleUpdateTarget(target.id, selectedTarget)}
-            onDialogClosed={() => handleBudgetingMapTargetListDialogClosed()}
-          />
-        </Popup>
+        {
+           !readOnly && (<Popup ref={ref => this.initPopup(ref, target)} className={styles.popup}>
+             <BudgetingMapTargetList
+               task={task}
+               selectedTarget={target.selectedTarget}
+               onDelete={selectedTarget => this.closePopup() && handleDeleteTarget(target.id, selectedTarget)}
+               onSave={selectedTarget => this.closePopup() && handleAddTarget(selectedTarget)}
+               onUpdate={selectedTarget => this.closePopup() && handleUpdateTarget(target.id, selectedTarget)}
+               onDialogClosed={() => handleBudgetingMapTargetListDialogClosed()}
+             />
+           </Popup>)
+        }
       </Marker>));
 
     return (<LeafletMap
@@ -125,10 +127,10 @@ class Map extends Component {
 Map.propTypes = {
   className: PropTypes.string,
   handleMapClick: PropTypes.func,
-  handleAddTarget: PropTypes.func.isRequired,
-  handleBudgetingMapTargetListDialogClosed: PropTypes.func.isRequired,
-  handleDeleteTarget: PropTypes.func.isRequired,
-  handleUpdateTarget: PropTypes.func.isRequired,
+  handleAddTarget: PropTypes.func,
+  handleBudgetingMapTargetListDialogClosed: PropTypes.func,
+  handleDeleteTarget: PropTypes.func,
+  handleUpdateTarget: PropTypes.func,
   layers: PropTypes.arrayOf(PropTypes.string).isRequired,
   mask: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   maxLat: PropTypes.number.isRequired,
@@ -136,15 +138,22 @@ Map.propTypes = {
   minLat: PropTypes.number.isRequired,
   minLong: PropTypes.number.isRequired,
   minZoom: PropTypes.number.isRequired,
-  task: PropTypes.shape({}).isRequired,
+  readOnly: PropTypes.bool,
+  task: PropTypes.shape({}),
   targetUserData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   url: PropTypes.string.isRequired,
 };
 
 Map.defaultProps = {
   className: '',
+  handleAddTarget: () => {},
+  handleBudgetingMapTargetListDialogClosed: () => {},
+  handleDeleteTarget: () => {},
   handleMapClick: null,
+  handleUpdateTarget: () => {},
+  readOnly: false,
   targets: [],
+  task: null,
 };
 
 export default Map;
