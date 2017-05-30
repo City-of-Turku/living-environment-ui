@@ -29,19 +29,28 @@
 }
 
 .firstCol {
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 60px;
-    background: @lineColor;
-  }
+  margin-bottom: 20px;
+
+  .tablet({
+    margin-bottom: 0;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 60px;
+      background: @lineColor;
+    }
+  })
 }
 
 .value {
   font-weight: 400;
   font-size: @fontSizeLarge;
-  margin-top: 10px;
+
+  .tablet({
+    margin-top: 10px;
+  });
 }
