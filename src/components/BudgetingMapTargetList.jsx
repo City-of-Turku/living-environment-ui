@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Badge, Button, ButtonGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
+import currencyFormatter from 'currency-formatter';
 
 import styles from './BudgetingMapTargetList.less';
 
@@ -75,11 +76,13 @@ class BudgetingMapTargetList extends Component {
             task.data.targets.map(
               target => (<ListGroupItem
                 active={selectedTarget === target}
-                className={styles.listItem}
                 key={target.id}
                 onClick={() => this.handleItemClick(target)}
               >
-                {target.name}
+                <span>{target.name}</span>
+                <Badge>{currencyFormatter.format(
+                  target.unit_price,
+                  { locale: 'fi-FI' })}</Badge>
               </ListGroupItem>))
           }
         </ListGroup>
