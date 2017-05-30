@@ -21,13 +21,14 @@ const setFromValues = (values, budgetingMap) => {
       }
     });
   });
+  return formData;
 };
 
 
 const mapStateToProps = state => ({
   assignment: state.assignment.assignment,
   budgetingMap: state.budgetingMap, // used by mergeProps
-  budget: calcAssignmentBudget(state),
+  budget: state.assignment ? calcAssignmentBudget(state) : {},
 });
 
 

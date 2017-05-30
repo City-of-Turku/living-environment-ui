@@ -1,5 +1,15 @@
 import RoutePattern from 'route-pattern';
 
+const generateReportPageMenuItems = (assignmentId, menuItems) => {
+  const reportMenuItem = {
+    id: `assignment-${assignmentId}`,
+    label: 'Raportti',
+    url: `report/${assignmentId}`,
+    icon: 'fa-home',
+  };
+  menuItems.push(reportMenuItem);
+};
+
 const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
   const assignmentId = assignment.id;
   const assignmentMenuItem = {
@@ -27,11 +37,17 @@ const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
   menuItems.push(assignmentMenuItem);
 };
 
+const matchesRoute = (pathname, pattern) => RoutePattern.fromString(pattern).matches(pathname);
+
 const createMenuItems = (assignment, budget) => {
   const menuItems = [];
   const pathname = location.pathname;
-  const pattern = RoutePattern.fromString("/:assignmentSlug");
-  if (pattern.matches(pathname)) {
+  const reportPatternUrl = '/report/:assignmentSlug';
+  if (matchesRoute(pathname, reportPatternUrl)) {
+    const reportPattern = RoutePattern.fromString(reportPatternUrl);
+    const { namedParams: { assignmentSlug } } = reportPattern.match(pathname);
+    generateReportPageMenuItems(assignmentSlug, menuItems);
+  } else if (matchesRoute(pathname, '/:assignmentSlug')) {
     generateAssignmentPageMenuItems(assignment, budget, menuItems);
   }
   return menuItems;

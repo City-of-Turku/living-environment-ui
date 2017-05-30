@@ -1,0 +1,10 @@
+@import '../../../styling/styling';
+
+.root {
+  padding-top: @headerHeight;
+  transition: padding-top @transitionDuration @transitionEasing;
+
+  .tablet({
+    padding-top: 0;
+  })
+}
