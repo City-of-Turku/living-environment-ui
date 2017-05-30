@@ -5,6 +5,7 @@
     "axios": "^0.16.1",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
     "npm": "^4.5.0",
