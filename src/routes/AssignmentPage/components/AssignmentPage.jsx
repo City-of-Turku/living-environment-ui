@@ -13,6 +13,21 @@ import TopImage from './TopImage';
 import styles from './AssignmentPage.less';
 
 class AssignmentPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.tasksCount = this.tasksCount.bind(this);
+    this.sectionTasksCount = this.sectionTasksCount.bind(this);
+  }
+
+  sectionTasksCount(section) { // eslint-disable-line class-methods-use-this
+    return (section.tasks || []).length;
+  }
+
+  tasksCount(assignment) {
+    return (assignment.sections || []).reduce(
+      (acc, section) => acc + this.sectionTasksCount(section), 0);
+  }
 
   render() {
     const { assignment, budget, handleSubmit, onSubmit } = this.props;
@@ -28,9 +43,8 @@ class AssignmentPage extends Component {
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
-            categoryName={'Example Category'}
-            tasks={{ completed: 10, total: 20 }}
-            totalBudget={100000}
+            tasksCount={this.tasksCount(assignment)}
+            totalBudget={budget.total}
           />
           <TaskContent
             body={assignment.description}
