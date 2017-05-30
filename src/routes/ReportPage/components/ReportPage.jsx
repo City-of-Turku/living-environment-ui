@@ -6,6 +6,8 @@ import CountOfAnswersPerClass from './CountOfAnswersPerClass';
 import CountOfAnswersPerSchool from './CountOfAnswersPerSchool';
 import OpenTextReport from './OpenTextReport';
 
+import styles from './ReportPage.less';
+
 const getOpenTextAnswersForSection = (section) => {
   const { open_text_tasks, title } = section;
   // eslint-disable-next-line camelcase
@@ -61,7 +63,8 @@ const getBudgetingTargetMap = report => ({
   area: getMaskPolygon(report.area),
 });
 
-const ReportPage = ({ report }) => (<div>
+const ReportPage = ({ report }) => (<div className={styles.root}>
+  <h1>Report</h1>
   <OpenTextReport report={getOpenTextAnswers(report)} />
   <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
   <CountOfAnswersPerClass report={report} />

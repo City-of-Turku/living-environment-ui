@@ -5,15 +5,15 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 
 import styles from './OpenTextReport.less';
 
-const OpenTextReport = ({ data }) => (<div className={styles.root}>
-  <ContentWrapper id="_" />
+const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
+  <h2>Open Text Tasks Report</h2>
   { // eslint-disable-next-line react/no-array-index-key
-    data.map((section, sectionIndex) => (<ContentWrapper id={`section-${section}`} key={sectionIndex}>
-      <h2>{section.title}</h2>
+    report.map((section, sectionIndex) => (<div key={sectionIndex}>
+      <h3>{section.title}</h3>
       {
         section.sectionQuestionsAndAnswers.map( // eslint-disable-next-line react/no-array-index-key
           (questionAndAnswers, index) => (<div key={index}>
-            <h3>{questionAndAnswers.question}</h3>
+            <h4>{questionAndAnswers.question}</h4>
             <div className={styles.answers}>
               {
                 questionAndAnswers.answers.map(
@@ -26,12 +26,12 @@ const OpenTextReport = ({ data }) => (<div className={styles.root}>
           </div>))
       }
       {section.question}
-    </ContentWrapper>))
+    </div>))
   }
-</div>);
+</ContentWrapper>);
 
 OpenTextReport.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  report: PropTypes.arrayOf(PropTypes.shape({
     sectionQuestionsAndAnswers: PropTypes.arrayOf(PropTypes.shape({
       question: PropTypes.string,
       answers: PropTypes.arrayOf(PropTypes.string),
