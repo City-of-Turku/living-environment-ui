@@ -5,8 +5,11 @@ import BudgetingTargetMap from './BudgetingTargetMap';
 import CountOfAnswersPerClass from './CountOfAnswersPerClass';
 import CountOfAnswersPerSchool from './CountOfAnswersPerSchool';
 import OpenTextReport from './OpenTextReport';
+import * as TaskType from '../../../constants/taskTypes/index';
 
 import styles from './ReportPage.less';
+
+const parseGeoJson = json => JSON.parse(json.replace(/"/g, '').replace(/'/g, '"'));
 
 const getOpenTextAnswersForSection = (section) => {
   const { open_text_tasks, title } = section;
@@ -24,7 +27,7 @@ const getOpenTextAnswers = report => (report.sections || []).map(
 
 const getMaskPolygon = (areaJSON) => {
   try {
-    const area = JSON.parse(areaJSON.replace(/"/g, '').replace(/'/g, '"'));
+    const area = parseGeoJson(areaJSON);
     return area.coordinates[0].map(([y, x]) => [x, y]);
   } catch (e) {
     return [];
@@ -34,8 +37,9 @@ const getMaskPolygon = (areaJSON) => {
 const getBudgetingTargetPoint = (budgetingTarget) => {
   const pointJson = budgetingTarget.point;
   try {
-    const pointObject = JSON.parse(pointJson);
-    return pointObject.coordinates || [0, 0];
+    const pointObject = parseGeoJson(pointJson);
+    const [lng, lat] = pointObject.coordinates || [0, 0];
+    return [lat, lng];
   } catch (err) {
     return [0, 0]; // can't parse the point json
   }
@@ -49,10 +53,12 @@ const getBudgetingTarget = budgetingTarget => ({
 
 const getBudgetingTargetMapForSection = (section) => {
   const { budgeting_tasks, title } = section;
-  const sectionTargetMap = (budgeting_tasks || []).map( // eslint-disable-line camelcase
-    ({ name, targets }) => ({
+  const sectionTargetMap = (budgeting_tasks || []) // eslint-disable-line camelcase
+    .filter(task => task.budgeting_type === TaskType.BudgetingMapTask)
+    .map(
+    ({ name, answers }) => ({
       name,
-      targets: targets.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
+      targets: answers.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
     }));
   return { sectionTargetMap, title };
 };
@@ -64,7 +70,7 @@ const getBudgetingTargetMap = report => ({
 });
 
 const ReportPage = ({ report }) => (<div className={styles.root}>
-  <h1>Report</h1>
+  <h1>Raportti</h1>
   <OpenTextReport report={getOpenTextAnswers(report)} />
   <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
   <CountOfAnswersPerClass report={report} />
