@@ -1,0 +1,39 @@
+@import '../styling/styling';
+
+.root {
+  width: 240px;
+
+  .error {
+    label {
+      color: @state-danger-text;
+    }
+
+    input, textarea {
+      color: @state-danger-text;
+      background: @state-danger-bg;
+      border-color: @state-danger-border;
+    }
+  }
+}
+
+.descriptionField {
+  .root & {
+    min-height: 40px;
+  }
+}
+
+.footer {
+  margin: 0 -(@spacingS);
+  padding: @spacingS @spacingS 0;
+  border-top: 1px solid @lightGray;
+  text-align: right;
+
+  :global .btn-group {
+    white-space: nowrap;
+
+    :global .btn {
+      float: none;
+      display: inline-block;
+    }
+  }
+}

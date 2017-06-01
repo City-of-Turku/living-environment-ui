@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import BudgetingMapTask from './BudgetingMapTask';
 import BudgetingTextTask from './BudgetingTextTask';
 import ContentWrapper from '../../../containers/ContentWrapper';
+import FriendsOfParkMap from './FriendsOfParkMap';
 import OpenTextTask from './OpenTextTask';
 import parseQueryString from '../../../components/helpers/urlHelpers';
 import Video from '../../../components/Video';
@@ -22,20 +23,33 @@ const getMaskPolygon = (assignment) => {
 };
 
 const createTaskList = (assignment, sectionId, tasks) => tasks.reduce((acc, task) => {
+  const maskPolygon = getMaskPolygon(assignment);
+  // open text task
   if (task.task_type === TaskType.OpenTextTask) {
     acc.push(<OpenTextTask
       {...{ ...task, className: styles.separator, key: task.id }}
     />);
+    //  budgeting map task
   } else if (task.task_type === TaskType.BudgetingTask
-      && task.data.budgeting_type === TaskType.BudgetingMapTask) {
-    const maskPolygon = getMaskPolygon(assignment);
+    && task.data.budgeting_type === TaskType.BudgetingMapTask) {
     acc.push(<BudgetingMapTask
       {...{ task, maskPolygon, sectionId, className: styles.separator, key: task.id }}
     />);
+    // budgeting text task
   } else if (task.task_type === TaskType.BudgetingTask
     && task.data.budgeting_type === TaskType.BudgetingTextTask) {
     acc.push(<BudgetingTextTask
       {...{ task, className: styles.separator, key: task.id }}
+    />);
+    // friends of the park
+  } else if (task.task_type === TaskType.VoluntarySignupTask) {
+    acc.push(<FriendsOfParkMap
+      friends={[]}
+      sectionId={sectionId}
+      maskPolygon={maskPolygon}
+      task={task}
+      key={task.id}
+      name={task.data.name}
     />);
   } else {
     console.warn(`Unknown task type ${task.task_type} can't be processed`); // eslint-disable-line no-console

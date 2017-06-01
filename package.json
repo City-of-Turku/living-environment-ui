@@ -8,6 +8,7 @@
     "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
+    "lodash": "^4.17.4",
     "npm": "^4.5.0",
     "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
