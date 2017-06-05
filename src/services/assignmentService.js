@@ -3,7 +3,18 @@ import client from './client';
 const openTextTaskIdReqExp = /open_text_task_(\d+)/;
 const budgetingTextTaskIdsReqExp = /budgeting_text_task_(\d+)_(\d+)/;
 
-const convertAssignmentFormDataToAPIPayload = (values) => {
+const getFriendOfParkDescription = (schools, schoolId, schoolClassId) => {
+  const schoolInfo = (schools || []).find(schoolIter => schoolIter.id === schoolId);
+  if (schoolInfo) {
+    const schoolClassInfo = (schoolInfo.classes || []).find(schoolClassIter => schoolClassIter.id === schoolClassId);
+    if (schoolClassInfo) {
+      return `${schoolInfo.name}/${schoolClassInfo.name}`;
+    }
+  }
+  return '';
+};
+
+const convertAssignmentFormDataToAPIPayload = (values, schools) => {
   const budgetingTextTargets = Object.entries(values).reduce((accum, [key, amount]) => {
     const match = key.match(budgetingTextTaskIdsReqExp);
     if (match) {
@@ -28,15 +39,22 @@ const convertAssignmentFormDataToAPIPayload = (values) => {
       }
       return accum;
     }, []),
-    budgeting_targets: [...budgetingTextTargets, ...budgetingMapTargets]
+    budgeting_targets: [...budgetingTextTargets, ...budgetingMapTargets],
+    voluntary_tasks: values.friendsOfPark.map(friend => ({
+      ...friend.details,
+      description: getFriendOfParkDescription(schools, parseInt(values.school, 10), parseInt(values.schoolClass, 10)),
+      task: friend.taskId,
+      lat: friend.lat,
+      long: friend.lng,
+    })),
   };
 };
 
 
 const assignmentService = {
   fetchAssignment: assignmentSlug => client.get('assignments/:assignmentSlug', { assignmentSlug }),
-  postAssignment: (assignmentSlug, values) =>
-    client.post('answers/:assignmentSlug/', { assignmentSlug }, convertAssignmentFormDataToAPIPayload(values)),
+  postAssignment: (assignmentSlug, values, schools) =>
+    client.post('answers/:assignmentSlug/', { assignmentSlug }, convertAssignmentFormDataToAPIPayload(values, schools)),
 };
 
 export default assignmentService;

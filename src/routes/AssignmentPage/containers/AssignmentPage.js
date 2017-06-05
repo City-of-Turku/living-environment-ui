@@ -6,8 +6,8 @@ import { submitForm } from '../actions/form';
 import validate from '../validation';
 import calcAssignmentBudget from '../../../components/helpers/budgetingHelper';
 
-const setFromValues = (values, budgetingMap) => {
-  const formData = { ...values, budgeting_targets: [] };
+const setFromValues = (values, budgetingMap, friendsOfPark) => {
+  const formData = { ...values, budgeting_targets: [], friendsOfPark };
   Object.keys(budgetingMap.tasks).forEach((taskId) => {
     const task = budgetingMap.tasks[taskId];
     task.targetUserData.forEach((target) => {
@@ -29,6 +29,8 @@ const mapStateToProps = state => ({
   assignment: state.assignment.assignment,
   budgetingMap: state.budgetingMap, // used by mergeProps
   budget: state.assignment ? calcAssignmentBudget(state) : {},
+  friendsOfPark: state.friendsOfParkMap ? state.friendsOfParkMap.friends : [],
+  schools: state.assignment.assignment ? state.assignment.assignment.schools : {},
 });
 
 
@@ -38,7 +40,10 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...ownProps,
     onSubmit: values => dispatch(
-      submitForm(ownProps.params.assignmentSlug, setFromValues(values, stateProps.budgetingMap))),
+      submitForm(
+        ownProps.params.assignmentSlug,
+        setFromValues(values, stateProps.budgetingMap, stateProps.friendsOfPark),
+        stateProps.schools)),
   };
 }
 

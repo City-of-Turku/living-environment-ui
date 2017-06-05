@@ -7,12 +7,16 @@
 
 .root {
   background: @white;
-  border: 1px solid (@borderColor * 0.25 + @backgroundColor * (1 - 0.25));
-  border-radius: @borderRadius;
   padding: @mainPadding;
-  margin: @margin;
+  margin: 0;
   max-width: 1020px;
   box-shadow: 0 9px 22px 0 RGBA(0, 0, 0, 0.1);
+
+  .tablet({
+    margin: @margin;
+    border-radius: @borderRadius;
+    border: 1px solid (@borderColor * 0.25 + @backgroundColor * (1 - 0.25));
+  });
 
   :global h1, :global h2 {
     &:not(:global .no-separator) {

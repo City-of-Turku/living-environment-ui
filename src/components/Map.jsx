@@ -4,9 +4,11 @@ import { Map as LeafletMap, Marker, Polygon, Popup, WMSTileLayer } from 'react-l
 import L, { divIcon } from 'leaflet';
 import inside from 'point-in-polygon';
 import classnames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 
 import MapMask from './MapMask';
 import BudgetingMapTargetList from '../components/BudgetingMapTargetList';
+import FriendsOfParkForm from './FriendsOfParkForm';
 import config from '../config';
 
 import styles from './Map.less';
@@ -17,7 +19,7 @@ const iconSize = [38, 48];
 
 class Map extends Component {
 
-  static getMarkerIcon(target) {
+  static getTargetMarkerIcon(target) {
     let html;
     const { backendImages: { baseUrl } } = config;
     if (target.valid && target.selectedTarget.icon) {
@@ -35,7 +37,21 @@ class Map extends Component {
         `</div>`].join('');
     }
     const iconDefinition = {
-      className: styles.dotIcon,
+      className: '',
+      iconAnchor: [iconSize[0] / 2, iconSize[1]],
+      iconSize,
+      html,
+    };
+    return divIcon(iconDefinition);
+  }
+
+  static getFriendMarkerIcon(friend) {
+    const backgroundImageUrl = friend.valid ? pin : pinWHole;
+    const html = [`<div class="${styles.markerIconWrapper}" style="background-image: url(${backgroundImageUrl})">`,
+      `</div>`].join('');
+
+    const iconDefinition = {
+      className: '',
       iconAnchor: [iconSize[0] / 2, iconSize[1]],
       iconSize,
       html,
@@ -53,6 +69,14 @@ class Map extends Component {
     }
   }
 
+  initFoPPopup(ref, friend) {
+    if (ref && !friend.valid) {
+      const position = [friend.lat, friend.lng];
+      this.mapRef = ref.context.map;
+      setTimeout(() => ref.context.map.openPopup(ref.leafletElement, position));
+    }
+  }
+
   closePopup() {
     this.mapRef.closePopup();
     return true;
@@ -66,30 +90,67 @@ class Map extends Component {
     }
   }
 
+  renderTargetMarkers() {
+    const {
+      handleAddTarget, handleBudgetingMapTargetListDialogClosed, handleDeleteTarget,
+      handleUpdateTarget, readOnly, targetUserData, task
+    } = this.props;
+
+    if (isEmpty(targetUserData)) {
+      return null;
+    }
+    return targetUserData.map(target => (
+      <Marker position={[target.lat, target.lng]} icon={Map.getTargetMarkerIcon(target)} key={target.id}>
+        {
+          !readOnly && (<Popup ref={ref => this.initPopup(ref, target)} className={styles.popup}>
+            <BudgetingMapTargetList
+              task={task}
+              selectedTarget={target.selectedTarget}
+              onDelete={selectedTarget => this.closePopup() && handleDeleteTarget(target.id, selectedTarget)}
+              onSave={selectedTarget => this.closePopup() && handleAddTarget(selectedTarget)}
+              onUpdate={selectedTarget => this.closePopup() && handleUpdateTarget(target.id, selectedTarget)}
+              onDialogClosed={() => handleBudgetingMapTargetListDialogClosed()}
+            />
+          </Popup>)
+        }
+      </Marker>));
+  }
+
+  renderFriendMarkers() {
+    const {
+      friends, handleAddFriend, handleDeleteFriend, handleFriendsOfParkDialogClosed, handleUpdateFriend,
+    } = this.props;
+    if (isEmpty(friends)) {
+      return null;
+    }
+    return friends.map(friendIter => (
+      <Marker
+        position={[friendIter.lat, friendIter.lng]}
+        icon={Map.getFriendMarkerIcon(friendIter)}
+        key={friendIter.id}
+      >
+        <Popup ref={ref => this.initFoPPopup(ref, friendIter)} className={styles.popup}>
+          <FriendsOfParkForm
+            friend={friendIter}
+            onDelete={() => this.closePopup() && handleDeleteFriend(friendIter.id)}
+            onSave={friendDetails => this.closePopup() && handleAddFriend(friendDetails)}
+            onUpdate={friendDetails => this.closePopup() && handleUpdateFriend(friendIter.id, friendDetails)}
+            onDialogClosed={() => handleFriendsOfParkDialogClosed()}
+          />
+        </Popup>
+      </Marker>
+    ));
+  }
+
   render() {
     const {
-      className, handleAddTarget, handleBudgetingMapTargetListDialogClosed, handleDeleteTarget,
-      handleUpdateTarget, layers, mask, maxLat, maxLong, minLat, minLong, minZoom, readOnly,
-      targetUserData, task, url
+      className, layers, mask, maxLat, maxLong, minLat, minLong, minZoom, targetUserData, url,
     } = this.props;
     const polygon = L.polygon(mask);
     const areaBounds = polygon.getBounds();
 
-    const markers = targetUserData.map(target => (
-      <Marker position={[target.lat, target.lng]} icon={Map.getMarkerIcon(target)} key={target.id}>
-        {
-           !readOnly && (<Popup ref={ref => this.initPopup(ref, target)} className={styles.popup}>
-             <BudgetingMapTargetList
-               task={task}
-               selectedTarget={target.selectedTarget}
-               onDelete={selectedTarget => this.closePopup() && handleDeleteTarget(target.id, selectedTarget)}
-               onSave={selectedTarget => this.closePopup() && handleAddTarget(selectedTarget)}
-               onUpdate={selectedTarget => this.closePopup() && handleUpdateTarget(target.id, selectedTarget)}
-               onDialogClosed={() => handleBudgetingMapTargetListDialogClosed()}
-             />
-           </Popup>)
-        }
-      </Marker>));
+    const targetMarkers = this.renderTargetMarkers();
+    const friendMarkers = this.renderFriendMarkers();
 
     return (<LeafletMap
       className={className}
@@ -119,17 +180,24 @@ class Map extends Component {
         weight={0}
       />
       <Polygon color="white" positions={mask} fillOpacity={0} weight={1} />
-      {markers}
+      {targetMarkers}
+      {friendMarkers}
     </LeafletMap>);
   }
 }
 
 Map.propTypes = {
   className: PropTypes.string,
+  friends: PropTypes.arrayOf(PropTypes.shape({
+  })),
   handleMapClick: PropTypes.func,
+  handleAddFriend: PropTypes.func,
   handleAddTarget: PropTypes.func,
   handleBudgetingMapTargetListDialogClosed: PropTypes.func,
+  handleDeleteFriend: PropTypes.func,
   handleDeleteTarget: PropTypes.func,
+  handleFriendsOfParkDialogClosed: PropTypes.func,
+  handleUpdateFriend: PropTypes.func,
   handleUpdateTarget: PropTypes.func,
   layers: PropTypes.arrayOf(PropTypes.string).isRequired,
   mask: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
@@ -140,19 +208,35 @@ Map.propTypes = {
   minZoom: PropTypes.number.isRequired,
   readOnly: PropTypes.bool,
   task: PropTypes.shape({}),
-  targetUserData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  targetUserData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+    valid: PropTypes.bool,
+    selectedTarget: PropTypes.shape({
+      icon: PropTypes.string,
+      id: PropTypes.number,
+      reference_amount: PropTypes.string,
+    }),
+  })),
   url: PropTypes.string.isRequired,
 };
 
 Map.defaultProps = {
   className: '',
+  friends: [],
+  handleAddFriend: () => {},
   handleAddTarget: () => {},
   handleBudgetingMapTargetListDialogClosed: () => {},
+  handleDeleteFriend: () => {},
   handleDeleteTarget: () => {},
+  handleFriendsOfParkDialogClosed: () => {},
   handleMapClick: null,
+  handleUpdateFriend: () => {},
   handleUpdateTarget: () => {},
   readOnly: false,
   targets: [],
+  targetUserData: null,
   task: null,
 };
 
