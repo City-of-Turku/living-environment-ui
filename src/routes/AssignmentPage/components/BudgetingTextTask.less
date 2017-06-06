@@ -1,11 +1,105 @@
 @import '../../../styling/styling';
 
+@imageHeight: 126px;
+@targetWidth: 270px;
+@progressBarMaxWidth: 610px;
+@progressBarHeight: 12px;
+@titleFontSize: 24px;
+@totalFontSize: 22px;
+@borderColor: @darkerGray * 0.15 + @white * (1 - 0.15);
+@progressBarLabelFontSize: 12px;
+
+.root {
+  margin: 0 @grid-gutter-width / -2;
+}
+
 .field {
   margin-bottom: 0;
 }
 
-.col {
-  vertical-align: middle;
-  float: none;
+.imageWrapper {
+  height: @imageHeight;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: @grid-gutter-width / -2 @grid-gutter-width / -2 @grid-gutter-width;
+}
+
+.targetRoot {
   display: inline-block;
+  max-width: @targetWidth;
+  padding: @grid-gutter-width / 2;
+  margin: @grid-gutter-width / 2;
+  border: 1px solid @borderColor;
+  border-radius: 10px;
+
+  h4 {
+    font-size: @titleFontSize;
+  }
+}
+
+.info {
+  border-radius: 4px;
+  background: @orange * 0.25 + @white * (1 - 0.25);
+  font-size: 12px;
+  font-weight: 800;
+  color: @brown;
+  margin-top: 10px;
+  padding: 4px 8px;
+}
+
+.priceWrapper {
+  text-align: center;
+}
+
+.price {
+  border: 1px solid @lightGreen;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: @lightGreen;
+  background: none;
+  margin-bottom: 25px;
+}
+
+.total {
+  float: right;
+  font-size: @totalFontSize;
+  color: @lightGreen;
+  display: inline-block;
+  max-width: 50%;
+  line-height: 1.25;
+}
+
+.totalLabel {
+  font-size: 14px;
+}
+
+.footer {
+  border-top: 1px solid @borderColor;
+  margin: @grid-gutter-width @grid-gutter-width / -2 @grid-gutter-width / -2;
+  padding: @grid-gutter-width / 2;
+}
+
+.progressBarWrapper {
+  font-size: @progressBarLabelFontSize;
+  text-align: center;
+  color: @lightGreen;
+  max-width: @progressBarMaxWidth;
+  margin: 0 auto;
+}
+
+.progressBar {
+  height: @progressBarHeight;
+}
+
+.progressBarIncomplete {
+  background: @state-danger-bg;
+}
+
+.progressLabelSuccess {
+  color: @lightGreen;
+}
+
+.progressLabelDanger {
+  color: @state-danger-text;
 }

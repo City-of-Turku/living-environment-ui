@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import BudgetingMapTask from './BudgetingMapTask';
-import BudgetingTextTask from './BudgetingTextTask';
+import BudgetingTextTask from '../containers/BudgetingTextTask';
 import ContentWrapper from '../../../containers/ContentWrapper';
 import FriendsOfParkMap from './FriendsOfParkMap';
 import OpenTextTask from './OpenTextTask';
