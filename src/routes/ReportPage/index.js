@@ -1,6 +1,7 @@
 import { injectAsyncReducer } from '../../store/index';
 import report from './reducers/report';
 import { fetchReport } from './actions/report';
+import { fetchAssignment } from "../AssignmentPage/actions/assignment";
 
 const ReportPageRoute = store => ({
   path: 'report/:assignmentSlug',
@@ -9,6 +10,7 @@ const ReportPageRoute = store => ({
       const assignmentSlug = nextState.params.assignmentSlug;
       injectAsyncReducer({ report });
       store.dispatch(fetchReport(assignmentSlug));
+      store.dispatch(fetchAssignment(assignmentSlug));
       const ReportPage = require('./containers/ReportPage').default;
       cb(null, ReportPage);
     }, 'ReportPage');
