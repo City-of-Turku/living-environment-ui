@@ -5,3 +5,8 @@ export const fetchReport = assignmentId => ({ // eslint-disable-line import/pref
   type: reportActionType.FETCH_REPORT,
   payload: reportService.fetchReport(assignmentId),
 });
+
+export const updateFilter = (assignmentId, school, schoolClass) => ({
+  type: reportActionType.FETCH_REPORT,
+  payload: reportService.fetchReport(assignmentId, school, schoolClass),
+});
