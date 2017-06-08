@@ -5,7 +5,7 @@ import Map from '../containers/Map';
 
 import styles from './BudgetingMapTask.less';
 
-const BudgetingMapTask = ({ className, maskPolygon, task }) => (
+const BudgetingMapTask = ({ className, maskPolygon, sectionId, task }) => (
   <div className={className}>
     <h4>{task.name}</h4>
     <Map
@@ -17,6 +17,7 @@ const BudgetingMapTask = ({ className, maskPolygon, task }) => (
       minZoom={9}
       maxLat={61.0}
       maxLong={23.2}
+      sectionId={sectionId}
       task={task}
       url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
     />
@@ -25,6 +26,7 @@ const BudgetingMapTask = ({ className, maskPolygon, task }) => (
 BudgetingMapTask.propTypes = {
   className: PropTypes.string,
   maskPolygon: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  sectionId: PropTypes.number.isRequired,
   task: PropTypes.shape({
   }).isRequired,
 };

@@ -8,7 +8,7 @@ const calcPercent = (moneyUsed, totalBudget) => 100 * (moneyUsed / totalBudget);
 
 const Header = ({ moneyUsed, totalBudget }) => (
   <Row className={styles.root}>
-    <div className={styles.label}>Assignment Name</div>
+    <div className={styles.label}>Nykyinen budjetti</div>
     <div className={styles.progressBarWrapper}>
       <OverlayTrigger
         placement="bottom"

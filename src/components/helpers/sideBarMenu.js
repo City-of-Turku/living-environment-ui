@@ -1,8 +1,16 @@
-import { match } from 'react-router';
+import RoutePattern from 'route-pattern';
 
-const isPathInRoutes = (routes, path) => routes.some(route => route.path === path);
+const generateReportPageMenuItems = (assignmentId, menuItems) => {
+  const reportMenuItem = {
+    id: `assignment-${assignmentId}`,
+    label: 'Raportti',
+    url: `report/${assignmentId}`,
+    icon: 'fa-home',
+  };
+  menuItems.push(reportMenuItem);
+};
 
-const generateAssignmentPageMenuItems = (assignment, menuItems) => {
+const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
   const assignmentId = assignment.id;
   const assignmentMenuItem = {
     id: `assignment-${assignmentId}`,
@@ -21,28 +29,28 @@ const generateAssignmentPageMenuItems = (assignment, menuItems) => {
   const sections = assignment.sections;
   sections.forEach((section) => {
     assignmentMenuItem.subitems.push({
-      label: section.title,
+      label: `${section.title}`,
+      badge: budget.sectionsSpentBudget[section.id],
       id: `${section.id}-section`,
     });
   });
   menuItems.push(assignmentMenuItem);
 };
 
-const createMenuItems = (assignment, router) => new Promise((resolve, reject) => {
-  const routes = router.routes;
-  match({ routes, location }, (error, redirect, renderProps) => {
-    if (error) {
-      /* eslint-disable no-console */
-      console.error(`Can't generate the menu content for the given path ${location.pathname}`);
-      /* eslint-enable no-console */
-      return reject(error);
-    }
-    const menuItems = [];
-    if (isPathInRoutes(renderProps.routes, '/:assignmentSlug')) {
-      generateAssignmentPageMenuItems(assignment, menuItems);
-    }
-    return resolve(menuItems);
-  });
-});
+const matchesRoute = (pathname, pattern) => RoutePattern.fromString(pattern).matches(pathname);
+
+const createMenuItems = (assignment, budget) => {
+  const menuItems = [];
+  const pathname = location.pathname;
+  const reportPatternUrl = '/report/:assignmentSlug';
+  if (matchesRoute(pathname, reportPatternUrl)) {
+    const reportPattern = RoutePattern.fromString(reportPatternUrl);
+    const { namedParams: { assignmentSlug } } = reportPattern.match(pathname);
+    generateReportPageMenuItems(assignmentSlug, menuItems);
+  } else if (matchesRoute(pathname, '/:assignmentSlug')) {
+    generateAssignmentPageMenuItems(assignment, budget, menuItems);
+  }
+  return menuItems;
+};
 
 export default createMenuItems;

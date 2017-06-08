@@ -5,8 +5,10 @@
     "axios": "^0.16.1",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
+    "lodash": "^4.17.4",
     "npm": "^4.5.0",
     "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
@@ -26,6 +28,7 @@
     "redux-form": "^6.6.3",
     "redux-logger": "^3.0.1",
     "redux-promise-middleware": "^4.2.0",
+    "route-pattern": "0.0.6",
     "url-pattern": "^1.0.3",
     "uuid": "^3.0.1"
   },

@@ -13,9 +13,24 @@ import TopImage from './TopImage';
 import styles from './AssignmentPage.less';
 
 class AssignmentPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.tasksCount = this.tasksCount.bind(this);
+    this.sectionTasksCount = this.sectionTasksCount.bind(this);
+  }
+
+  sectionTasksCount(section) { // eslint-disable-line class-methods-use-this
+    return (section.tasks || []).length;
+  }
+
+  tasksCount(assignment) {
+    return (assignment.sections || []).reduce(
+      (acc, section) => acc + this.sectionTasksCount(section), 0);
+  }
 
   render() {
-    const { assignment, handleSubmit, onSubmit } = this.props;
+    const { assignment, budget, handleSubmit, onSubmit } = this.props;
     if (!assignment) {
       return null;
     }
@@ -23,14 +38,13 @@ class AssignmentPage extends Component {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.headerWrapper}>
-          <Header moneyUsed={3} totalBudget={5} />
+          <Header moneyUsed={budget.spent} totalBudget={budget.total} />
         </div>
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
-            categoryName={'Example Category'}
-            tasks={{ completed: 10, total: 20 }}
-            totalBudget={100000}
+            tasksCount={this.tasksCount(assignment)}
+            totalBudget={budget.total}
           />
           <TaskContent
             body={assignment.description}
@@ -56,6 +70,10 @@ AssignmentPage.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  budget: PropTypes.shape({
+    spent: PropTypes.number,
+    total: PropTypes.number,
+  }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
