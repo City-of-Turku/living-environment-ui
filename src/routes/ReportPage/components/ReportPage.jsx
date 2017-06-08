@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import BudgetingTargetMap from './BudgetingTargetMap';
 import CountOfAnswersPerClass from './CountOfAnswersPerClass';
 import CountOfAnswersPerSchool from './CountOfAnswersPerSchool';
+import Filter from './Filter';
 import OpenTextReport from './OpenTextReport';
 import * as TaskType from '../../../constants/taskTypes/index';
 
@@ -69,8 +70,9 @@ const getBudgetingTargetMap = report => ({
   area: getMaskPolygon(report.area),
 });
 
-const ReportPage = ({ report }) => (<div className={styles.root}>
+const ReportPage = ({ report, updateFilter }) => (<div className={styles.root}>
   <h1>Raportti</h1>
+  { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
   <OpenTextReport report={getOpenTextAnswers(report)} />
   <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
   <CountOfAnswersPerClass report={report} />
@@ -90,6 +92,14 @@ ReportPage.propTypes = {
         })),
       }))
     })),
+    schools: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      classes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      })),
+    })).isRequired,
     submissions: PropTypes.shape({
       per_school: PropTypes.arrayOf(PropTypes.shape({
         school__name: PropTypes.string,
@@ -97,6 +107,7 @@ ReportPage.propTypes = {
       })),
     }),
   }).isRequired,
+  updateFilter: PropTypes.func.isRequired,
 };
 
 ReportPage.defaultProps = {

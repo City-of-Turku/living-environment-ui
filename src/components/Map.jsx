@@ -209,7 +209,7 @@ Map.propTypes = {
   readOnly: PropTypes.bool,
   task: PropTypes.shape({}),
   targetUserData: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     lat: PropTypes.number,
     lng: PropTypes.number,
     valid: PropTypes.bool,
