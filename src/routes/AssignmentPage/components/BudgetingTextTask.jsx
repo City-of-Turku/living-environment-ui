@@ -27,7 +27,7 @@ const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
           [styles.progressBarIncomplete]: !progress.completed })}
       />
       <span className={progress.completed ? styles.progressLabelSuccess : styles.progressLabelDanger}>
-        {progress.label}
+        Käytetty {progress.label}
       </span>
     </div>
     {
