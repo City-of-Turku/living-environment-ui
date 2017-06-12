@@ -30,7 +30,7 @@ class AssignmentPage extends Component {
   }
 
   render() {
-    const { assignment, budget, handleSubmit, onSubmit } = this.props;
+    const { assignment, budget, handleSubmit, onSubmit, submitButtonEnabled } = this.props;
     if (!assignment) {
       return null;
     }
@@ -58,7 +58,7 @@ class AssignmentPage extends Component {
           assignment.sections && assignment.sections.map(
             section => <SectionBlock assignment={assignment} section={section} key={section.id} />)
         }
-        <SubmitAssignment />
+        <SubmitAssignment submitButtonEnabled={submitButtonEnabled} />
       </form>
     </section>);
   }
@@ -76,10 +76,12 @@ AssignmentPage.propTypes = {
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  submitButtonEnabled: PropTypes.bool,
 };
 
 AssignmentPage.defaultProps = {
   assignment: null,
+  submitButtonEnabled: true,
 };
 
 export default AssignmentPage;

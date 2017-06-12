@@ -6,4 +6,12 @@ export const submitForm = (assignmentSlug, values, schools) => ({
   payload: assignmentService.postAssignment(assignmentSlug, values, schools),
 });
 
+export const disableSubmitButton = () => ({
+  type: formActionType.DISABLE_SUBMIT_BUTTON,
+});
+
+export const enableSubmitButton = () => ({
+  type: formActionType.ENABLE_SUBMIT_BUTTON,
+});
+
 export default submitForm;
