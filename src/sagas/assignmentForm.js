@@ -1,3 +1,4 @@
+import {reset} from 'redux-form';
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { formActionType } from '../routes/AssignmentPage/constants/actionTypes';
@@ -12,6 +13,7 @@ function* handleFormSubmition(action) {
   case formActionType.SUBMIT_FORM_FULFILLED:
     yield put(showAlert('Form sent', 'You have successfully lorem ipsumed', 'success'));
     yield put(enableSubmitButton());
+    yield put(reset('assignmentPage'));
     break;
   case formActionType.SUBMIT_FORM_REJECTED:
     yield put(showAlert('Sent failed', 'Something went terribly wrong!', 'danger'));
