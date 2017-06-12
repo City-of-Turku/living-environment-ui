@@ -1,1 +1,3 @@
-export const SUBMIT_FORM = 'SUBMIT_FORM'; // eslint-disable-line import/prefer-default-export
+export const SUBMIT_FORM = 'SUBMIT_FORM';
+export const SUBMIT_FORM_FULFILLED = 'SUBMIT_FORM_FULFILLED';
+export const SUBMIT_FORM_REJECTED = 'SUBMIT_FORM_REJECTED';

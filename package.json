@@ -28,6 +28,7 @@
     "redux-form": "^6.6.3",
     "redux-logger": "^3.0.1",
     "redux-promise-middleware": "^4.2.0",
+    "redux-saga": "^0.15.3",
     "route-pattern": "0.0.6",
     "url-pattern": "^1.0.3",
     "uuid": "^3.0.1"
