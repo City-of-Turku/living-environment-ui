@@ -25,7 +25,7 @@ class BudgetingTargetMap extends Component { // eslint-disable-line react/prefer
       return null;
     }
     return (<ContentWrapper id="budgetingTargetMap">
-      <h2>Budjetointikarttakohteiden raportti</h2>
+      <h2>Karttakohteet</h2>
       {
         report.sections.map( // eslint-disable-next-line react/no-array-index-key
           (section, sectionIndex) => (<div key={sectionIndex}>

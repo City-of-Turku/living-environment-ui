@@ -71,7 +71,7 @@ const getBudgetingTargetMap = report => ({
 });
 
 const ReportPage = ({ report, updateFilter }) => (<div className={styles.root}>
-  <h1>Raportti</h1>
+  <h1>{report.name} raportti</h1>
   { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
   <OpenTextReport report={getOpenTextAnswers(report)} />
   <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
