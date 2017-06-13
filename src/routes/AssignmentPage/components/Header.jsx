@@ -15,7 +15,7 @@ const Header = ({ moneyUsed, totalBudget }) => (
         placement="bottom"
         overlay={
           <Tooltip id="progress" className="success">
-            {`${currencyFormatter.format(moneyUsed, { locale: 'fi-FI' })}/${currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}`}
+            {`${currencyFormatter.format(moneyUsed, { locale: 'fi-FI' })} / ${currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}`}
           </Tooltip>
         }
       >
@@ -25,6 +25,9 @@ const Header = ({ moneyUsed, totalBudget }) => (
           className={styles.progressBarControl}
         />
       </OverlayTrigger>
+    </div>
+    <div className={styles.budgetingTotalUsed}>
+      {currencyFormatter.format(moneyUsed, { locale: 'fi-FI' })} / {currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}
     </div>
   </Row>);
 
