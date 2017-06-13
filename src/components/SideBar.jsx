@@ -58,7 +58,7 @@ class SideBar extends Component {
                         >
                           <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
                             {subitem.label}
-                            {subitem.badge > 0 && <Badge className={styles.badge}>{currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}</Badge>}
+                            {!isNaN(subitem.badge) && subitem.badge !== 0 && <Badge className={styles.badge}>{currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}</Badge>}
                           </ScrollLink>
                         </li>))
                     }
