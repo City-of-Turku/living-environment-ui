@@ -31,6 +31,7 @@ const mapStateToProps = state => ({
   budget: state.assignment ? calcAssignmentBudget(state) : {},
   friendsOfPark: state.friendsOfParkMap ? state.friendsOfParkMap.friends : [],
   schools: state.assignment.assignment ? state.assignment.assignment.schools : {},
+  submitButtonEnabled: state.assignmentForm.enabled,
 });
 
 

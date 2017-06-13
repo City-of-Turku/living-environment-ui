@@ -1,0 +1,60 @@
+@import '../styling/styling';
+
+@iconSize: 28px;
+@maxWidth: 865px;
+
+.root {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .tablet({
+    left: @sideBarWidth;
+  });
+
+  transition: transform @transitionDuration @transitionEasing;
+  transform: translateY(-100%);
+}
+
+.shown {
+  transform: translateY(0);
+}
+
+
+.wrapper {
+  max-width: @maxWidth;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.icon {
+  border: 1px solid @black;
+  border-radius: 50%;
+  display: inline-block;
+  width: @iconSize;
+  height: @iconSize;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+:global(.fa) {
+  &.icon {
+    line-height: @iconSize;
+    color: @black;
+  }
+}
+
+.contentWrapper {
+  position: relative;
+  padding-left: 40px;
+  min-height: @iconSize;
+}
+
+.details {
+  font-size: 14px;
+  line-height: 1.2;
+}
