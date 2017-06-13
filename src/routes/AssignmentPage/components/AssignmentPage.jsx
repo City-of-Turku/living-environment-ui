@@ -38,13 +38,13 @@ class AssignmentPage extends Component {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.headerWrapper}>
-          <Header moneyUsed={budget.spent} totalBudget={budget.total} />
+          <Header moneyUsed={budget.spent} totalBudget={assignment.budget} />
         </div>
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
             tasksCount={this.tasksCount(assignment)}
-            totalBudget={budget.total}
+            totalBudget={assignment.budget}
           />
           <TaskContent
             body={assignment.description}
@@ -72,7 +72,6 @@ AssignmentPage.propTypes = {
   }),
   budget: PropTypes.shape({
     spent: PropTypes.number,
-    total: PropTypes.number,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
