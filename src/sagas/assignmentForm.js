@@ -2,7 +2,7 @@ import {reset} from 'redux-form';
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { formActionType } from '../routes/AssignmentPage/constants/actionTypes';
-import { disableSubmitButton, enableSubmitButton } from '../routes/AssignmentPage/actions/form';
+import { disableSubmitButton, enableSubmitButton, scrollToTop } from '../routes/AssignmentPage/actions/form';
 import { showAlert } from "../actions/alerts";
 
 function* handleFormSubmition(action) {
@@ -14,6 +14,7 @@ function* handleFormSubmition(action) {
     yield put(showAlert('Tiedot lähetetty', 'Olet lähettänyt tiedot onnistuneesti. Kiitos ajastasi.', 'success'));
     yield put(enableSubmitButton());
     yield put(reset('assignmentPage'));
+    yield put(scrollToTop());
     break;
   case formActionType.SUBMIT_FORM_REJECTED:
     yield put(showAlert('Lähetys epäonnistui', 'Jokin meni pahasti pieleen :( Yritä myöhemmin uudelleen.', 'danger'));

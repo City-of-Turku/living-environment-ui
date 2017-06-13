@@ -12,7 +12,7 @@ const Alerts = ({ text, details, type, shown }) => (<div className={classnames(s
     <Alert bsStyle={type || 'success'}>
       <div className={styles.contentWrapper}>
         <i className={classnames(`fa ${iconClass(type)}`, styles.icon)} />
-        <div>{text}{type}</div>
+        <div>{text}</div>
         <div className={styles.details}>{details}</div>
       </div>
     </Alert>
