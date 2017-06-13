@@ -35,7 +35,7 @@ class Filter extends Component {
     const { schools } = this.props;
     const { schoolClasses } = this.state;
     return (<div className={styles.root}>
-      <h2 className="no-separator">Minun tietoni</h2>
+      <h2 className="no-separator">Suodattimet</h2>
       <form>
         <Field
           name="school"
@@ -56,7 +56,7 @@ class Filter extends Component {
           optionsKey="id"
           optionsValue="name"
         />
-        <Button onClick={this.handleSubmit}>Filter</Button>
+        <Button onClick={this.handleSubmit}>Suodata</Button>
       </form>
     </div>);
   }
