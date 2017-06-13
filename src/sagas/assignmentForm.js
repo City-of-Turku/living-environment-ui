@@ -11,12 +11,12 @@ function* handleFormSubmition(action) {
     yield put(disableSubmitButton());
     break;
   case formActionType.SUBMIT_FORM_FULFILLED:
-    yield put(showAlert('Form sent', 'You have successfully lorem ipsumed', 'success'));
+    yield put(showAlert('Tiedot lähetetty', 'Olet lähettänyt tiedot onnistuneesti. Kiitos ajastasi.', 'success'));
     yield put(enableSubmitButton());
     yield put(reset('assignmentPage'));
     break;
   case formActionType.SUBMIT_FORM_REJECTED:
-    yield put(showAlert('Sent failed', 'Something went terribly wrong!', 'danger'));
+    yield put(showAlert('Lähetys epäonnistui', 'Jokin meni pahasti pieleen :( Yritä myöhemmin uudelleen.', 'danger'));
     yield put(enableSubmitButton());
     break;
   default:
