@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Link, routerShape } from 'react-router';
 import { Link as ScrollLink } from 'react-scroll';
 import { Badge } from 'react-bootstrap';
+import currencyFormatter from 'currency-formatter';
 
 import styles from './SideBar.less';
 import resolveToLocation from './helpers/routerHelper';
@@ -57,7 +58,7 @@ class SideBar extends Component {
                         >
                           <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
                             {subitem.label}
-                            {subitem.badge > 0 && <Badge className={styles.badge}>{subitem.badge} EUR</Badge>}
+                            {subitem.badge > 0 && <Badge className={styles.badge}>{currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}</Badge>}
                           </ScrollLink>
                         </li>))
                     }
