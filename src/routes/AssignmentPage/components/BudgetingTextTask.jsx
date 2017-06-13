@@ -54,7 +54,7 @@ const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
         />
       </div>
       <div className={styles.info}>
-        <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {fieldToNumber(targetValuesMap[target.id])}
+        <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {fieldToNumber(targetValuesMap[target.id])} {task.data.unit}
       </div>
       <div className={styles.footer}>
         <span className={styles.totalLabel}>Yhteensä</span>
