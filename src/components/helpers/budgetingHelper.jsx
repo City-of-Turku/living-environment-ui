@@ -45,10 +45,9 @@ const calcAssignmentBudget = (state) => {
     (acc, section) => {
       const sectionSpentBudget = calcSectionSpentBudget(section, state);
       acc.spent += sectionSpentBudget;
-      acc.total += parseFloat(assignment.budget);
       acc.sectionsSpentBudget[section.id] = sectionSpentBudget;
       return acc;
-    }, { spent: 0, total: 0, sectionsSpentBudget: {} });
+    }, { spent: 0, sectionsSpentBudget: {} });
 
   return Object.keys(budgetingMap.tasks).reduce(
     (accSpentBudget, taskId) => {
