@@ -4,6 +4,6 @@
     "timeout": 30000
   },
   "backendImages": {
-    "baseUrl": "http://localhost:8000"
+    "baseUrl": ""
   }
 }
