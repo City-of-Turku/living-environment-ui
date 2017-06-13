@@ -43,7 +43,8 @@
 
   a {
     color: @cyan;
-
+    font-weight: bold;
+    
     &:hover {
       color: darken(@cyan, 20);
       text-decoration: none;
@@ -76,11 +77,12 @@
   padding: 0 30px 0 0;
 
   a {
-    color: @gray;
+    color: @lightGray;
+    cursor: pointer;
 
     &:hover {
-      color: darken(@gray, 20);
-      text-decoration: none;
+      color: lighten(@lightGray, 20);
+      text-decoration: none;     
     }
   }
 }
@@ -90,6 +92,7 @@
 
   a {
     color: @cyan;
+    font-weight: bold;
 
     &:hover {
       color: @cyan;
