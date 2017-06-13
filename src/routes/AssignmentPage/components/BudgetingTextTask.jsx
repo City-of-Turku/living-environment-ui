@@ -27,7 +27,7 @@ const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
           [styles.progressBarIncomplete]: !progress.completed })}
       />
       <span className={progress.completed ? styles.progressLabelSuccess : styles.progressLabelDanger}>
-        Käytetty {progress.label}
+        Käytetty {progress.label} {task.data.unit}
       </span>
     </div>
     {
@@ -54,7 +54,7 @@ const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
         />
       </div>
       <div className={styles.info}>
-        <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {task.data.amount_of_consumption} {task.data.unit}
+        <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {target.reference_amount} {task.data.unit}
       </div>
       <div className={styles.footer}>
         <span className={styles.totalLabel}>Yhteensä</span>
