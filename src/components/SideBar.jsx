@@ -24,11 +24,11 @@ class SideBar extends Component {
   }
 
   render() {
-    const { assignment, budget } = this.props;
+    const { assignment, budget, reportName } = this.props;
     if (!assignment) {
       return null;
     }
-    const menuItems = createMenuItems(assignment, budget);
+    const menuItems = createMenuItems(assignment, budget, reportName);
     return (
       <div className={styles.root}>
         <div className={styles.logoWrapper}>
@@ -41,7 +41,7 @@ class SideBar extends Component {
                 <div className={styles.menuItem}>
                   <Link to={item.url} role="menuitem" className={styles.menuItemLink}>
                     <span className={styles.iconWrapper}>
-                      <i className={classNames('glyphfont', 'icon-triangle', styles.menuIcon)} />
+                      <i className={classNames('glyphfont', item.icon, styles.menuIcon)} />
                     </span>
                     {item.label}</Link>
                 </div>
@@ -58,7 +58,9 @@ class SideBar extends Component {
                         >
                           <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
                             {subitem.label}
-                            {!isNaN(subitem.badge) && subitem.badge !== 0 && <Badge className={styles.badge}>{currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}</Badge>}
+                            {!isNaN(subitem.badge) && subitem.badge !== 0 && <Badge className={styles.badge}>
+                              {currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}
+                            </Badge>}
                           </ScrollLink>
                         </li>))
                     }
@@ -85,10 +87,12 @@ SideBar.propTypes = {
   currentSection: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number,
   ]).isRequired,
+  reportName: PropTypes.string,
 };
 
 SideBar.defaultProps = {
   assignment: null,
+  reportName: '',
 };
 
 

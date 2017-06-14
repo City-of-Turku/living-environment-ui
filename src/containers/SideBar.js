@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   currentSection: state.waypoints.currentSection,
   assignment: state.assignment ? state.assignment.assignment : {},
   budget: state.assignment ? calcAssignmentBudget(state) : {},
+  reportName: state.report ? state.report.name : '',
 });
 
 export default connect(mapStateToProps)(SideBar);

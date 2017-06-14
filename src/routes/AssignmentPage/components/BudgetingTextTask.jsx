@@ -17,20 +17,21 @@ const { backendImages: { baseUrl } } = config;
 const fieldToNumber = value => parseFloat(value || 0);
 
 function budgetingProgressBar(progress, task) {
-  if(task.data.amount_of_consumption > 0) {
+  if (task.data.amount_of_consumption > 0) {
     return (<div className={styles.progressBarWrapper}>
       <ProgressBar
         now={progress.value}
         bsStyle={progress.completed ? 'success' : 'danger'}
         className={classnames(styles.progressBar, {
-        [styles.progressBarIncomplete]: !progress.completed })}
+          [styles.progressBarIncomplete]: !progress.completed })}
       />
       <span className={progress.completed ? styles.progressLabelSuccess : styles.progressLabelDanger}>
         Käytetty {progress.label} {task.data.unit}
       </span>
-      </div>
+    </div>
     );
   }
+  return null;
 }
 
 const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
