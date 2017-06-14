@@ -9,6 +9,8 @@ const instance = axios.create({
   timeout: api.timeout,
   headers: { 'Content-Type': 'application/json' },
   responseType: 'json',
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFToken',
 });
 
 const client = {

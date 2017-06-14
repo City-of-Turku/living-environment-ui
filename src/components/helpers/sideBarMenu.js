@@ -1,11 +1,18 @@
 import RoutePattern from 'route-pattern';
 
-const generateReportPageMenuItems = (assignmentId, menuItems) => {
-  const reportMenuItem = {
+const generateReportPageMenuItems = (assignmentId, menuItems, reportName) => {
+  const assignmentMenuItem = {
     id: `assignment-${assignmentId}`,
+    label: reportName || '...',
+    url: `/${assignmentId}`,
+    icon: 'icon-triangle',
+  };
+  menuItems.push(assignmentMenuItem);
+  const reportMenuItem = {
+    id: `report-assignment-${assignmentId}`,
     label: 'Raportti',
-    url: `report/${assignmentId}`,
-    icon: 'fa-home',
+    url: `/report/${assignmentId}`,
+    icon: 'icon-rect',
   };
   menuItems.push(reportMenuItem);
 };
@@ -16,7 +23,7 @@ const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
     id: `assignment-${assignmentId}`,
     label: assignment.name,
     url: `/${assignment.slug}`,
-    icon: 'fa-home',
+    icon: 'icon-triangle',
     subitems: [{
       label: assignment.header,
       id: `${assignmentId}-assignment`,
@@ -35,19 +42,28 @@ const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
     });
   });
   menuItems.push(assignmentMenuItem);
+  const reportMenuItem = {
+    id: `report-assignment-${assignmentId}`,
+    label: 'Raportti',
+    url: `/report/${assignment.slug}`,
+    icon: 'icon-rect',
+  };
+  menuItems.push(reportMenuItem);
 };
 
 const matchesRoute = (pathname, pattern) => RoutePattern.fromString(pattern).matches(pathname);
 
-const createMenuItems = (assignment, budget) => {
+const assignmentPatternUrl = '/:assignmentSlug';
+const reportPatternUrl = '/report/:assignmentSlug';
+
+const createMenuItems = (assignment, budget, reportName) => {
   const menuItems = [];
   const pathname = location.pathname;
-  const reportPatternUrl = '/report/:assignmentSlug';
   if (matchesRoute(pathname, reportPatternUrl)) {
     const reportPattern = RoutePattern.fromString(reportPatternUrl);
     const { namedParams: { assignmentSlug } } = reportPattern.match(pathname);
-    generateReportPageMenuItems(assignmentSlug, menuItems);
-  } else if (matchesRoute(pathname, '/:assignmentSlug')) {
+    generateReportPageMenuItems(assignmentSlug, menuItems, reportName);
+  } else if (matchesRoute(pathname, assignmentPatternUrl)) {
     generateAssignmentPageMenuItems(assignment, budget, menuItems);
   }
   return menuItems;

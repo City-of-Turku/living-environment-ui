@@ -5,12 +5,24 @@ import { formValueSelector } from 'redux-form';
 import BudgetingTextTask from '../components/BudgetingTextTask';
 
 const fieldToNumber = value => parseFloat(value || 0);
+
 const formValue = formValueSelector('assignmentPage');
-const getProgress = (targetValuesMap, amountOfConsumption) => {
+
+const getTargetById = (data, targetId) => data.targets.find(target => target.id === targetId);
+
+const getProgress = (targetValuesMap, data) => {
+  const amountOfConsumption = data.amount_of_consumption;
   const total = fieldToNumber(amountOfConsumption);
   if (total > 0) {
     const current = Object.keys(targetValuesMap).reduce(
-      (acc, targetId) => acc + fieldToNumber(targetValuesMap[targetId]), 0);
+      (acc, targetId) => {
+        const target = getTargetById(data, parseInt(targetId, 10));
+        const value = fieldToNumber(targetValuesMap[targetId]);
+        if (!target || (target.min_amount > value) || (target.max_amount && target.max_amount < value)) {
+          return acc;
+        }
+        return acc + value;
+      }, 0);
     return {
       value: 100 * (current / total),
       label: `${current} / ${total}`,
@@ -26,7 +38,7 @@ const getTargetValuesMap = (state, ownProps) => ownProps.task.data.targets.reduc
 }, {});
 
 const mapStateToProps = (state, ownProps) => ({
-  progress: getProgress(getTargetValuesMap(state, ownProps), ownProps.task.data.amount_of_consumption),
+  progress: getProgress(getTargetValuesMap(state, ownProps), ownProps.task.data),
   targetValuesMap: getTargetValuesMap(state, ownProps),
 });
 
