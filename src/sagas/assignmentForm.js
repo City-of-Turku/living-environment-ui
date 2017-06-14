@@ -1,4 +1,4 @@
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { formActionType } from '../routes/AssignmentPage/constants/actionTypes';
