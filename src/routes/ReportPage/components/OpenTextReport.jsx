@@ -6,7 +6,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 import styles from './OpenTextReport.less';
 
 const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
-  <h2>Open Text Tasks Report</h2>
+  <h2>Avoin tekstikentät</h2>
   { // eslint-disable-next-line react/no-array-index-key
     report.map((section, sectionIndex) => (<div key={sectionIndex}>
       <h3>{section.title}</h3>

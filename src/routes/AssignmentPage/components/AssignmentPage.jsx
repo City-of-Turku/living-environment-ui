@@ -30,7 +30,7 @@ class AssignmentPage extends Component {
   }
 
   render() {
-    const { assignment, budget, handleSubmit, onSubmit } = this.props;
+    const { assignment, budget, handleSubmit, onSubmit, submitButtonEnabled } = this.props;
     if (!assignment) {
       return null;
     }
@@ -38,13 +38,13 @@ class AssignmentPage extends Component {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <div className={styles.headerWrapper}>
-          <Header moneyUsed={budget.spent} totalBudget={budget.total} />
+          <Header moneyUsed={budget.spent} totalBudget={assignment.budget} />
         </div>
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
             tasksCount={this.tasksCount(assignment)}
-            totalBudget={budget.total}
+            totalBudget={assignment.budget}
           />
           <TaskContent
             body={assignment.description}
@@ -58,7 +58,7 @@ class AssignmentPage extends Component {
           assignment.sections && assignment.sections.map(
             section => <SectionBlock assignment={assignment} section={section} key={section.id} />)
         }
-        <SubmitAssignment />
+        <SubmitAssignment submitButtonEnabled={submitButtonEnabled} />
       </form>
     </section>);
   }
@@ -72,14 +72,15 @@ AssignmentPage.propTypes = {
   }),
   budget: PropTypes.shape({
     spent: PropTypes.number,
-    total: PropTypes.number,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  submitButtonEnabled: PropTypes.bool,
 };
 
 AssignmentPage.defaultProps = {
   assignment: null,
+  submitButtonEnabled: true,
 };
 
 export default AssignmentPage;

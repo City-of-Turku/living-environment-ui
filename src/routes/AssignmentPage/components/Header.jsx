@@ -1,6 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { Row, OverlayTrigger, ProgressBar, Tooltip } from 'react-bootstrap';
+import currencyFormatter from 'currency-formatter';
 
 import styles from './Header.less';
 
@@ -14,7 +15,7 @@ const Header = ({ moneyUsed, totalBudget }) => (
         placement="bottom"
         overlay={
           <Tooltip id="progress" className="success">
-            {`${moneyUsed}/${totalBudget}`}
+            {`${currencyFormatter.format(moneyUsed, { locale: 'fi-FI' })} / ${currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}`}
           </Tooltip>
         }
       >
@@ -24,6 +25,9 @@ const Header = ({ moneyUsed, totalBudget }) => (
           className={styles.progressBarControl}
         />
       </OverlayTrigger>
+    </div>
+    <div className={styles.budgetingTotalUsed}>
+      {currencyFormatter.format(moneyUsed, { locale: 'fi-FI' })} / {currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}
     </div>
   </Row>);
 
