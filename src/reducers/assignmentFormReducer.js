@@ -26,7 +26,6 @@ const assignmentFormReducer = {
       case assignmentActionType.FETCH_ASSIGNMENT_FULFILLED:
         const assignment = action.payload;
         const initialValues = calculateFormInitialValues(assignment);
-        debugger;
         return {
           ...state,
           values: {
