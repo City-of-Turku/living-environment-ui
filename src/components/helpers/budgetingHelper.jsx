@@ -10,7 +10,11 @@ const calcTextTaskSpentBudget = (task, state) => {
       (accTarget, target) => {
         const targetAmount = formValue(state, `budgeting_text_task_${task.id}_${target.id}`);
         if (!isNaN(targetAmount)) {
-          return accTarget + (parseFloat(target.unit_price) * parseFloat(targetAmount));
+          const value = parseFloat(targetAmount);
+          if (value < target.min_amount || (target.max_amount && value > target.max_amount)) {
+            return accTarget;
+          }
+          return accTarget + (parseFloat(target.unit_price) * value);
         }
         return accTarget;
       }, 0);
