@@ -91,17 +91,17 @@ class BudgetingMapTargetList extends Component {
             bsStyle="primary"
             disabled={!selectedTarget}
             onClick={this.handleSaveClick}
-          >Add</Button>)}
+          >Lisää</Button>)}
           { !addNewTarget && (<ButtonGroup>
             <Button
               bsStyle="danger"
               onClick={this.handleDeleteClick}
-            >Delete</Button>
+            >Poista</Button>
             <Button
               bsStyle="success"
               disabled={!selectedTarget}
               onClick={this.handleUpdateClick}
-            >Update</Button>
+            >Päivitä</Button>
           </ButtonGroup>)}
         </div>
       </div>
