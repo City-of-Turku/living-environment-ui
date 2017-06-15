@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Badge, ProgressBar } from 'react-bootstrap';
+import { Col, Badge, ProgressBar } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import classnames from 'classnames';
 import currencyFormatter from 'currency-formatter';
+import format from 'number-formatter';
 
 import { renderField } from '../../../components/helpers/formHelpers';
 import * as Validation from '../../../validation';
@@ -11,6 +12,8 @@ import config from '../../../config';
 
 
 import styles from './BudgetingTextTask.less';
+
+const numberFormat = '# ##0.00';
 
 const { backendImages: { baseUrl } } = config;
 
@@ -34,18 +37,30 @@ function budgetingProgressBar(progress, task) {
         className={classnames(styles.progressBar, {
           [styles.progressBarIncomplete]: !progress.completed })}
       />
-      <span className={progress.completed ? styles.progressLabelSuccess : styles.progressLabelDanger}>
-        Käytetty {progress.label} {task.data.unit}
-      </span>
     </div>);
   }
   return null;
 }
 
-const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
+const createSummaryTop = (summary, unit) => (<div className={classnames(styles.summary, styles.summaryTotal)}>
+  {format(numberFormat, summary.total)} {unit}
+</div>);
+
+const createSummaryBottom = (summary, unit) => (<div className={styles.summary}>
+  <Col xs={12} sm={6}>
+    <div className={styles.alignLeft}>Jäljellä {format(numberFormat, summary.used)} {unit}</div>
+  </Col>
+  <Col xs={12} sm={6}>
+    <div className={styles.alignRight}>Käyttämättä {format(numberFormat, summary.unused)} {unit}</div>
+  </Col>
+</div>);
+
+const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task }) => (
   <div className={classnames(styles.root, className)}>
     <h3>{task.data.name}</h3>
+    { createSummaryTop(summary, task.data.unit)}
     { budgetingProgressBar(progress, task) }
+    { createSummaryBottom(summary, task.data.unit)}
     {
     task.data.targets.map(target => (<div key={target.id} className={styles.targetRoot}>
       <div
@@ -98,6 +113,11 @@ BudgetingTextTask.propTypes = {
   progress: PropTypes.shape({
     value: PropTypes.number,
     label: PropTypes.string,
+  }).isRequired,
+  summary: PropTypes.shape({
+    used: PropTypes.number,
+    unused: PropTypes.number,
+    total: PropTypes.number,
   }).isRequired,
   task: PropTypes.shape({
     data: PropTypes.shape({

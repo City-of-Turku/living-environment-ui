@@ -37,9 +37,30 @@ const getTargetValuesMap = (state, ownProps) => ownProps.task.data.targets.reduc
   return acc;
 }, {});
 
+const calcSummary = (targetValuesMap, data) => {
+  const amountOfConsumption = data.amount_of_consumption;
+  const total = fieldToNumber(amountOfConsumption);
+  const result = { used: 0, unused: data.amount_of_consumption, total: data.amount_of_consumption };
+  if (total > 0) {
+    const used = Object.keys(targetValuesMap).reduce(
+      (acc, targetId) => {
+        const target = getTargetById(data, parseInt(targetId, 10));
+        const value = fieldToNumber(targetValuesMap[targetId]);
+        if (!target || (target.min_amount > value) || (target.max_amount && target.max_amount < value)) {
+          return acc;
+        }
+        return acc + value;
+      }, 0);
+    result.used = used;
+    result.unused = Math.max(0, total - used);
+  }
+  return result;
+};
+
 const mapStateToProps = (state, ownProps) => ({
   progress: getProgress(getTargetValuesMap(state, ownProps), ownProps.task.data),
   targetValuesMap: getTargetValuesMap(state, ownProps),
+  summary: calcSummary(getTargetValuesMap(state, ownProps), ownProps.task.data),
 });
 
 export default connect(mapStateToProps)(BudgetingTextTask);

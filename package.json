@@ -10,6 +10,7 @@
     "leaflet": "^1.0.3",
     "lodash": "^4.17.4",
     "npm": "^4.5.0",
+    "number-formatter": "^1.2.0",
     "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
