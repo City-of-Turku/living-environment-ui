@@ -73,10 +73,10 @@ const getBudgetingTargetMap = report => ({
 const ReportPage = ({ report, updateFilter }) => (<div className={styles.root}>
   <h1>{report.name} raportti</h1>
   { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
+  <CountOfAnswersPerSchool report={report} />
+  <CountOfAnswersPerClass report={report} />
   <OpenTextReport report={getOpenTextAnswers(report)} />
   <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
-  <CountOfAnswersPerClass report={report} />
-  <CountOfAnswersPerSchool report={report} />
 </div>);
 
 ReportPage.propTypes = {
