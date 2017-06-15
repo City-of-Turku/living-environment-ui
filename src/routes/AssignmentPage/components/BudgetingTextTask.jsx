@@ -85,7 +85,6 @@ const BudgetingTextTask = ({ className, progress, targetValuesMap, task }) => (
         <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {target.reference_amount} {task.data.unit}
       </div>
       <div className={styles.footer}>
-        <span className={styles.totalLabel}>Yhteensä</span>
         <span className={styles.total}>
           {total(target, targetValuesMap)}
         </span>

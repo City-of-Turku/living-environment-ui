@@ -5,7 +5,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 
 const SubmitAssignment = ({ submitButtonEnabled }) => (
   <ContentWrapper id="submitAssignment">
-    <button type="submit" disabled={!submitButtonEnabled}>Submit</button>
+    <button type="submit" disabled={!submitButtonEnabled}>Lähetä tiedot</button>
   </ContentWrapper>
 );
 
