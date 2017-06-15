@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonGroup, Col, Row } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import classnames from 'classnames';
 
 import styles from './FriendsOfParkForm.less';
@@ -130,66 +130,50 @@ class FriendsOfParkForm extends Component {
     const addNewFriend = !valid;
 
     return (<div className={classnames('container-fluid', styles.root)}>
-      <Row className={this.getGroupClass('first_name')}>
-        <Col xs={12} sm={3}>
-          <label htmlFor="first_name">Etunimi</label>
-        </Col>
-        <Col xs={12} sm={8}>
-          <input
-            type="text"
-            name="first_name"
-            className="form-control"
-            onBlur={() => this.handleBlur('first_name')}
-            onChange={this.handleInputChange}
-            value={this.state.first_name.value}
-          />
-        </Col>
-      </Row>
-      <Row className={this.getGroupClass('last_name')}>
-        <Col xs={12} sm={3}>
-          <label htmlFor="last_name">Sukunimi</label>
-        </Col>
-        <Col xs={12} sm={8}>
-          <input
-            type="text"
-            name="last_name"
-            className="form-control"
-            onBlur={() => this.handleBlur('last_name')}
-            onChange={this.handleInputChange}
-            value={this.state.last_name.value}
-          />
-        </Col>
-      </Row>
-      <Row className={this.getGroupClass('email')}>
-        <Col xs={12} sm={3}>
-          <label htmlFor="email">Sähköposti</label>
-        </Col>
-        <Col xs={12} sm={8}>
-          <input
-            type="text"
-            name="email"
-            className="form-control"
-            onBlur={() => this.handleBlur('email')}
-            onChange={this.handleInputChange}
-            value={this.state.email.value}
-          />
-        </Col>
-      </Row>
-      <Row className={this.getGroupClass('phone')}>
-        <Col xs={12} sm={3}>
-          <label htmlFor="phone">Puhelin</label>
-        </Col>
-        <Col xs={12} sm={8}>
-          <input
-            type="text"
-            name="phone"
-            className="form-control"
-            onBlur={() => this.handleBlur('phone')}
-            onChange={this.handleInputChange}
-            value={this.state.phone.value}
-          />
-        </Col>
-      </Row>
+      <div className={this.getGroupClass('first_name')}>
+        <label htmlFor="first_name">Etunimi</label>
+        <input
+          type="text"
+          name="first_name"
+          className="form-control"
+          onBlur={() => this.handleBlur('first_name')}
+          onChange={this.handleInputChange}
+          value={this.state.first_name.value}
+        />
+      </div>
+      <div className={this.getGroupClass('last_name')}>
+        <label htmlFor="last_name">Sukunimi</label>
+        <input
+          type="text"
+          name="last_name"
+          className="form-control"
+          onBlur={() => this.handleBlur('last_name')}
+          onChange={this.handleInputChange}
+          value={this.state.last_name.value}
+        />
+      </div>
+      <div className={this.getGroupClass('email')}>
+        <label htmlFor="email">Sähköposti</label>
+        <input
+          type="text"
+          name="email"
+          className="form-control"
+          onBlur={() => this.handleBlur('email')}
+          onChange={this.handleInputChange}
+          value={this.state.email.value}
+        />
+      </div>
+      <div className={this.getGroupClass('phone')}>
+        <label htmlFor="phone">Puhelin</label>
+        <input
+          type="text"
+          name="phone"
+          className="form-control"
+          onBlur={() => this.handleBlur('phone')}
+          onChange={this.handleInputChange}
+          value={this.state.phone.value}
+        />
+      </div>
       <div className={styles.footer}>
         { addNewFriend && (<Button
           bsStyle="primary"
