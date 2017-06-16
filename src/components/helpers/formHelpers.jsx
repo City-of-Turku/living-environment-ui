@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import NumericInput from 'react-numeric-input';
 
 export const renderField = (field) => { // eslint-disable-line import/prefer-default-export
   const placeholder = field.placeholder || field.label;
@@ -34,7 +35,8 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
             }
           </select>
         }
-        { otherTypes && <input {...attributes} /> }
+        { otherTypes && (attributes.type === 'number'
+          ? <div><NumericInput precision={2} {...attributes} /></div> : <input {...attributes} />)}
         { !suppressErrors && <div className="help-block">
           {hasError && (<span>{error}</span>)}
         </div>}
