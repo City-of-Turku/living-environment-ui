@@ -92,14 +92,6 @@
   background: @state-danger-bg;
 }
 
-.progressLabelSuccess {
-  color: @lightGreen;
-}
-
-.progressLabelDanger {
-  color: @state-danger-text;
-}
-
 .fieldWrapper {
   :global .help-block {
     font-size: 14px;
@@ -110,4 +102,27 @@
 
 .range {
   font-size: 14px;
+}
+
+.summary {
+  margin: 10px auto 20px;
+  text-align: center;
+  font-size: 14px;
+  max-width: @progressBarMaxWidth;
+}
+
+.summaryTotal {
+  margin-bottom: 10px;
+}
+
+.alignLeft {
+  .tablet({
+    float: left;
+  })
+}
+
+.alignRight {
+  .tablet({
+    float: right;
+  })
 }
