@@ -161,7 +161,6 @@ class Map extends Component {
       ref={(ref) => {
         this.ref = ref;
       }}
-      scrollWheelZoom={false}
       targetUserData={targetUserData}
     >
       <WMSTileLayer
