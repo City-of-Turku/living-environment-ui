@@ -70,13 +70,22 @@ const getBudgetingTargetMap = report => ({
   area: getMaskPolygon(report.area),
 });
 
+const openTextReportHasAnswers =
+  report => (report.sections || []).reduce(
+    (acc, section) => acc + (
+      (section.budgeting_tasks || []).reduce((accAnswers, answer) => answer.length, 0)
+    ), 0) !== 0;
+
+const budgetingTargetMapHasPins = report => (report.sections || []).reduce(
+  (acc, section) => acc + section.open_text_tasks.length, 0) !== 0;
+
 const ReportPage = ({ report, updateFilter }) => (<div className={styles.root}>
   <h1>{report.name} raportti</h1>
   { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
   <CountOfAnswersPerSchool report={report} />
   <CountOfAnswersPerClass report={report} />
-  <OpenTextReport report={getOpenTextAnswers(report)} />
-  <BudgetingTargetMap report={getBudgetingTargetMap(report)} />
+  { openTextReportHasAnswers(report) && <OpenTextReport report={getOpenTextAnswers(report)} /> }
+  { budgetingTargetMapHasPins(report) && <BudgetingTargetMap report={getBudgetingTargetMap(report)} /> }
 </div>);
 
 ReportPage.propTypes = {
@@ -99,7 +108,7 @@ ReportPage.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
       })),
-    })).isRequired,
+    })),
     submissions: PropTypes.shape({
       per_school: PropTypes.arrayOf(PropTypes.shape({
         school__name: PropTypes.string,
@@ -111,6 +120,7 @@ ReportPage.propTypes = {
 };
 
 ReportPage.defaultProps = {
+  schools: [],
 };
 
 export default ReportPage;

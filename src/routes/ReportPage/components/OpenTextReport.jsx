@@ -11,19 +11,20 @@ const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
     report.map((section, sectionIndex) => (<div key={sectionIndex}>
       <h3>{section.title}</h3>
       {
-        section.sectionQuestionsAndAnswers.map( // eslint-disable-next-line react/no-array-index-key
-          (questionAndAnswers, index) => (<div key={index}>
-            <h4>{questionAndAnswers.question}</h4>
-            <div className={styles.answers}>
-              {
+        section.sectionQuestionsAndAnswers.map(
+          (questionAndAnswers, index) =>  // eslint-disable-next-line react/no-array-index-key
+            (questionAndAnswers.answers.length ? (<div key={index}>
+              <h4>{questionAndAnswers.question}</h4>
+              <div className={styles.answers}>
+                {
                 questionAndAnswers.answers.map(
                   (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
                     key={`${index}-${answerIndex}`}
                     className={styles.answer}
                   >{answer}</div>))
-              }
-            </div>
-          </div>))
+                }
+              </div>
+            </div>) : null))
       }
       {section.question}
     </div>))
