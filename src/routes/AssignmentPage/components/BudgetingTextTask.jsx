@@ -80,6 +80,7 @@ const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task
           defaultValue={parseInt(target.reference_amount, 10)}
           placeholder="" min="0"
           component={renderField} type="number"
+          tooltipError
           validate={[Validation.number, value =>
             Validation.range(value,
               Number(target.min_amount), target.max_amount ? Number(target.max_amount) : 1e99)
@@ -124,7 +125,7 @@ BudgetingTextTask.propTypes = {
       name: PropTypes.string.isRequired,
       targets: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        max_amount: PropTypes.string.isRequired, // server returns string here
+        max_amount: PropTypes.string, // server returns string here
         min_amount: PropTypes.string.isRequired, // -- / --
         name: PropTypes.string.isRequired,
       })).isRequired,

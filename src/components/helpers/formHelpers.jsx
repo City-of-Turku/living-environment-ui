@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tooltip } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NumericInput from 'react-numeric-input';
@@ -8,7 +9,8 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
   // all input types except textarea, select and error
   const otherTypes = field.type !== 'textarea' && field.type !== 'select' && field.type !== 'error';
   const { touched, error } = field.meta;
-  const suppressErrors = field.suppressErrors;
+  const tooltipError = field.tooltipError;
+  const suppressErrors = field.suppressErrors || tooltipError;
   const wrapperClass = field.className || 'form-group';
   const attributes = {
     ...field.input,
@@ -40,6 +42,12 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
         { !suppressErrors && <div className="help-block">
           {hasError && (<span>{error}</span>)}
         </div>}
+        {
+          tooltipError && hasError && (
+            <Tooltip placement="bottom" className="in failed" id="tooltip-bottom">
+              {error}
+            </Tooltip>)
+        }
       </div>
     </div>
   );
