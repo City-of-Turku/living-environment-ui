@@ -23,7 +23,7 @@ const Header = ({ moneyUsed, totalBudget }) => (
       >
         <ProgressBar
           now={calcPercent(moneyUsed, totalBudget)}
-          bsStyle="success"
+          bsStyle={moneyUsed > totalBudget ? 'danger' : 'success'}
           className={styles.progressBarControl}
         />
       </OverlayTrigger>
