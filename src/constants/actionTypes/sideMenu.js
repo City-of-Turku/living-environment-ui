@@ -1,1 +1,2 @@
-export const TOGGLE_MENU = 'TOGGLE_MENU'; // eslint-disable-line import/prefer-default-export
+export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const HIDE_MENU = 'HIDE_MENU';

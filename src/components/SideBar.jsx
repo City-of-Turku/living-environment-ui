@@ -24,7 +24,7 @@ class SideBar extends Component {
   }
 
   render() {
-    const { assignment, budget, reportName } = this.props;
+    const { assignment, budget, hideMenu, reportName } = this.props;
     if (!assignment) {
       return null;
     }
@@ -39,7 +39,7 @@ class SideBar extends Component {
             menuItems.map(item => (
               <li role="presentation" className={this.calcMenuWrapperStyle(item.url)} key={item.id}>
                 <div className={styles.menuItem}>
-                  <Link to={item.url} role="menuitem" className={styles.menuItemLink}>
+                  <Link to={item.url} role="menuitem" onClick={hideMenu} className={styles.menuItemLink}>
                     <span className={styles.iconWrapper}>
                       <i className={classNames('glyphfont', item.icon, styles.menuIcon)} />
                     </span>
@@ -56,7 +56,9 @@ class SideBar extends Component {
                             styles.menuSubitem,
                             this.calcSubmenuStyle(subitem.id))}
                         >
-                          <ScrollLink to={subitem.id} smooth offset={-20} duration={250} role="menuitem">
+                          <ScrollLink
+                            to={subitem.id} onClick={hideMenu} smooth offset={-20} duration={250} role="menuitem"
+                          >
                             {subitem.label}
                             {!isNaN(subitem.badge) && subitem.badge !== 0 && <Badge className={styles.badge}>
                               {currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}
@@ -87,11 +89,13 @@ SideBar.propTypes = {
   currentSection: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number,
   ]).isRequired,
+  hideMenu: PropTypes.func,
   reportName: PropTypes.string,
 };
 
 SideBar.defaultProps = {
   assignment: null,
+  hideMenu: () => {},
   reportName: '',
 };
 
