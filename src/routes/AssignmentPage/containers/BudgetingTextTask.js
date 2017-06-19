@@ -33,14 +33,13 @@ const getProgress = (targetValuesMap, data) => {
 };
 
 const getTargetValuesMap = (state, ownProps) => ownProps.task.data.targets.reduce((acc, target) => {
-  acc[target.id] = formValue(state, `budgeting_text_task_${ownProps.task.id}_${target.id}`);
+  acc[target.id] = `${formValue(state, `budgeting_text_task_${ownProps.task.id}_${target.id}`)}`;
   return acc;
 }, {});
 
 const calcSummary = (targetValuesMap, data) => {
-  const amountOfConsumption = data.amount_of_consumption;
-  const total = fieldToNumber(amountOfConsumption);
-  const result = { used: 0, unused: data.amount_of_consumption, total: data.amount_of_consumption };
+  const total = parseFloat(data.amount_of_consumption);
+  const result = { used: 0, unused: total, total: total };
   if (total > 0) {
     const used = Object.keys(targetValuesMap).reduce(
       (acc, targetId) => {

@@ -22,7 +22,7 @@ const TaskInfoBar = ({ tasksCount, totalBudget }) => (
 
 TaskInfoBar.propTypes = {
   tasksCount: PropTypes.number.isRequired,
-  totalBudget: PropTypes.number.isRequired,
+  totalBudget: PropTypes.string.isRequired,
 };
 
 export default TaskInfoBar;

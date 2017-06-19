@@ -1,18 +1,82 @@
 @import '../styling';
 
-@directions: top, left, bottom, right;
+.tooltip.top.success {
+  .tooltip-arrow {
+    border-top-color: @green;
+  }
 
-.custom-tooltip(@name, @color) {
-  .for(@directions);
-  .-each(@direction) {
-    .tooltip.@{direction}.@{name} .tooltip-arrow {
-      border-@{direction}-color: @color
-    }
-
-    .tooltip.@{direction}.@{name} .tooltip-inner {
-      background: @color;
-    }
+  .tooltip-inner {
+    background: @green;
   }
 }
 
-.custom-tooltip(success, @green);
+.tooltip.left.success {
+  .tooltip-arrow {
+    border-left-color: @green;
+  }
+
+  .tooltip-inner {
+    background: @green;
+  }
+}
+
+.tooltip.right.success {
+  .tooltip-arrow {
+    border-right-color: @green;
+  }
+
+  .tooltip-inner {
+    background: @green;
+  }
+}
+
+.tooltip.bottom.success  {
+  .tooltip-arrow {
+    border-bottom-color: @green;
+  }
+
+  .tooltip-inner {
+    background: @green;
+  }
+}
+
+
+.tooltip.top.failed {
+  .tooltip-arrow {
+    border-top-color: @red;
+  }
+
+  .tooltip-inner {
+    background: @red;
+  }
+}
+
+.tooltip.left.failed {
+  .tooltip-arrow {
+    border-left-color: @red;
+  }
+
+  .tooltip-inner {
+    background: @red;
+  }
+}
+
+.tooltip.right.failed {
+  .tooltip-arrow {
+    border-right-color: @red;
+  }
+
+  .tooltip-inner {
+    background: @red;
+  }
+}
+
+.tooltip.bottom.failed  {
+  .tooltip-arrow {
+    border-bottom-color: @red;
+  }
+
+  .tooltip-inner {
+    background: @red;
+  }
+}

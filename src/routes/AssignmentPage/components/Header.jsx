@@ -37,7 +37,7 @@ const Header = ({ moneyUsed, totalBudget }) => (
 
 Header.propTypes = {
   moneyUsed: PropType.number.isRequired,
-  totalBudget: PropType.number.isRequired,
+  totalBudget: PropType.string.isRequired,
 };
 
 export default Header;
