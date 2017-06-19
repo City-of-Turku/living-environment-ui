@@ -9,6 +9,11 @@ const Video = ({ videoId }) => (
     <YouTube
       className={styles.video}
       videoId={videoId}
+      opts={{
+        playerVars: {
+          rel: 0
+        }
+      }}
     />
   </div>);
 
