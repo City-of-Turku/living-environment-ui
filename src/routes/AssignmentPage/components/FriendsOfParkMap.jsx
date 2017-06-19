@@ -7,6 +7,7 @@ import styles from './FriendsOfParkMap.less';
 
 const FriendsOfParkMap = ({ name, maskPolygon, sectionId, task }) => (<div>
   <h2>{name}</h2>
+  <p>Annetut yhteystiedot välitetään Turun kaupungin palautejärjestelmään.</p>
   <Map
     className={styles.map}
     layers={['Opaskartta']}
