@@ -2,22 +2,32 @@
 
 @fontSize: 24px;
 
-.iconWrapper {
-  .tablet({
-    text-align: right;
-  });
-}
-
 .question {
   font-size: @fontSize;
   line-height: (36 / 24);
   margin-bottom: 1em;
-}
+  position: relative;
 
-.editIcon {
-  display: inline-block;
-  font-size: @fontSize;
-  color: @cyan;
+  @media (max-width: @screen-md-max) {
+      padding-left: 45px;
+  }
+
+  .iconWrapper {
+    text-align: right;
+    position: absolute;
+    top: 0;
+    left: 15px;
+
+    @media (min-width: @screen-lg-min) {
+      left: -30px;
+    }
+  }
+
+  .editIcon {
+    display: block;
+    font-size: @fontSize;
+    color: @cyan;
+  }
 }
 
 .inputFieldWrapper {
