@@ -1,8 +1,22 @@
 .form-control {
-  box-shadow: 0 5px 10px fade(@textColor, 10%) inset;
-  font-size: 18px;
+  .input-lg();
+  box-shadow: @form-shadow;
+  color: @textColor;
+  border-radius: @form-border-radius;
+  border: @form-border;
+
+  &:hover, &:focus {
+    border: @form-hover-border;
+    box-shadow: @form-hover-shadow;
+  }
+
+  &:focus {
+    color: @form-focus-color;
+  }
 }
 
 textarea {
   min-height: 180px;
+  width: 100%;
+  max-width: 100%;
 }
