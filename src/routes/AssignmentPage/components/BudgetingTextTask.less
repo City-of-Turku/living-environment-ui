@@ -10,8 +10,8 @@
 @borderColor: @darkerGray * 0.15 + @white * (1 - 0.15);
 @progressBarLabelFontSize: 12px;
 
-.root {
-  margin: 0 @grid-gutter-width / -2;
+.taskWrapper {
+    text-align: center;
 }
 
 .field {
@@ -38,6 +38,7 @@
   border: 1px solid @borderColor;
   border-radius: 10px;
   overflow: hidden;
+  text-align: left;
 
   h4 {
     font-size: @titleFontSize;
@@ -107,6 +108,7 @@
 
 .range {
   font-size: 14px;
+  color: lighten(@baseGray, 15%);
 }
 
 .summary {
