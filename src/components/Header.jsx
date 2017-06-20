@@ -16,7 +16,8 @@ const Header = ({ toggleMenu }) => (
         <i className={classnames('glyphfont', 'turku-logo', styles.logo)} />
       </div>
     </div>
-  </Row>);
+  </Row>
+);
 
 Header.propTypes = {
   toggleMenu: PropType.func.isRequired,

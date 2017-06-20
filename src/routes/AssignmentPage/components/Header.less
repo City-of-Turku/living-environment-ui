@@ -4,28 +4,77 @@
 @toggleButtonColor: @gray;
 @progressBarControlMaxWidth: 600px;
 
-.budgetingTotalUsed {
-  text-align: center;
-}
-
 .root {
+  transition: top @transitionDuration @transitionEasing, left @transitionDuration @transitionEasing;
+  position: fixed;
+  top: @headerHeight;
+  left: 0;
+  right: 0;
+  height: @assignmentHeaderHeight;
+  z-index: 9999;
   background: @white;
-  padding: @spacingL @spacingL 10px 50px;
-  box-shadow: 0 5px 45px -20px @black;
+  box-shadow: 0 2px 22px rgba(0,0,0,0.1);
+
+  .tablet({
+    top: 0;
+    left: @sideBarWidth;
+  });
+
+  .content {
+    max-width: 1050px;
+    margin: 0 @spacingS;
+    padding: 0 @spacingS;
+    display: flex;
+    height: 100%;
+
+    @media (min-width: @screen-md-min) {
+      margin: 0 @spacingL;
+      padding: 0 @spacingM;
+    }
+  }
 }
 
 .label {
   line-height: @progressBarHeight;
   float: left;
   font-size: 14px;
+  flex: 0 1 0%;
+  align-self: center;
+  color: lighten(@baseGray, 5%);
 
+  @media (min-width: @screen-md-min) {
+    flex: 0 1 200px;
+  }
 }
 
 .progressBarWrapper {
-  overflow: hidden;
-  padding: 0 (100% -  @progressBarWidth) / 2;
-}
+  padding: 20px 0 @spacingXL @spacingM;
+  flex: 1 1 0%;
+  align-self: center;
+  position: relative;
 
-.progressBarControl {
-  max-width: @progressBarControlMaxWidth;
+  @media (min-width: @screen-md-min) {
+    padding: 20px 0 @spacingXL @spacingXL;
+  }
+
+  :global .progress {
+    height: 12px;
+  }
+
+  .budgetingTotalUsed {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    font-size: 14px;
+    color: lighten(@baseGray, 15%);
+    font-weight: 600;
+
+    :global .over {
+      color: @red;
+    }
+
+    :global .under {
+      color: @green;
+    }
+  }
 }
