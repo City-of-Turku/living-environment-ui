@@ -14,7 +14,7 @@ const Header = ({ moneyUsed, totalBudget }) => (
       <OverlayTrigger
         placement="bottom"
         overlay={
-          <Tooltip id="progress" className="success">
+          <Tooltip id="progress" className={moneyUsed > totalBudget ? 'failed' : 'success'}>
             {`${currencyFormatter.format(moneyUsed,
               { locale: 'fi-FI' })} / ${currencyFormatter.format(totalBudget,
               { locale: 'fi-FI' })}`}

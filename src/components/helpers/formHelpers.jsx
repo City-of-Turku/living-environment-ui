@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NumericInput from 'react-numeric-input';
 
+
+const formatNumericField = number => number.toString().replace('.', ',');
+
+const parseNumericField = numberString => parseFloat((numberString || '').replace(',', '.')) || 0;
+
 export const renderField = (field) => { // eslint-disable-line import/prefer-default-export
   const placeholder = field.placeholder || field.label;
   // all input types except textarea, select and error
@@ -18,6 +23,9 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
     type: field.type,
     className: 'form-control',
   };
+  if (field.precision) {
+    attributes.precision = field.precision;
+  }
   const hasError = touched && error;
   return (
     <div>
@@ -38,7 +46,8 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
           </select>
         }
         { otherTypes && (attributes.type === 'number'
-          ? <div><NumericInput precision={2} {...attributes} /></div> : <input {...attributes} />)}
+          ? <div><NumericInput {...attributes} parse={parseNumericField} format={formatNumericField} /></div>
+          : <input {...attributes} />)}
         { !suppressErrors && <div className="help-block">
           {hasError && (<span>{error}</span>)}
         </div>}

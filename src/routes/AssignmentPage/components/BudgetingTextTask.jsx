@@ -28,19 +28,17 @@ const total = (target, targetValuesMap) => {
     { locale: 'fi-FI' });
 };
 
-function budgetingProgressBar(progress, task) {
-  if (task.data.amount_of_consumption > 0) {
-    return (<div className={styles.progressBarWrapper}>
-      <ProgressBar
-        now={progress.value}
-        bsStyle={progress.completed ? 'success' : 'danger'}
-        className={classnames(styles.progressBar, {
-          [styles.progressBarIncomplete]: !progress.completed })}
-      />
-    </div>);
-  }
-  return null;
-}
+const budgetingProgressBar = progress => (<div className={styles.progressBarWrapper}>
+  <ProgressBar
+    now={progress.value}
+    bsStyle={progress.completed ? 'success' : 'danger'}
+    className={classnames(
+      styles.progressBar,
+      { [styles.progressBarIncomplete]: !progress.completed }
+      )}
+  />
+</div>);
+
 
 const createSummaryTop = (summary, unit) => (<div className={classnames(styles.summary, styles.summaryTotal)}>
   {format(numberFormat, summary.total)} {unit}
@@ -48,19 +46,19 @@ const createSummaryTop = (summary, unit) => (<div className={classnames(styles.s
 
 const createSummaryBottom = (summary, unit) => (<div className={styles.summary}>
   <Col xs={12} sm={6}>
-    <div className={styles.alignLeft}>Jäljellä {format(numberFormat, summary.used)} {unit}</div>
+    <div className={styles.alignLeft}>Käytetty {format(numberFormat, summary.used)} {unit}</div>
   </Col>
   <Col xs={12} sm={6}>
-    <div className={styles.alignRight}>Käyttämättä {format(numberFormat, summary.unused)} {unit}</div>
+    <div className={styles.alignRight}>Jäljellä {format(numberFormat, summary.unused)} {unit}</div>
   </Col>
 </div>);
 
 const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task }) => (
   <div className={classnames(styles.root, className)}>
     <h3>{task.data.name}</h3>
-    { createSummaryTop(summary, task.data.unit)}
-    { budgetingProgressBar(progress, task) }
-    { createSummaryBottom(summary, task.data.unit)}
+    { task.data.amount_of_consumption > 0 && createSummaryTop(summary, task.data.unit)}
+    { task.data.amount_of_consumption > 0 && budgetingProgressBar(progress, task) }
+    { task.data.amount_of_consumption > 0 && createSummaryBottom(summary, task.data.unit)}
     {
     task.data.targets.map(target => (<div key={target.id} className={styles.targetRoot}>
       <div
@@ -80,6 +78,7 @@ const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task
           defaultValue={parseInt(target.reference_amount, 10)}
           placeholder="" min="0"
           component={renderField} type="number"
+          precision={2}
           tooltipError
           validate={[Validation.number, value =>
             Validation.range(value,

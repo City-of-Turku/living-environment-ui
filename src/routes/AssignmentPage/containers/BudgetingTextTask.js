@@ -39,7 +39,7 @@ const getTargetValuesMap = (state, ownProps) => ownProps.task.data.targets.reduc
 
 const calcSummary = (targetValuesMap, data) => {
   const total = parseFloat(data.amount_of_consumption);
-  const result = { used: 0, unused: total, total: total };
+  const result = { used: 0, unused: total, total };
   if (total > 0) {
     const used = Object.keys(targetValuesMap).reduce(
       (acc, targetId) => {
@@ -51,7 +51,7 @@ const calcSummary = (targetValuesMap, data) => {
         return acc + value;
       }, 0);
     result.used = used;
-    result.unused = Math.max(0, total - used);
+    result.unused = total - used;
   }
   return result;
 };
