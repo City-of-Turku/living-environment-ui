@@ -34,42 +34,50 @@ class SideBar extends Component {
         <div className={styles.logoWrapper}>
           <i className={classNames('glyphfont', 'turku-logo', styles.logo)} />
         </div>
-        <ul role="menu" className={styles.menu} aria-label="Side bar">
-          {
-            menuItems.map(item => (
-              <li role="presentation" className={this.calcMenuWrapperStyle(item.url)} key={item.id}>
-                <div className={styles.menuItem}>
-                  <Link to={item.url} role="menuitem" onClick={hideMenu} className={styles.menuItemLink}>
-                    <span className={styles.iconWrapper}>
-                      <i className={classNames('glyphfont', item.icon, styles.menuIcon)} />
-                    </span>
-                    {item.label}</Link>
-                </div>
-                { item.subitems && (
-                  <ul className={styles.submenu}>
-                    {
-                      item.subitems.map(subitem => (
-                        <li
-                          key={subitem.id}
-                          role="presentation"
-                          className={classNames(
-                            styles.menuSubitem,
-                            this.calcSubmenuStyle(subitem.id))}
-                        >
-                          <ScrollLink
-                            to={subitem.id} onClick={hideMenu} smooth offset={-20} duration={250} role="menuitem"
-                          >
-                            {subitem.label}
-                            {!isNaN(subitem.badge) && subitem.badge !== 0 && <Badge className={styles.badge}>
-                              {currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}
-                            </Badge>}
-                          </ScrollLink>
-                        </li>))
+        <ul role="menu" className={styles.menu} aria-label="Sidebar">
+          {menuItems.map(item =>
+            <li role="presentation" className={this.calcMenuWrapperStyle(item.url)} key={item.id}>
+              <Link to={item.url} role="menuitem" onClick={hideMenu} className={styles.menuItemLink}>
+                <span className={styles.iconWrapper}>
+                  <i className={classNames('glyphfont', item.icon, styles.menuIcon)} />
+                </span>
+                {item.label}
+              </Link>
+              {item.subitems &&
+              <ul className={styles.submenu}>
+                {item.subitems.map(subitem =>
+                  <li
+                    key={subitem.id}
+                    role="presentation"
+                    className={
+                      classNames(
+                        styles.menuSubitem,
+                        this.calcSubmenuStyle(subitem.id)
+                      )
                     }
-                  </ul>)}
-              </li>))}
+                  >
+                    <ScrollLink
+                      to={subitem.id}
+                      onClick={hideMenu}
+                      smooth
+                      offset={-20}
+                      duration={250}
+                      role="menuitem"
+                    >
+                      <span>{subitem.label}</span>
+                      {!isNaN(subitem.badge) && subitem.badge !== 0 &&
+                      <Badge className={styles.badge}>
+                        {currencyFormatter.format(subitem.badge, { locale: 'fi-FI' })}
+                      </Badge>}
+                    </ScrollLink>
+                  </li>)
+                }
+              </ul>}
+            </li>)
+          }
         </ul>
-      </div>);
+      </div>
+    );
   }
 }
 
