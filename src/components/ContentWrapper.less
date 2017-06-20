@@ -1,24 +1,24 @@
 @import '../styling/styling';
 
 @borderRadius: 10px;
-@mainPadding: @spacingL;
 @margin: @spacingXL @spacingL;
-@borderColor: #979797;
 
 .root {
   background: @white;
-  padding: @mainPadding;
-  margin: 0;
+  padding: @spacingM;
+  margin: @spacingM @spacingS;
   max-width: 1020px;
-  box-shadow: 0 9px 22px 0 RGBA(0, 0, 0, 0.1);
+  box-shadow: 0 9px 22px 0 darken(@backgroundColor, 7%);
 
   .tablet({
     margin: @margin;
+    padding: @spacingL;
     border-radius: @borderRadius;
-    border: 1px solid (@borderColor * 0.25 + @backgroundColor * (1 - 0.25));
+    border: 1px solid darken(@backgroundColor, 8%);
   });
 
-  :global h1, :global h2 {
+  :global h1,
+  :global h2 {
     &:not(:global .no-separator) {
       position: relative;
       padding-bottom: 1em;
