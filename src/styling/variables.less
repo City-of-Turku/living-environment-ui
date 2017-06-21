@@ -2,6 +2,7 @@
 
 @import '@{bootstrap}/variables.less';
 
+@baseGray: #495E64;
 @black: #000000;
 @darkGray: #231F20;
 @darkerGray: #4A5E64;
@@ -10,14 +11,14 @@
 @brown: #827759;
 @green: #5CB85C;
 @lightGreen: #50DA5F;
-@cyan: #1FBAF1;
+@cyan: #00B9F4;
 @orange: #FFCF45;
 @white: #FFFFFF;
 @red: #F02833;
 
-@backgroundColor: #F6F6F6;
-@textColor: #252525;
-@lineColor: @textColor * 0.4 + @white * (1 - 0.4);
+@backgroundColor: #f5f7f7;
+@textColor: darken(@baseGray, 5%);
+@lineColor: fade(#8DAAB3, 40%);
 
 @progressBarHeight: 15px;
 @spacingXL: 40px;
@@ -32,3 +33,15 @@
 @headerHeight: 60px;
 @sideBarWidth: 340px;
 @assignmentHeaderHeight: 75px;
+
+
+// Forms
+@form-placeholder-color: #8DAAB3;
+@form-border: 1px solid #8DAAB3;
+@form-shadow: 0px 5px 10px fade(#8DAAB3, 25%) inset;
+@form-border-radius: 6px;
+
+@form-hover-border: 1px solid @cyan;
+@form-hover-shadow: 0px 5px 10px fade(@cyan, 12%) inset, 0px 5px 10px fade(#8DAAB3, 25%);
+
+@form-focus-color: @cyan;

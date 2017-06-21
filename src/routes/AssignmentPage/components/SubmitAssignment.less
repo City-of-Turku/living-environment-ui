@@ -1,0 +1,28 @@
+@import '../../../styling/styling';
+
+.submitButton {
+  border: 0;
+  background: @cyan;
+  border-radius: 50px;
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 12px 35px;
+  font-weight: bold;
+  font-size: 14px;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &:hover, &:focus {
+    background: lighten(@cyan, 5%);
+    box-shadow: 0 5px 10px fade(@cyan, 25%);
+  }
+
+  &:active {
+    background: darken(@cyan, 5%);
+    box-shadow: 0 5px 10px fade(darken(@cyan, 5%), 25%);
+  }
+}

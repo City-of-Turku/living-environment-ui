@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Col, Row } from 'react-bootstrap';
 
 import BudgetingMapTask from './BudgetingMapTask';
 import BudgetingTextTask from '../containers/BudgetingTextTask';
@@ -70,9 +71,14 @@ const SectionBlock = ({ assignment, section }) => (
   <ContentWrapper id={`${section.id}-section`}>
     { video(section) }
     <h2>{section.title}</h2>
-    <div
-      dangerouslySetInnerHTML={{ __html: section.description }} // eslint-disable-line react/no-danger
-    />
+    <Row>
+      <Col lg={8} lgOffset={2}>
+        <div
+          className={styles.sectionHTMLContent}
+          dangerouslySetInnerHTML={{ __html: section.description }} // eslint-disable-line react/no-danger
+        />
+      </Col>
+    </Row>
     { createTaskList(assignment, section.id, section.tasks)}
   </ContentWrapper>
 );

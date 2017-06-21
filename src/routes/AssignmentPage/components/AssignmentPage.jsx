@@ -37,9 +37,7 @@ class AssignmentPage extends Component {
     return (<section className={styles.root}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
-        <div className={styles.headerWrapper}>
-          <Header moneyUsed={budget.spent} totalBudget={assignment.budget} />
-        </div>
+        <Header moneyUsed={budget.spent} totalBudget={assignment.budget} />
         <ContentWrapper id={`${assignment.id}-assignment`}>
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
