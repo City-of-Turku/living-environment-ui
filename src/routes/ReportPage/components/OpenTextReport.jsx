@@ -6,7 +6,7 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 import styles from './OpenTextReport.less';
 
 const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
-  <h2>Avoin tekstikentät</h2>
+  <h2>Avoimet tekstikentät</h2>
   { // eslint-disable-next-line react/no-array-index-key
     report.map((section, sectionIndex) => (<div key={sectionIndex}>
       <h3>{section.title}</h3>
@@ -14,7 +14,7 @@ const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
         section.sectionQuestionsAndAnswers.map(
           (questionAndAnswers, index) =>  // eslint-disable-next-line react/no-array-index-key
             (questionAndAnswers.answers.length ? (<div key={index}>
-              <h4>{questionAndAnswers.question}</h4>
+              <h4 className={styles.qeustionTitle}>{questionAndAnswers.question}</h4>
               <div className={styles.answers}>
                 {
                 questionAndAnswers.answers.map(

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import { renderField } from '../../../components/helpers/formHelpers';
 
@@ -34,31 +34,39 @@ class Filter extends Component {
   render() {
     const { schools } = this.props;
     const { schoolClasses } = this.state;
-    return (<div className={styles.root}>
-      <h2 className="no-separator">Suodattimet</h2>
-      <form>
-        <Field
-          name="school"
-          label={'Koulu'}
-          placeholder="Valitse koulu"
-          component={renderField} type="select"
-          options={schools}
-          optionsKey="id"
-          optionsValue="name"
-          onChange={this.handleChange}
-        />
-        <Field
-          name="schoolClass"
-          label={'Luokka'}
-          placeholder="Valitse luokka"
-          component={renderField} type="select"
-          options={schoolClasses}
-          optionsKey="id"
-          optionsValue="name"
-        />
-        <Button onClick={this.handleSubmit}>Suodata</Button>
-      </form>
-    </div>);
+    return (
+      <div className={styles.root}>
+        <h2 className={`no-separator h3 ${styles.title}`}>Suodattimet</h2>
+        <form>
+          <Row>
+            <Col md={6}>
+              <Field
+                name="school"
+                label={'Koulu'}
+                placeholder="Valitse koulu"
+                component={renderField} type="select"
+                options={schools}
+                optionsKey="id"
+                optionsValue="name"
+                onChange={this.handleChange}
+              />
+            </Col>
+            <Col md={6}>
+              <Field
+                name="schoolClass"
+                label={'Luokka'}
+                placeholder="Valitse luokka"
+                component={renderField} type="select"
+                options={schoolClasses}
+                optionsKey="id"
+                optionsValue="name"
+              />
+            </Col>
+          </Row>
+          <Button onClick={this.handleSubmit}>Suodata</Button>
+        </form>
+      </div>
+    );
   }
 }
 
