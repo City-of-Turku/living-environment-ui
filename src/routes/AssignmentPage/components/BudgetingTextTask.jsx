@@ -87,7 +87,7 @@ const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task
             defaultValue={parseInt(target.reference_amount, 10)}
             placeholder="" min="0"
             component={renderField} type="number"
-            precision={2}
+            precision={1}
             tooltipError
             validate={[Validation.number, value =>
               Validation.range(value,

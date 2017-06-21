@@ -3,12 +3,13 @@ import * as TaskType from '../../constants/taskTypes';
 
 const formValue = formValueSelector('assignmentPage');
 
+const toFloat = value => parseFloat((value || '').toString().replace(',', '.'));
 
 const calcTextTaskSpentBudget = (task, state) => {
   const taskData = (task.data || {});
   const textTaskSpentBudget = (taskData.targets || []).reduce(
       (accTarget, target) => {
-        const targetAmount = formValue(state, `budgeting_text_task_${task.id}_${target.id}`);
+        const targetAmount = toFloat(formValue(state, `budgeting_text_task_${task.id}_${target.id}`));
         if (!isNaN(targetAmount)) {
           const value = parseFloat(targetAmount);
           if (value < target.min_amount || (target.max_amount && value > target.max_amount)) {
