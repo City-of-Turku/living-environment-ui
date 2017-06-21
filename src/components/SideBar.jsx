@@ -11,6 +11,11 @@ import resolveToLocation from './helpers/routerHelper';
 import createMenuItems from './helpers/sideBarMenu';
 
 class SideBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
 
   calcMenuWrapperStyle(to) {
     const { router } = this.context;
@@ -23,8 +28,14 @@ class SideBar extends Component {
     return currentSection === id ? styles.menuSubitemSelected : '';
   }
 
+  handleItemClick() {
+    const { hideMenu, scrollPageToTop } = this.props;
+    hideMenu();
+    scrollPageToTop();
+  }
+
   render() {
-    const { assignment, budget, hideMenu, reportName } = this.props;
+    const { assignment, budget, reportName } = this.props;
     if (!assignment) {
       return null;
     }
@@ -37,7 +48,7 @@ class SideBar extends Component {
         <ul role="menu" className={styles.menu} aria-label="Sidebar">
           {menuItems.map(item =>
             <li role="presentation" className={this.calcMenuWrapperStyle(item.url)} key={item.id}>
-              <Link to={item.url} role="menuitem" onClick={hideMenu} className={styles.menuItemLink}>
+              <Link to={item.url} role="menuitem" onClick={this.handleItemClick} className={styles.menuItemLink}>
                 <span className={styles.iconWrapper}>
                   <i className={classNames('glyphfont', item.icon, styles.menuIcon)} />
                 </span>
@@ -58,7 +69,7 @@ class SideBar extends Component {
                   >
                     <ScrollLink
                       to={subitem.id}
-                      onClick={hideMenu}
+                      onClick={this.handleItemClick}
                       smooth
                       offset={-20}
                       duration={250}
@@ -99,12 +110,14 @@ SideBar.propTypes = {
   ]).isRequired,
   hideMenu: PropTypes.func,
   reportName: PropTypes.string,
+  scrollPageToTop: PropTypes.func,
 };
 
 SideBar.defaultProps = {
   assignment: null,
   hideMenu: () => {},
   reportName: '',
+  scrollPageToTop: () => {},
 };
 
 

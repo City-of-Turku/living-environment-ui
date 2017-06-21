@@ -8,4 +8,8 @@ export const hideMenu = () => ({
   type: sideMenuActionType.HIDE_MENU,
 });
 
+export const scrollPageToTop = () => ({
+  type: sideMenuActionType.SCROLL_PAGE_TO_TOP,
+});
+
 export default toggleMenu;
