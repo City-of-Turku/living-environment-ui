@@ -5,10 +5,14 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 
 import styles from './OpenTextReport.less';
 
+const skipEmptySections = report => report.filter(
+  section => section.sectionQuestionsAndAnswers.reduce(
+    (acc, questionAndAnswers) => acc + questionAndAnswers.answers.length, 0));
+
 const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
   <h2>Avoin tekstikentät</h2>
   { // eslint-disable-next-line react/no-array-index-key
-    report.map((section, sectionIndex) => (<div key={sectionIndex}>
+    skipEmptySections(report).map((section, sectionIndex) => (<div key={sectionIndex}>
       <h3>{section.title}</h3>
       {
         section.sectionQuestionsAndAnswers.map(
