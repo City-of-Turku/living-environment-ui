@@ -79,14 +79,18 @@ const openTextReportHasAnswers =
 const budgetingTargetMapHasPins = report => (report.sections || []).reduce(
   (acc, section) => acc + section.open_text_tasks.length, 0) !== 0;
 
-const ReportPage = ({ report, updateFilter }) => (<div className={styles.root}>
-  <h1>{report.name} raportti</h1>
-  { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
-  <CountOfAnswersPerSchool report={report} />
-  <CountOfAnswersPerClass report={report} />
-  { openTextReportHasAnswers(report) && <OpenTextReport report={getOpenTextAnswers(report)} /> }
-  { budgetingTargetMapHasPins(report) && <BudgetingTargetMap report={getBudgetingTargetMap(report)} /> }
-</div>);
+const ReportPage = ({ report, updateFilter }) => (
+  <div className={styles.root}>
+    <div className={styles.topContent}>
+      <h1>{report.name} raportti</h1>
+      { report.schools && <Filter updateFilter={updateFilter} schools={report.schools || []} /> }
+    </div>
+    <CountOfAnswersPerSchool report={report} />
+    <CountOfAnswersPerClass report={report} />
+    { openTextReportHasAnswers(report) && <OpenTextReport report={getOpenTextAnswers(report)} /> }
+    { budgetingTargetMapHasPins(report) && <BudgetingTargetMap report={getBudgetingTargetMap(report)} /> }
+  </div>
+);
 
 ReportPage.propTypes = {
   report: PropTypes.shape({
