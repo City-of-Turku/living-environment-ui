@@ -1,6 +1,7 @@
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+import { showAlert } from "../../../actions/alerts";
 import AssignmentPage from '../components/AssignmentPage';
 import { submitForm } from '../actions/form';
 import validate from '../validation';
@@ -51,5 +52,10 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
 export default connect(mapStateToProps, null, mergeProps)(reduxForm({
   form: 'assignmentPage',
+  onSubmitFail: (errors, dispatch) => dispatch(showAlert(
+      '',
+      'Tarkista, että kaikki vaaditut tiedot on täytetty.',
+      'danger',
+    )),
   validate,
 })(AssignmentPage));
