@@ -53,7 +53,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 export default connect(mapStateToProps, null, mergeProps)(reduxForm({
   form: 'assignmentPage',
   onSubmitFail: (errors, dispatch) => dispatch(showAlert(
-      '',
+      'Tarkista tiedot',
       'Tarkista, että kaikki vaaditut tiedot on täytetty.',
       'danger',
     )),

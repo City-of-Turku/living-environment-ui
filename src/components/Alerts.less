@@ -12,6 +12,12 @@
 
   transition: transform @transitionDuration @transitionEasing;
   transform: translateY(-100%);
+
+  margin-left: 0;
+
+  .tablet({
+    margin-left: @sideBarWidth;
+  });
 }
 
 .shown {
@@ -40,7 +46,8 @@
 :global(.fa) {
   &.icon {
     line-height: @iconSize;
-    color: @black;
+    color: @white;
+    border-color: @white;
   }
 }
 
