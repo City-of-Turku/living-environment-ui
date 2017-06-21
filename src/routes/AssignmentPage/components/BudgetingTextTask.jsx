@@ -13,7 +13,7 @@ import config from '../../../config';
 
 import styles from './BudgetingTextTask.less';
 
-const numberFormat = '# ##0.00';
+const numberFormat = '# ##0.0';
 
 const { backendImages: { baseUrl } } = config;
 
@@ -97,16 +97,19 @@ const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task
           <div className={styles.range}>
             {
               target.max_amount &&
-              <span>Sallittu arvo {target.min_amount}  - {target.max_amount} {task.data.unit}</span>
+              <span>Sallittu arvo {
+                format(numberFormat, target.min_amount)} - {
+                format(numberFormat, target.max_amount)} {task.data.unit}</span>
             }
             {
               !target.max_amount &&
-              <span>Sallittu arvo vähintään {target.min_amount} {task.data.unit}</span>
+              <span>Sallittu arvo vähintään {format(numberFormat, target.min_amount)} {task.data.unit}</span>
             }
           </div>
         </div>
         <div className={styles.info}>
-          <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {target.reference_amount} {task.data.unit}
+          <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {
+          format(numberFormat, target.reference_amount)} {task.data.unit}
         </div>
         <div className={styles.footer}>
           <span className={styles.total}>
