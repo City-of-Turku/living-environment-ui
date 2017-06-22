@@ -19,13 +19,15 @@ const calculateFormInitialValues = (assignment) => {
 };
 
 const assignmentFormReducer = {
-  // ... your other reducers here ...
   form: formReducer.plugin({
-    assignmentPage: (state, action) => {   // <----- 'login' is name of form given to reduxForm()
+    assignmentPage: (state, action) => {
       switch (action.type) {
-      case assignmentActionType.FETCH_ASSIGNMENT_FULFILLED:
+      case assignmentActionType.FETCH_ASSIGNMENT_FULFILLED: {
         const assignment = action.payload;
         const initialValues = calculateFormInitialValues(assignment);
+        if (!state) {
+          return state;
+        }
         return {
           ...state,
           values: {
@@ -36,6 +38,7 @@ const assignmentFormReducer = {
             ...state.fields,
           }
         };
+      }
       default:
         return state;
       }

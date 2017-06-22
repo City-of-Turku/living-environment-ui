@@ -10,15 +10,15 @@ import { renderField } from '../../../components/helpers/formHelpers';
 const OpenTextTask = ({ className, data, id }) => (
   <div className={className}>
     <Row>
-      <Col xs={12} sm={2} className={styles.iconWrapper}>
-        <i className={classNames('glyphfont', 'icon-edit', styles.editIcon)} />
-      </Col>
-      <Col xs={12} sm={8} className={styles.question}>
+      <Col lg={8} lgOffset={2} className={styles.question}>
+        <div className={styles.iconWrapper}>
+          <i className={classNames('glyphfont', 'icon-edit', styles.editIcon)} />
+        </div>
         {data.question}
       </Col>
     </Row>
     <Row>
-      <Col xs={12} sm={8} smOffset={2} className={classNames('form-group', styles.inputFieldWrapper)}>
+      <Col lg={8} lgOffset={2} className={classNames('form-group', styles.inputFieldWrapper)}>
         <Field
           name={`open_text_task_${id}`}
           placeholder=""

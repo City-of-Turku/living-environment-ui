@@ -1,18 +1,32 @@
 @import '../../../styling/styling';
 
 .answers {
-  border: 1px solid @gray;
+  margin: @spacingM auto (@spacingXL * 1.5) auto;
+  max-width: 750px;
 }
 
 .answer {
-  border-bottom: 1px solid @gray;
+  border: solid darken(@backgroundColor, 15%);
+  border-width: 1px 1px 0px 1px;
   padding: @spacingS;
+  font-size: 15px;
 
-  &:nth-child(2n) {
-    background: @backgroundColor;
+  &:first-child {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
   }
 
   &:last-child {
-    border-bottom: none;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-bottom-width: 1px;
   }
+
+  &:nth-child(odd) {
+    background: @backgroundColor;
+  }
+}
+
+.qeustionTitle {
+    margin-top: @spacingXL;
 }

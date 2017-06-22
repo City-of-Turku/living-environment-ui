@@ -9,20 +9,25 @@ import styles from './TaskInfoBar.less';
 const TaskInfoBar = ({ tasksCount, totalBudget }) => (
   <div className={styles.root}>
     <Row>
-      <Col xs={12} sm={6} className={classNames(styles.col, styles.firstCol)}>
+      <Col sm={6} className={classNames(styles.col, styles.firstCol)}>
         <div>Budjetti</div>
-        <div className={styles.value}>{currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}</div>
+        <div className={styles.value}>
+          <strong>{currencyFormatter.format(totalBudget, { locale: 'fi-FI' })}</strong>
+        </div>
       </Col>
-      <Col xs={12} sm={6} className={styles.col}>
+      <Col sm={6} className={styles.col}>
         <div>Tehtävien määrä</div>
-        <div className={styles.value}>{tasksCount}</div>
+        <div className={styles.value}>
+          <strong>{tasksCount}</strong>
+        </div>
       </Col>
     </Row>
-  </div>);
+  </div>
+);
 
 TaskInfoBar.propTypes = {
   tasksCount: PropTypes.number.isRequired,
-  totalBudget: PropTypes.number.isRequired,
+  totalBudget: PropTypes.string.isRequired,
 };
 
 export default TaskInfoBar;

@@ -5,22 +5,25 @@ import Map from '../containers/FriendsOfParkMap';
 
 import styles from './FriendsOfParkMap.less';
 
-const FriendsOfParkMap = ({ name, maskPolygon, sectionId, task }) => (<div>
-  <h2>{name}</h2>
-  <Map
-    className={styles.map}
-    layers={['Opaskartta']}
-    mask={maskPolygon}
-    minLat={60.1}
-    minLong={21.5}
-    minZoom={9}
-    maxLat={61.0}
-    maxLong={23.2}
-    sectionId={sectionId}
-    task={task}
-    url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
-  />
-</div>);
+const FriendsOfParkMap = ({ name, maskPolygon, sectionId, task }) => (
+  <div>
+    <h2>{name}</h2>
+    <p className="text-center">Annetut yhteystiedot välitetään Turun kaupungin palautejärjestelmään.</p>
+    <Map
+      className={styles.map}
+      layers={['Opaskartta']}
+      mask={maskPolygon}
+      minLat={60.1}
+      minLong={21.5}
+      minZoom={9}
+      maxLat={61.0}
+      maxLong={23.2}
+      sectionId={sectionId}
+      task={task}
+      url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
+    />
+  </div>
+);
 
 FriendsOfParkMap.propTypes = {
   name: PropTypes.string,

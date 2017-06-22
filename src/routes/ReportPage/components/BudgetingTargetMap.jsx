@@ -19,6 +19,11 @@ class BudgetingTargetMap extends Component { // eslint-disable-line react/prefer
     }));
   }
 
+  static sectionTargetMapHasAnswers(section) {
+    return section.sectionTargetMap.reduce(
+      (acc, target) => acc + BudgetingTargetMap.getTargetUserData(target).length, 0);
+  }
+
   render() {
     const { report } = this.props;
     if (!((report || {}).sections || []).length) {
@@ -27,31 +32,36 @@ class BudgetingTargetMap extends Component { // eslint-disable-line react/prefer
     return (<ContentWrapper id="budgetingTargetMap">
       <h2>Karttakohteet</h2>
       {
-        report.sections.map( // eslint-disable-next-line react/no-array-index-key
-          (section, sectionIndex) => (<div key={sectionIndex}>
-            <h3>{section.title}</h3>
-            {
-              section.sectionTargetMap.map( // eslint-disable-next-line react/no-array-index-key
-                (target, index) => (<div key={index}>
-                  <h4>{target.name}</h4>
-                  <Map
-                    className={styles.map}
-                    layers={['Opaskartta']}
-                    mask={report.area}
-                    minLat={60.1}
-                    minLong={21.5}
-                    minZoom={9}
-                    maxLat={61.0}
-                    maxLong={23.2}
-                    readOnly
-                    targetUserData={BudgetingTargetMap.getTargetUserData(target)}
-                    task={null}
-                    url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
-                  />
-                </div>))
-            }
-            {section.question}
-          </div>))
+        report.sections.map(
+          (section, sectionIndex) => (BudgetingTargetMap.sectionTargetMapHasAnswers(section) ?
+            // eslint-disable-next-line react/no-array-index-key
+            (<div key={sectionIndex}>
+              <h3>{section.title}</h3>
+              {
+                section.sectionTargetMap.map(
+                  (target, index) => (BudgetingTargetMap.getTargetUserData(target).length ?
+                    // eslint-disable-next-line react/no-array-index-key
+                    (<div key={index}>
+                      <h4>{target.name}</h4>
+                      <Map
+                        className={styles.map}
+                        layers={['Opaskartta']}
+                        mask={report.area}
+                        minLat={60.1}
+                        minLong={21.5}
+                        minZoom={9}
+                        maxLat={61.0}
+                        maxLong={23.2}
+                        readOnly
+                        targetUserData={BudgetingTargetMap.getTargetUserData(target)}
+                        task={null}
+                        url="https://opaskartta.turku.fi/TeklaOGCWeb/WMS.ashx"
+                      />
+                    </div>) : null)
+                )
+              }
+              {section.question}
+            </div>) : null))
       }
     </ContentWrapper>);
   }

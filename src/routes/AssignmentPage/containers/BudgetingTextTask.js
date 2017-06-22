@@ -33,13 +33,33 @@ const getProgress = (targetValuesMap, data) => {
 };
 
 const getTargetValuesMap = (state, ownProps) => ownProps.task.data.targets.reduce((acc, target) => {
-  acc[target.id] = formValue(state, `budgeting_text_task_${ownProps.task.id}_${target.id}`);
+  acc[target.id] = `${formValue(state, `budgeting_text_task_${ownProps.task.id}_${target.id}`)}`;
   return acc;
 }, {});
+
+const calcSummary = (targetValuesMap, data) => {
+  const total = parseFloat(data.amount_of_consumption);
+  const result = { used: 0, unused: total, total };
+  if (total > 0) {
+    const used = Object.keys(targetValuesMap).reduce(
+      (acc, targetId) => {
+        const target = getTargetById(data, parseInt(targetId, 10));
+        const value = fieldToNumber(targetValuesMap[targetId]);
+        if (!target || (target.min_amount > value) || (target.max_amount && target.max_amount < value)) {
+          return acc;
+        }
+        return acc + value;
+      }, 0);
+    result.used = used;
+    result.unused = total - used;
+  }
+  return result;
+};
 
 const mapStateToProps = (state, ownProps) => ({
   progress: getProgress(getTargetValuesMap(state, ownProps), ownProps.task.data),
   targetValuesMap: getTargetValuesMap(state, ownProps),
+  summary: calcSummary(getTargetValuesMap(state, ownProps), ownProps.task.data),
 });
 
 export default connect(mapStateToProps)(BudgetingTextTask);

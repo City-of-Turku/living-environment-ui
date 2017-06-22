@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import SideBar from '../components/SideBar';
 import calcAssignmentBudget from '../components/helpers/budgetingHelper';
+
+import { hideMenu, scrollPageToTop } from '../actions/sideMenu';
 
 const mapStateToProps = state => ({
   currentSection: state.waypoints.currentSection,
@@ -10,4 +13,11 @@ const mapStateToProps = state => ({
   reportName: state.report ? state.report.name : '',
 });
 
-export default connect(mapStateToProps)(SideBar);
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    hideMenu,
+    scrollPageToTop,
+  }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

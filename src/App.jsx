@@ -7,6 +7,9 @@ import ReactDOM from 'react-dom';
 import store from './store';
 import createRoutes from './routes';
 
+// Array.prototype.find polyfill
+require('array.prototype.find').shim();
+
 const routes = createRoutes(store);
 const history = syncHistoryWithStore(browserHistory, store);
 

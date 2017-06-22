@@ -2,10 +2,11 @@
 
 @background-normal: @darkGray;
 @background-selected: #0F0D0D;
-@iconWrapperWidth: 40px;
+@iconWrapperWidth: 45px;
 @logoWrapperHeight: 160px;
-@circleSize: 0.5em;
-@fontSize: 14px;
+@circleSize: 6px;
+@fontSizeLarge: 19px;
+@fontSize: 15px;
 @lineHeight: 1.4;
 
 .root {
@@ -17,105 +18,10 @@
   }
 }
 
-.iconWrapper {
-  display: inline-block;
-  text-align: center;
-  width: @iconWrapperWidth;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.selectedItem {
-  background: @background-selected;
-
-  .menuItem {
-    border-right: 4px solid @cyan;
-  }
-}
-
-.menu {
-  padding: 0 0 0 0;
-}
-
-.menuItem {
-  padding: 0 @spacingM 0 0;
-
-  a {
-    color: @cyan;
-    font-weight: bold;
-
-    &:hover {
-      color: darken(@cyan, 20);
-      text-decoration: none;
-    }
-  }
-}
-
-.menuItemLink {
-  display: inline-block;
-  padding-left: @iconWrapperWidth;
-  position: relative;
-  font-size: @fontSize;
-  line-height: @lineHeight;
-}
-
-.menuIcon {
-  display: inline-block;
-  transform: scale(1.4);
-  text-align: center;
-}
-
-.submenu {
-  padding: 0 0 0.5em @iconWrapperWidth;
-}
-
-.menuSubitem {
-  font-size: @fontSize;
-  line-height: @lineHeight;
-  margin-top: 15px;
-  padding: 0 30px 0 0;
-
-  a {
-    color: @lightGray;
-    cursor: pointer;
-
-    &:hover {
-      color: lighten(@lightGray, 20);
-      text-decoration: none;     
-    }
-  }
-}
-
-.menuSubitemSelected {
-  position: relative;
-
-  a {
-    color: @cyan;
-    font-weight: bold;
-
-    &:hover {
-      color: @cyan;
-    }
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: @circleSize;
-    height: @circleSize;
-    background: @cyan;
-    border-radius: 50%;
-    left: -1.5em;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
 .logoWrapper {
   overflow: hidden;
   height: 0;
-  padding-top: 10px;
+  text-align: center;
 
   .tablet({
     height: @logoWrapperHeight;
@@ -130,13 +36,96 @@
   top: 50%;
   transform: translate(-50%, -50%);
   color: @cyan;
-  font-size: 130px;
+  font-size: 175px;
+  line-height: 1;
 
   .tablet({
-    display: inline-block;
+    display: block;
   })
 }
 
-.badge {
-  margin-left: 10px;
+.menu {
+  padding: 0;
+
+  .menuItemLink {
+    display: block;
+    padding: 15px 15px 15px (@iconWrapperWidth * 1.25);
+    position: relative;
+    font-size: @fontSizeLarge;
+    line-height: @lineHeight;
+    color: @cyan;
+    font-weight: 300;
+
+    &:hover, &:focus {
+      color: lighten(@cyan, 15%);
+      text-decoration: none;
+    }
+  }
+
+  .selectedItem {
+    background: @background-selected;
+    border-right: 5px solid @cyan;
+  }
+
+  .iconWrapper {
+    display: inline-block;
+    text-align: right;
+    width: @iconWrapperWidth;
+    position: absolute;
+    top: 15px;
+    left: 0;
+
+    .menuIcon {
+      display: block;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  .submenu {
+    padding: 0 0 15px (@iconWrapperWidth * 1.25);
+  }
+
+  .menuSubitem {
+    a {
+      color: rgba(255,255,255,0.9);
+      display: block;
+      font-size: @fontSize;
+      padding: 7px 15px 7px 0;
+      line-height: @lineHeight;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .menuSubitemSelected {
+    position: relative;
+
+    a {
+      color: @cyan;
+
+      &:hover {
+        color: @cyan;
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: @circleSize;
+      height: @circleSize;
+      background: @cyan;
+      border-radius: 50%;
+      left: -1em;
+      top: 15px;
+    }
+  }
 }

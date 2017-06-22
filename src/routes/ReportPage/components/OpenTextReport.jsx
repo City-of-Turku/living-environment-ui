@@ -5,25 +5,30 @@ import ContentWrapper from '../../../containers/ContentWrapper';
 
 import styles from './OpenTextReport.less';
 
+const skipEmptySections = report => report.filter(
+  section => section.sectionQuestionsAndAnswers.reduce(
+    (acc, questionAndAnswers) => acc + questionAndAnswers.answers.length, 0));
+
 const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
-  <h2>Avoin tekstikentät</h2>
+  <h2>Avoimet tekstikentät</h2>
   { // eslint-disable-next-line react/no-array-index-key
-    report.map((section, sectionIndex) => (<div key={sectionIndex}>
+    skipEmptySections(report).map((section, sectionIndex) => (<div key={sectionIndex}>
       <h3>{section.title}</h3>
       {
-        section.sectionQuestionsAndAnswers.map( // eslint-disable-next-line react/no-array-index-key
-          (questionAndAnswers, index) => (<div key={index}>
-            <h4>{questionAndAnswers.question}</h4>
-            <div className={styles.answers}>
-              {
+        section.sectionQuestionsAndAnswers.map(
+          (questionAndAnswers, index) =>  // eslint-disable-next-line react/no-array-index-key
+            (questionAndAnswers.answers.length ? (<div key={index}>
+              <h4 className={styles.qeustionTitle}>{questionAndAnswers.question}</h4>
+              <div className={styles.answers}>
+                {
                 questionAndAnswers.answers.map(
                   (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
                     key={`${index}-${answerIndex}`}
                     className={styles.answer}
                   >{answer}</div>))
-              }
-            </div>
-          </div>))
+                }
+              </div>
+            </div>) : null))
       }
       {section.question}
     </div>))

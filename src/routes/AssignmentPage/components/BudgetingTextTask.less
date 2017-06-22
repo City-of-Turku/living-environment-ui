@@ -10,17 +10,21 @@
 @borderColor: @darkerGray * 0.15 + @white * (1 - 0.15);
 @progressBarLabelFontSize: 12px;
 
-.root {
-  margin: 0 @grid-gutter-width / -2;
+.taskWrapper {
+    text-align: center;
 }
 
 .field {
   margin-bottom: 0;
+
+  input {
+    width: 100%;
+  }
 }
 
 .imageWrapper {
   height: @imageHeight;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   margin: @grid-gutter-width / -2 @grid-gutter-width / -2 @grid-gutter-width;
@@ -33,6 +37,8 @@
   margin: @grid-gutter-width / 2;
   border: 1px solid @borderColor;
   border-radius: 10px;
+  overflow: hidden;
+  text-align: left;
 
   h4 {
     font-size: @titleFontSize;
@@ -66,14 +72,8 @@
   float: right;
   font-size: @totalFontSize;
   color: @lightGreen;
-  display: inline-block;
   line-height: 1.25;
   min-height: @totalFontSize * 1.25;
-}
-
-.totalLabel {
-  font-size: 14px;
-  position: absolute;
 }
 
 .footer {
@@ -98,14 +98,6 @@
   background: @state-danger-bg;
 }
 
-.progressLabelSuccess {
-  color: @lightGreen;
-}
-
-.progressLabelDanger {
-  color: @state-danger-text;
-}
-
 .fieldWrapper {
   :global .help-block {
     font-size: 14px;
@@ -116,4 +108,28 @@
 
 .range {
   font-size: 14px;
+  color: lighten(@baseGray, 15%);
+}
+
+.summary {
+  margin: 10px auto 20px;
+  text-align: center;
+  font-size: 14px;
+  max-width: @progressBarMaxWidth;
+}
+
+.summaryTotal {
+  margin-bottom: 10px;
+}
+
+.alignLeft {
+  .tablet({
+    float: left;
+  })
+}
+
+.alignRight {
+  .tablet({
+    float: right;
+  })
 }
