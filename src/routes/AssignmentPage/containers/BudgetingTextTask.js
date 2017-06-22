@@ -4,7 +4,9 @@ import { formValueSelector } from 'redux-form';
 
 import BudgetingTextTask from '../components/BudgetingTextTask';
 
-const fieldToNumber = value => parseFloat(value || 0);
+const toFloat = value => parseFloat((value || '').toString().replace(',', '.'));
+
+const fieldToNumber = value => toFloat(value || 0);
 
 const formValue = formValueSelector('assignmentPage');
 
