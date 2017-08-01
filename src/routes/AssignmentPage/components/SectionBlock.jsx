@@ -68,7 +68,7 @@ const video = (task) => {
 };
 
 const SectionBlock = ({ assignment, section }) => (
-  <ContentWrapper id={`${section.id}-section`}>
+  <ContentWrapper id={`${section.id}-section`}  role="section">
     { video(section) }
     <h2>{section.title}</h2>
     <Row>

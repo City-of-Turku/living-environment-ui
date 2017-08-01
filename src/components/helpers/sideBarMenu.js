@@ -26,10 +26,10 @@ const generateAssignmentPageMenuItems = (assignment, budget, menuItems) => {
     icon: 'icon-triangle',
     subitems: [{
       label: assignment.header,
-      id: `${assignmentId}-assignment`,
+      id: `${assignmentId}-main-section`,
     }, {
       label: 'Minun tietoni',
-      id: `${assignmentId}-assignment-my-information`,
+      id: `${assignmentId}-information-section`,
     },
     ],
   };

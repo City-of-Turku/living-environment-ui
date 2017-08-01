@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { showAlert } from "../../../actions/alerts";
 import AssignmentPage from '../components/AssignmentPage';
-import { submitForm } from '../actions/form';
+import { submitForm, scrollToFirstErrorSection } from '../actions/form';
 import validate from '../validation';
 import calcAssignmentBudget from '../../../components/helpers/budgetingHelper';
 
@@ -52,10 +52,13 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
 export default connect(mapStateToProps, null, mergeProps)(reduxForm({
   form: 'assignmentPage',
-  onSubmitFail: (errors, dispatch) => dispatch(showAlert(
+  onSubmitFail: (errors, dispatch) => {
+    dispatch(showAlert(
       'Tarkista tiedot',
       'Tarkista, että kaikki vaaditut tiedot on täytetty.',
       'danger',
-    )),
+    ));
+    dispatch(scrollToFirstErrorSection(errors));
+  },
   validate,
 })(AssignmentPage));

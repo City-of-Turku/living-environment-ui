@@ -38,7 +38,7 @@ class AssignmentPage extends Component {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ContentWrapper id="_" />
         <Header moneyUsed={budget.spent} totalBudget={assignment.budget} />
-        <ContentWrapper id={`${assignment.id}-assignment`}>
+        <ContentWrapper id={`${assignment.id}-main-section`} role="section">
           <TopImage url={assignment.image} altText={assignment.header} />
           <TaskInfoBar
             tasksCount={this.tasksCount(assignment)}
@@ -49,7 +49,7 @@ class AssignmentPage extends Component {
             title={assignment.header}
           />
         </ContentWrapper>
-        <ContentWrapper id={`${assignment.id}-assignment-my-information`}>
+        <ContentWrapper id={`${assignment.id}-information-section`} role="section">
           <MyInformation schools={assignment.schools} />
         </ContentWrapper>
         {
