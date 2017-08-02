@@ -3,11 +3,13 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 import { formActionType } from '../routes/AssignmentPage/constants/actionTypes';
 import { disableSubmitButton, enableSubmitButton, scrollToTop } from '../routes/AssignmentPage/actions/form';
+import { cleanInvalidFriends } from '../routes/AssignmentPage/actions/friendsOfParkMap';
 import { showAlert } from "../actions/alerts";
 
 function* handleFormSubmition(action) {
   switch (action.type) {
   case formActionType.SUBMIT_FORM:
+    yield put(cleanInvalidFriends());
     yield put(disableSubmitButton());
     break;
   case formActionType.SUBMIT_FORM_FULFILLED:
