@@ -8,7 +8,7 @@ import validate from '../validation';
 import calcAssignmentBudget from '../../../components/helpers/budgetingHelper';
 
 const setFromValues = (values, budgetingMap, friendsOfPark) => {
-  const formData = { ...values, budgeting_targets: [], friendsOfPark };
+  const formData = { ...values, budgeting_targets: [], friendsOfPark: friendsOfPark.filter(item => item.valid) };
   Object.keys(budgetingMap.tasks).forEach((taskId) => {
     const task = budgetingMap.tasks[taskId];
     task.targetUserData.forEach((target) => {
@@ -58,7 +58,9 @@ export default connect(mapStateToProps, null, mergeProps)(reduxForm({
       'Tarkista, että kaikki vaaditut tiedot on täytetty.',
       'danger',
     ));
-    dispatch(scrollToFirstErrorSection(errors));
+    if (errors !== undefined) {
+      dispatch(scrollToFirstErrorSection(errors));
+    }
   },
   validate,
 })(AssignmentPage));
