@@ -2,8 +2,16 @@
 
 .root {
   padding-top: @assignmentHeaderHeight + @headerHeight;
-
   .tablet({
     padding-top: @assignmentHeaderHeight;
+  })
+}
+
+:global div[role=section] {
+  padding-top: @assignmentHeaderHeight + @headerHeight;
+  margin-top: (@assignmentHeaderHeight + @headerHeight) * -1;
+  .tablet({
+    padding-top: @assignmentHeaderHeight;
+    margin-top: @assignmentHeaderHeight * -1;
   })
 }

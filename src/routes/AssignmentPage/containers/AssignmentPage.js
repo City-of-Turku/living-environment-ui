@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import { showAlert } from "../../../actions/alerts";
 import AssignmentPage from '../components/AssignmentPage';
-import { submitForm } from '../actions/form';
+import { submitForm, scrollToFirstErrorSection } from '../actions/form';
 import validate from '../validation';
 import calcAssignmentBudget from '../../../components/helpers/budgetingHelper';
 
 const setFromValues = (values, budgetingMap, friendsOfPark) => {
-  const formData = { ...values, budgeting_targets: [], friendsOfPark };
+  const formData = { ...values, budgeting_targets: [], friendsOfPark: friendsOfPark.filter(item => item.valid) };
   Object.keys(budgetingMap.tasks).forEach((taskId) => {
     const task = budgetingMap.tasks[taskId];
     task.targetUserData.forEach((target) => {
@@ -52,10 +52,15 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
 export default connect(mapStateToProps, null, mergeProps)(reduxForm({
   form: 'assignmentPage',
-  onSubmitFail: (errors, dispatch) => dispatch(showAlert(
+  onSubmitFail: (errors, dispatch) => {
+    dispatch(showAlert(
       'Tarkista tiedot',
       'Tarkista, että kaikki vaaditut tiedot on täytetty.',
       'danger',
-    )),
+    ));
+    if (errors !== undefined) {
+      dispatch(scrollToFirstErrorSection(errors));
+    }
+  },
   validate,
 })(AssignmentPage));

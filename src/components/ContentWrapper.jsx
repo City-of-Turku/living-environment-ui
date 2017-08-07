@@ -48,19 +48,19 @@ class ContentWrapper extends Component {
   }
 
   render() {
-    const { id, children } = this.props;
+    const { id, children, role } = this.props;
     if (id === '_') {
       currentSection = Number.MAX_SAFE_INTEGER;
       return null;
     }
     wrappersList.push(id);
     return (
-      <ScrollElement name={id}>
+      <ScrollElement name={id} role={role}>
         <Waypoint
           onEnter={({ previousPosition }) => this.handleEnterHelper(previousPosition)}
           onLeave={({ currentPosition }) => this.handleLeaveHelper(currentPosition)}
-          topOffset={30}
-          bottomOffset={30}
+          topOffset={50}
+          bottomOffset={50}
         >
           <div className={styles.root}>
             {children}
@@ -77,6 +77,7 @@ ContentWrapper.propTypes = {
     PropTypes.number,
   ]).isRequired,
   handleWaypoint: PropTypes.func.isRequired,
+  role: PropTypes.string,
   children: PropTypes.node,
 };
 

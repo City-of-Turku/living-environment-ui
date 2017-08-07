@@ -71,7 +71,6 @@ class SideBar extends Component {
                       to={subitem.id}
                       onClick={this.handleItemClick}
                       smooth
-                      offset={-20}
                       duration={250}
                       role="menuitem"
                     >
