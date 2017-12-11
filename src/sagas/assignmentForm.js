@@ -7,19 +7,28 @@ import { cleanInvalidFriends } from '../routes/AssignmentPage/actions/friendsOfP
 import { showAlert } from "../actions/alerts";
 
 function* handleFormSubmition(action) {
+  let details;
   switch (action.type) {
   case formActionType.SUBMIT_FORM:
     yield put(cleanInvalidFriends());
     yield put(disableSubmitButton());
     break;
   case formActionType.SUBMIT_FORM_FULFILLED:
-    yield put(showAlert('Tiedot lähetetty', 'Olet lähettänyt tiedot onnistuneesti. Kiitos ajastasi.', 'success'));
+    details = 'Olet lähettänyt tiedot onnistuneesti. Kiitos ajastasi.'
+    if (action.payload.feedback_system_success){
+      details += '\n\n' + action.payload.feedback_system_success;
+    }
+    yield put(showAlert('Tiedot lähetetty', details, 'success'));
     yield put(enableSubmitButton());
     yield put(reset('assignmentPage'));
     yield put(scrollToTop());
     break;
   case formActionType.SUBMIT_FORM_REJECTED:
-    yield put(showAlert('Lähetys epäonnistui', 'Jokin meni pahasti pieleen :( Yritä myöhemmin uudelleen.', 'danger'));
+    details = 'Jokin meni pahasti pieleen :( Yritä myöhemmin uudelleen.'; 
+    if (action.payload.response !== undefined) {
+      details += '\n\n' + action.payload.response.data.detail;
+    }
+    yield put(showAlert('Lähetys epäonnistui', details, 'danger'));
     yield put(enableSubmitButton());
     break;
   default:
