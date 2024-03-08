@@ -9,8 +9,7 @@
     "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
-    "lodash": "^4.17.4",
-    "npm": "^4.5.0",
+    "lodash": "^4.17.21",
     "number-formatter": "^1.2.0",
     "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
@@ -19,16 +18,17 @@
     "react-dom": "^15.5.4",
     "react-leaflet": "^1.1.6",
     "react-numeric-input": "^2.0.7",
-    "react-redux": "^5.0.4",
+    "react-redux": "5.1.2",
     "react-router": "^3.0.2",
     "react-router-bootstrap": "^0.23.1",
     "react-router-redux": "^4.0.8",
+    "react-scripts": "^5.0.1",
     "react-scroll": "^1.5.2",
     "react-waypoint": "^6.0.0",
     "react-youtube": "^7.4.0",
-    "redux": "^3.6.0",
+    "redux": "3.7.2",
     "redux-devtools-extension": "^2.13.0",
-    "redux-form": "^6.6.3",
+    "redux-form": "6.8.0",
     "redux-logger": "^3.0.1",
     "redux-promise-middleware": "^4.2.0",
     "redux-saga": "^0.15.3",
@@ -37,22 +37,50 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
+    "@babel/core": "^7.24.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "babel-cli": "6.26.0",
+    "babel-loader": "^9.1.3",
     "babel-preset-react-app": "^2.2.0",
-    "custom-react-scripts": "0.0.23",
-    "eslint": "^3.15.0",
+    "css-loader": "^6.10.0",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "6.10.0",
-    "stylelint": "^7.10.1"
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "resolve-url-loader": "^5.0.0",
+    "style-loader": "^3.3.4",
+    "stylelint": "7.13.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.2"
   },
   "scripts": {
-    "start": "node ./scripts/patch_webpack.js && react-scripts start",
+    "start": "webpack-dev-server",
     "build": "node ./scripts/patch_webpack.js && react-scripts build",
     "test": "node ./scripts/patch_webpack.js && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx && stylelint \"src/**/*.less\"",
     "lint-fix": "./node_modules/eslint/bin/eslint.js src --ext .js,.jsx --fix && stylelint \"src/**/*.less\" --fix"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
