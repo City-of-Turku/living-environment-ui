@@ -26,19 +26,27 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                mode: 'local',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
             },
           },
-          {
-            loader: "less-loader",
-          }
-        ]
+          'less-loader',
+        ],
+        exclude: /styles\.global\.less$/,
+      },
+      {
+        test: /styles\.global\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.css$/,
