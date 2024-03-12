@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const port = process.env.PORT || 3005;
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -10,7 +9,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/',
   },
-  mode: 'development', // TODO: handle prod
+  mode: 'production',
   module: {
     rules: [
       {
@@ -62,13 +61,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new Dotenv(),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devServer: {
-    host: 'localhost',
-    port: port,
-    historyApiFallback: true,
-  }
+  // devtool: 'source-map', // Only for debugging!
 };

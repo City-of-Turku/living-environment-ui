@@ -1,5 +1,5 @@
-import * as devConfig from './config.dev.json';
-import * as prodConfig from './config.prod.json';
+import devConfig from './config.dev';
+import prodConfig from './config.prod';
 
 const configFile = process.env.NODE_ENV === 'development' ? devConfig : prodConfig;
 
