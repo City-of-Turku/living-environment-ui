@@ -1,7 +1,7 @@
 export const number = value => (value && isNaN(Number(`${value}`.replace(',', '.')))
   ? 'A number is expected' : undefined);
 
-export const range = (value, min, max) => { // eslint-disable-line import/prefer-default-export
+export const range = (value, min, max) => {
   const minDefined = typeof min === 'number';
   const maxDefined = typeof max === 'number';
   const i18nValue = Number(`${value}`.replace(',', '.'));

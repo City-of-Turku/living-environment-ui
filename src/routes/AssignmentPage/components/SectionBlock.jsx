@@ -94,6 +94,7 @@ SectionBlock.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string,
     video: PropTypes.string,
+    tasks: PropTypes.arrayOf(PropTypes.object)
   }).isRequired
 };
 

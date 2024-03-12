@@ -200,6 +200,8 @@ FriendsOfParkForm.propTypes = {
     last_name: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
+    valid: PropTypes.bool,
+    details: PropTypes.string,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
   onDialogClosed: PropTypes.func.isRequired,

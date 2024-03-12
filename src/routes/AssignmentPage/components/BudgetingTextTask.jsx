@@ -109,7 +109,7 @@ const BudgetingTextTask = ({ className, progress, summary, targetValuesMap, task
         </div>
         <div className={styles.info}>
           <i className="fa fa-exclamation-circle" /> Nykyinen määrä: {
-          format(numberFormat, target.reference_amount)} {task.data.unit}
+            format(numberFormat, target.reference_amount)} {task.data.unit}
         </div>
         <div className={styles.footer}>
           <span className={styles.total}>
@@ -135,6 +135,8 @@ BudgetingTextTask.propTypes = {
   task: PropTypes.shape({
     data: PropTypes.shape({
       name: PropTypes.string.isRequired,
+      unit: PropTypes.string,
+      amount_of_consumption: PropTypes.string,
       targets: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         max_amount: PropTypes.string, // server returns string here

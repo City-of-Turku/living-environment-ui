@@ -57,10 +57,10 @@ const getBudgetingTargetMapForSection = (section) => {
   const sectionTargetMap = (budgeting_tasks || []) // eslint-disable-line camelcase
     .filter(task => task.budgeting_type === TaskType.BudgetingMapTask)
     .map(
-    ({ name, answers }) => ({
-      name,
-      targets: answers.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
-    }));
+      ({ name, answers }) => ({
+        name,
+        targets: answers.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
+      }));
   return { sectionTargetMap, title };
 };
 
@@ -95,7 +95,7 @@ const ReportPage = ({ report, updateFilter }) => (
 ReportPage.propTypes = {
   report: PropTypes.shape({
     name: PropTypes.string,
-    area: PropTypes.string,
+    area: PropTypes.object,
     sections: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string,
       open_text_tasks: PropTypes.arrayOf(PropTypes.shape({

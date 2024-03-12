@@ -67,6 +67,11 @@ AssignmentPage.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     description: PropTypes.string,
+    budget: PropTypes.string,
+    image: PropTypes.string,
+    header: PropTypes.string,
+    schools: PropTypes.arrayOf(PropTypes.object),
+    sections: PropTypes.arrayOf(PropTypes.object),
   }),
   budget: PropTypes.shape({
     spent: PropTypes.number,
