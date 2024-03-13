@@ -14,13 +14,10 @@ import * as TaskType from '../../../constants/taskTypes/index';
 import styles from './SectionBlock.less';
 
 const getMaskPolygon = (assignment) => {
-  try {
-    const area = JSON.parse((assignment.area || '').replace(/'/g, '"'));
-    return area.coordinates[0].map(([y, x]) => [x, y]);
-  } catch (e) {
-    console.warn(`Can't parse area ${assignment.area}`); // eslint-disable-line no-console
-    return [];
+  if (assignment?.area?.coordinates) {
+    return assignment.area.coordinates[0].map(([y, x]) => [x, y]);
   }
+  return [];
 };
 
 const createTaskList = (assignment, sectionId, tasks) => tasks.reduce((acc, task) => {
