@@ -11,7 +11,7 @@
     "classnames": "^2.2.5",
     "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
-    "leaflet": "^1.0.3",
+    "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "number-formatter": "^1.2.0",
     "point-in-polygon": "^1.0.1",
