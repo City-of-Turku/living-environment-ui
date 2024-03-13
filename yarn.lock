@@ -2337,9 +2337,10 @@ connect-history-api-fallback@^2.0.0:
   resolved "https://registry.yarnpkg.com/connect-history-api-fallback/-/connect-history-api-fallback-2.0.0.tgz#647264845251a0daf25b97ce87834cace0f5f1c8"
   integrity sha512-U73+6lQFmfiNPrYbXqr6kZ1i1wiRqXnp2nhMsINseWXO8lDau0LGEffJ8kQi4EjLZympVgRdvqjAgiZ1tgzDDA==
 
-consolidated-events@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/consolidated-events/-/consolidated-events-1.0.1.tgz#70f475f4a5d6d20428e702da1b8870d9cc031a14"
+consolidated-events@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/consolidated-events/-/consolidated-events-1.1.1.tgz#25395465b35e531395418b7bbecb5ecaf198d179"
+  integrity sha512-y1FtzOGAyIrtFyWRqZfrO+gZVnFMYF1X0fIEOOMJBMHzUF8Xl86YvrREn0P0sMWhq6GShS2Bep4RpOoVAQb4YA==
 
 content-disposition@0.5.2:
   version "0.5.2"
@@ -4950,7 +4951,7 @@ prop-types@15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5170,11 +5171,13 @@ react-transition-group@^2.0.0, react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-waypoint@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-6.0.0.tgz#a14c8cb1305bfdf7160ace4f8a087d6c7f745639"
+react-waypoint@^7.3.4:
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-7.3.4.tgz#6f4a167ca71c0877576699d6980089f001137f90"
+  integrity sha512-68XMCOOTTNEFHzbisKqJ4EizNnX1Gyz+4MBBlriXhAJcG64s2Xw/d69oS8hh/fTt199NSkuiEtZvvw/zR8mkCA==
   dependencies:
-    consolidated-events "^1.0.1"
+    consolidated-events "^1.1.0"
+    prop-types "^15.0.0"
 
 react-youtube@^7.14.0:
   version "7.14.0"
