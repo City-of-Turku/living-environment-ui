@@ -4,7 +4,7 @@
   "dependencies": {
     "array.prototype.find": "^2.0.4",
     "axios": "^0.28.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "classnames": "^2.2.5",
     "currency-formatter": "^1.2.1",
     "font-awesome": "^4.7.0",
@@ -14,7 +14,7 @@
     "point-in-polygon": "^1.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-bootstrap": "^0.31.0",
+    "react-bootstrap": "^0.33.1",
     "react-dom": "^15.5.4",
     "react-leaflet": "^1.1.6",
     "react-numeric-input": "^2.0.7",
