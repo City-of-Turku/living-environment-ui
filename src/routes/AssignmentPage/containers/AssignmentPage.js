@@ -52,6 +52,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
 export default connect(mapStateToProps, null, mergeProps)(reduxForm({
   form: 'assignmentPage',
+  // eslint-disable-next-line no-unused-vars
   onSubmitFail: (errors, dispatch, submitError) => {
     if (errors !== undefined) {
       dispatch(showAlert(

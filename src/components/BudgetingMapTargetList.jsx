@@ -115,8 +115,10 @@ BudgetingMapTargetList.propTypes = {
   onSave: PropTypes.func,
   onUpdate: PropTypes.func,
   selectedTarget: PropTypes.shape({
+    id: PropTypes.string,
   }),
   task: PropTypes.shape({
+    data: PropTypes.object,
   }).isRequired,
 };
 

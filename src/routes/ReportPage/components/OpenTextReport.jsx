@@ -21,11 +21,11 @@ const OpenTextReport = ({ report }) => (<ContentWrapper id="openTextReport">
               <h4 className={styles.qeustionTitle}>{questionAndAnswers.question}</h4>
               <div className={styles.answers}>
                 {
-                questionAndAnswers.answers.map(
-                  (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
-                    key={`${index}-${answerIndex}`}
-                    className={styles.answer}
-                  >{answer}</div>))
+                  questionAndAnswers.answers.map(
+                    (answer, answerIndex) => (<div // eslint-disable-next-line react/no-array-index-key
+                      key={`${index}-${answerIndex}`}
+                      className={styles.answer}
+                    >{answer}</div>))
                 }
               </div>
             </div>) : null))

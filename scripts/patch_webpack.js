@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const configPath = './config/webpack/';
-const moduleConfigPath = 'node_modules/custom-react-scripts/config/';
+// const moduleConfigPath = 'node_modules/custom-react-scripts/config/';
 
 const rollbackFile = (fileName) => {
   fs.renameSync(`${moduleConfigPath + fileName}.bak`, moduleConfigPath + fileName, (err) => {
