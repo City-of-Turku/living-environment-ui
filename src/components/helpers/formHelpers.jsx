@@ -1,8 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'react-bootstrap';
 import classnames from 'classnames';
-import NumericInput from 'react-numeric-input';
-
 
 const formatNumericField = number => number.toString().replace('.', ',');
 
@@ -35,6 +33,10 @@ export const renderField = (field) => {
   if (field.precision) {
     attributes.precision = field.precision;
   }
+  if (field.type === 'number'){
+    attributes.onBlur = (event) => {field.input.onBlur(parseNumericField(event.target.value))}
+    attributes.value = parseNumericField(formatNumericField(attributes.value));
+  }
   const hasError = touched && error;
   return (
     <div>
@@ -54,9 +56,7 @@ export const renderField = (field) => {
             }
           </select>
         }
-        { otherTypes && (attributes.type === 'number'
-          ? <div><NumericInput {...attributes} parse={parseNumericField} format={formatNumericField} /></div>
-          : <input {...attributes} />)}
+        { otherTypes && <input {...attributes}/>}
         { !suppressErrors && <div className="help-block">
           {hasError && (<span>{error}</span>)}
         </div>}
