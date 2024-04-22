@@ -1,15 +1,43 @@
 {
-  "extends": "airbnb",
+  "parser": "@babel/eslint-parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "indent": ["error", 2],  // Require 2-space indent
-    "quotes": 0,  // No specified quote style; the programmer should take care of using only one style
-    "max-len": ["error", 120],  // 120-character lines are fine
-    "curly": ["error", "all"], // Always require curlys.
-    "comma-dangle": ["error", "only-multiline"],  // Require trailing commas in multi-line literals (such as this)
-    "complexity": ["error", {"max": 20}]
+    "indent": [
+      "error",
+      2
+    ], // Require 2-space indent
+    "quotes": 0, // No specified quote style; the programmer should take care of using only one style
+    "max-len": [
+      "error",
+      120
+    ], // 120-character lines are fine
+    "curly": [
+      "error",
+      "all"
+    ], // Always require curlys.
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ], // Require trailing commas in multi-line literals (such as this)
+    "complexity": [
+      "error",
+      {
+        "max": 20
+      }
+    ]
   },
   "env": {
     "browser": true,
-    "mocha": true
+    "mocha": true,
+    "node": true,
+    "es6": true
   }
 }

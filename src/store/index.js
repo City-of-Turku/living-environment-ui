@@ -13,10 +13,15 @@ let asyncReducers = {};
 const middleware = [
   sagaMiddleware,
   promiseMiddleware(),
-  logger,
 ];
 
-const composeEnhancers = process.env.NODE_ENV === 'development' ? composeWithDevTools({}) : compose;
+const isDev = process.env.NODE_ENV === 'development';
+
+if (isDev) {
+  middleware.push(logger);
+}
+
+const composeEnhancers = isDev ? composeWithDevTools({}) : compose;
 
 const store = createStore(
   createReducer(),

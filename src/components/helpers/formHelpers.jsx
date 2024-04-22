@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tooltip } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NumericInput from 'react-numeric-input';
 
@@ -9,17 +8,17 @@ const formatNumericField = number => number.toString().replace('.', ',');
 
 const parseNumericField = (numberString) => {
   let result = (numberString || '')
-      .replace(/[^0-9,.]/g, '') // allowed chars are 0-9, ',' and '.'
-      .replace(/\./, ',') // replace all '.' to ','
-      .replace(/,/, '*') // replace the first ',' to '*'
-      .replace(/,/g, '') // remove the other ','
-      .replace(/\*/g, ',') // first ','
-      .replace(',', '.'); // replace the first ',' to '.'
+    .replace(/[^0-9,.]/g, '') // allowed chars are 0-9, ',' and '.'
+    .replace(/\./, ',') // replace all '.' to ','
+    .replace(/,/, '*') // replace the first ',' to '*'
+    .replace(/,/g, '') // remove the other ','
+    .replace(/\*/g, ',') // first ','
+    .replace(',', '.'); // replace the first ',' to '.'
   result = parseInt(10 * result, 10) / 10 || 0; // parse and round the number to the 1st digit
   return result;
 };
 
-export const renderField = (field) => { // eslint-disable-line import/prefer-default-export
+export const renderField = (field) => {
   const placeholder = field.placeholder || field.label;
   // all input types except textarea, select and error
   const otherTypes = field.type !== 'textarea' && field.type !== 'select' && field.type !== 'error';
@@ -70,8 +69,4 @@ export const renderField = (field) => { // eslint-disable-line import/prefer-def
       </div>
     </div>
   );
-};
-
-renderField.PropTypes = {
-  field: PropTypes.object.isRequired,
 };

@@ -1,9 +1,0 @@
-{
-  "api": {
-    "baseUrl": "/api",
-    "timeout": 30000
-  },
-  "backendImages": {
-    "baseUrl": ""
-  }
-}

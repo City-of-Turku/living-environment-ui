@@ -8,30 +8,30 @@ const toFloat = value => parseFloat((value || '').toString().replace(',', '.'));
 const calcTextTaskSpentBudget = (task, state) => {
   const taskData = (task.data || {});
   const textTaskSpentBudget = (taskData.targets || []).reduce(
-      (accTarget, target) => {
-        const targetAmount = toFloat(formValue(state, `budgeting_text_task_${task.id}_${target.id}`));
-        if (!isNaN(targetAmount)) {
-          const value = parseFloat(targetAmount);
-          if (value < target.min_amount || (target.max_amount && value > target.max_amount)) {
-            return accTarget;
-          }
-          return accTarget + (parseFloat(target.unit_price) * value);
+    (accTarget, target) => {
+      const targetAmount = toFloat(formValue(state, `budgeting_text_task_${task.id}_${target.id}`));
+      if (!isNaN(targetAmount)) {
+        const value = parseFloat(targetAmount);
+        if (value < target.min_amount || (target.max_amount && value > target.max_amount)) {
+          return accTarget;
         }
-        return accTarget;
-      }, 0);
+        return accTarget + (parseFloat(target.unit_price) * value);
+      }
+      return accTarget;
+    }, 0);
   return textTaskSpentBudget;
 };
 
 const calcSectionSpentBudget = (section, state) => (section.tasks || []).reduce(
-    (accSection, task) => {
-      if (task.task_type === TaskType.BudgetingTask) {
-        const taskData = (task.data || {});
-        if (taskData.budgeting_type === TaskType.BudgetingTextTask) {
-          return accSection + calcTextTaskSpentBudget(task, state);
-        }
+  (accSection, task) => {
+    if (task.task_type === TaskType.BudgetingTask) {
+      const taskData = (task.data || {});
+      if (taskData.budgeting_type === TaskType.BudgetingTextTask) {
+        return accSection + calcTextTaskSpentBudget(task, state);
       }
-      return accSection;
-    }, 0);
+    }
+    return accSection;
+  }, 0);
 
 const calcMapSpentBudget = task => (task.targetUserData || []).reduce((acc, target) => {
   if (target.selectedTarget) {

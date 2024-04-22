@@ -25,9 +25,9 @@ const resolveUrl = (url, pathParams = {}) => {
   client[methodName] = (url, pathParams, params) => {
     const resolvedUrl = resolveUrl(url, pathParams);
     return instance[methodName](resolvedUrl, { params })
-    .then(
-      response => response.data,
-      error => Promise.reject(error));
+      .then(
+        response => response.data,
+        error => Promise.reject(error));
   };
 });
 
@@ -35,9 +35,9 @@ const resolveUrl = (url, pathParams = {}) => {
   client[methodName] = (url, pathParams, data) => {
     const resolvedUrl = resolveUrl(url, pathParams);
     return instance[methodName](resolvedUrl, data)
-    .then(
-      response => response.data,
-      error => Promise.reject(error));
+      .then(
+        response => response.data,
+        error => Promise.reject(error));
   };
 });
 

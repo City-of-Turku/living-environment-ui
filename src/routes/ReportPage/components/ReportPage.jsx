@@ -10,8 +10,6 @@ import * as TaskType from '../../../constants/taskTypes/index';
 
 import styles from './ReportPage.less';
 
-const parseGeoJson = json => JSON.parse(json.replace(/"/g, '').replace(/'/g, '"'));
-
 const getOpenTextAnswersForSection = (section) => {
   const { open_text_tasks, title } = section;
   // eslint-disable-next-line camelcase
@@ -26,24 +24,22 @@ const getOpenTextAnswersForSection = (section) => {
 const getOpenTextAnswers = report => (report.sections || []).map(
   section => getOpenTextAnswersForSection(section));
 
-const getMaskPolygon = (areaJSON) => {
-  try {
-    const area = parseGeoJson(areaJSON);
+const getMaskPolygon = (area) => {
+  if(area?.coordinates){
     return area.coordinates[0].map(([y, x]) => [x, y]);
-  } catch (e) {
-    return [];
   }
+  return [];
 };
 
 const getBudgetingTargetPoint = (budgetingTarget) => {
-  const pointJson = budgetingTarget.point;
-  try {
-    const pointObject = parseGeoJson(pointJson);
-    const [lng, lat] = pointObject.coordinates || [0, 0];
+  const {point} = budgetingTarget;
+
+  if(point?.coordinates){
+    const [lng, lat] = point.coordinates || [0, 0];
     return [lat, lng];
-  } catch (err) {
-    return [0, 0]; // can't parse the point json
   }
+
+  return [0, 0];
 };
 
 const getBudgetingTarget = budgetingTarget => ({
@@ -57,10 +53,10 @@ const getBudgetingTargetMapForSection = (section) => {
   const sectionTargetMap = (budgeting_tasks || []) // eslint-disable-line camelcase
     .filter(task => task.budgeting_type === TaskType.BudgetingMapTask)
     .map(
-    ({ name, answers }) => ({
-      name,
-      targets: answers.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
-    }));
+      ({ name, answers }) => ({
+        name,
+        targets: answers.map(budgetingTarget => getBudgetingTarget(budgetingTarget)),
+      }));
   return { sectionTargetMap, title };
 };
 
@@ -95,7 +91,7 @@ const ReportPage = ({ report, updateFilter }) => (
 ReportPage.propTypes = {
   report: PropTypes.shape({
     name: PropTypes.string,
-    area: PropTypes.string,
+    area: PropTypes.object,
     sections: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string,
       open_text_tasks: PropTypes.arrayOf(PropTypes.shape({

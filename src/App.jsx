@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import ReactDOM from 'react-dom';
 
 import store from './store';
 import createRoutes from './routes';
@@ -20,11 +19,6 @@ const App = () => (
       {routes}
     </Router>
   </Provider>
-);
-
-ReactDOM.render(
-  <App />, // eslint-disable-line react/jsx-filename-extension
-  document.getElementById('root')
 );
 
 export default App;

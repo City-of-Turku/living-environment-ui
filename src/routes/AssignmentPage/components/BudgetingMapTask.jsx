@@ -28,6 +28,7 @@ BudgetingMapTask.propTypes = {
   maskPolygon: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   sectionId: PropTypes.number.isRequired,
   task: PropTypes.shape({
+    name: PropTypes.string,
   }).isRequired,
 };
 
